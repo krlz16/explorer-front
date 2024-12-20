@@ -26,4 +26,8 @@ export interface IBlocks {
   paidFees: string;
   cumulativeDifficulty: string;
   received: string;
+  difficultyInGH: number;
+  totalDifficultyInEH: number;
+  blockHashrateInMHs: number;
+  txDensity: number
 }

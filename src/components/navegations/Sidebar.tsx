@@ -7,22 +7,22 @@ import { usePathname } from 'next/navigation';
 function Sidebar() {
   const pathname = usePathname();
   const isActive = (route:string) => {
-    console.log('route: ', route);
     return pathname!.includes(route); 
   };
   const color = {
-    [ROUTER.HOME]: "bg-brand-purple",
+    [ROUTER.HOME]: "bg-brand-orange",
     [ROUTER.BLOCKS.INDEX]: "bg-brand-green",
     [ROUTER.TXS]: "bg-brand-orange",
     [ROUTER.ADDRESSES]: "bg-brand-pink",
     [ROUTER.TOKENS]: "bg-brand-cyan",
   }
   return (
-    <div className='w-[210px] fixed h-screen inset-0 z-50 md:relative'>
+    <div className='w-[210px] fixed h-screen inset-0 z-10 md:relative'>
       <div className='w-[210px] h-full'>
-        <aside className="w-[210px] pt-8 fixed top-0 left-0 h-full border-r border-r-zinc-800">
+        <aside className="w-[210px] pt-5 fixed top-0 left-0 h-full border-r border-line">
           <div className="mb-10 ml-6">
             <Logo />
+            <span className='bg-brand-orange rounded-xl text-xs px-1 font-semibold text-black'>MAINNET</span>
           </div>
           <SidebarItem
             label="Home"

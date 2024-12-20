@@ -14,7 +14,6 @@ export default async function layout({ children, params }: props) {
   const { id } = await params
   const response = await fetchData<IBlocks>(`${ROUTER.BLOCKS.INDEX}/${id}`);
   const block = response?.data;
-  console.log('block: ', block?.id);
 
   return (
     <Card pd="p0" className="mb-14">

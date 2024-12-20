@@ -2,7 +2,7 @@
 
 import TableLoader from "@/components/loaders/TableLoader";
 import Button from "@/components/generals/Button";
-import BlocksTabsContent from "@/components/blocks/tabs/BlocksTabsContent";
+import BlocksTabsContent from "@/components/blocks/tabs/BlocksTxsTabsContent";
 import { IInternalTxs, ITxs } from "@/common/interfaces/Txs";
 import { useTab } from "@/hooks/useTab";
 import { useParams } from "next/navigation";
@@ -14,12 +14,14 @@ export default function BlockPage() {
   const { changeTab, currentTap } = useTab({ defaultTab: BLOCKS_URL_TABS[0].tab });
 
   const currentUrl = BLOCKS_URL_TABS.find((u) => u.tab === currentTap);
+  console.log('currentUrl: ', currentUrl);
 
-  if (!currentUrl) {
+  if (!currentUrl?.url) {
     return <div>tab Invalid data</div>;
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, loading, error } = useFetch(`${currentUrl?.url}/${urlId.id}`);
+  console.log('loading: ', loading);
 
   if (loading) return <div><TableLoader /></div>;
   if (error) return <div>Error</div>;

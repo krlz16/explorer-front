@@ -34,7 +34,6 @@ export default async function layout({ children, params }:props) {
         breadcrumb={{ name: 'Transactions', path: ROUTER.TXS }}
         icon={<AddressIcon className="w-6 h-6" />}
         title="Transaction"
-        titleColor="brand-pink"
         themeBtn="bg-brand-orange text-black"
         buttons={[
           { label: 'Transaction', tab: 'tx' },

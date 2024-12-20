@@ -8,9 +8,15 @@ interface IPagination {
   total: number
   totalPages: number
 }
+export interface INavigation {
+  next: number | string | undefined
+  prev: number | string | undefined
+}
+
 type Data<T> = {
   data: T | undefined
-  pagination: IPagination
+  pagination?: IPagination
+  navigation?: INavigation
 } | null;
 
 type ErrorType = Error | null;
@@ -48,7 +54,7 @@ const useFetch = <T>(url: string): Params<T> => {
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [url]);
 
   return { data, loading, error }
 }

@@ -1,6 +1,7 @@
 import { ROUTER } from '@/common/constants';
 import { TxIcon } from '@/common/icons';
 import { ITxs } from '@/common/interfaces/Txs';
+import { parseDecimals } from '@/common/utils/ParseDecimals';
 import ToolTip from '@/components/control/ToolTip';
 import Link from 'next/link';
 import React from 'react';
@@ -11,55 +12,53 @@ type props = {
 
 function TxsTable({ txs }: props) {
   return (
-    <div>
-      <div className='flex overflow-scroll md:overflow-hidden md:w-full'>
-      <div className='w-[700px] md:w-[100%]'>
-        <table className='w-[700px] md:w-[100%] mt-10 px-3 table-fixed'>
-          <thead className='px-3 bg-zinc-800'>
-            <tr className='text-white2 text-sm font-medium h-[52px] bg-secondary px-3 text-center'>
-              <th className='w-24'></th>
-              <th>Hash</th>
-              <th>Block</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Value</th>
-              <th>GasUsed</th>
-              <th>Type</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              txs?.map((tx, i) => (
-                <tr key={i} className='h-[52px] border-b-[1px] text-white-400 border-b-zinc-800 hover:bg-secondary px-3'>
-                  <td className='w-24'>
-                    <div className='flex justify-start items-center'>
-                      <div className='w-10 h-10 rounded-full bg-[#252525] ml-4 flex justify-center items-center'>
-                        <TxIcon />
-                      </div>
-                    </div>
-                  </td>
-                  <td className='text-center'>
-                    <Link href={`${ROUTER.TXS}/${tx.hash}`}>
-                      <ToolTip text={ tx.hash } />
-                    </Link>
-                  </td>
-                  <td className='text-center'>{ tx.blockNumber }</td>
-                  <td className='text-center'>
-                    <ToolTip text={ tx.from } />
-                  </td>
-                  <td className='text-center'>
-                    <ToolTip text={ tx.to } />
-                  </td>
-                  <td className='text-center'>{ tx.gasUsed }</td>
-                  <td className='text-center'>{ tx.gasUsed }</td>
-                  <td className='text-center'>{ tx.txType }</td>
-                  <td className='text-center'></td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+    <div className='w-full mt-6'>
+      <div className='w-full bg-secondary rounded-tl-xl rounded-tr-xl flex h-13 p-5'>
+        <div className='w-12 text-center'></div>
+        <div className='flex-1 text-center'>Hash</div>
+        <div className='flex-1 text-center'>Block</div>
+        <div className='flex-1 text-center'>From</div>
+        <div className='flex-1 text-center'>To</div>
+        <div className='flex-1 text-center'>Value</div>
+        <div className='flex-1 text-center'>GasUsed</div>
+        <div className='flex-1 text-center'>Type</div>
+        <div className='flex-1 text-center'>Status</div>
+      </div>
+        {
+          txs?.map((tx, i) => (
+            <div key={i} className='flex h-13 p-5 hover:bg-secondary text-white-400'>
+              <div className='w-12 text-center'>
+                <TxIcon />
+              </div>
+              <div className='flex-1 text-center text-brand-orange'>
+                <ToolTip
+                  text={tx.hash}
+                  href={`${ROUTER.TXS}/${tx.hash}`}
+                />
+              </div>
+              <div className='flex-1 text-center'>
+                <Link href={`${ROUTER.BLOCKS.INDEX}/${tx.blockNumber}`}>{parseDecimals(tx.blockNumber)}</Link>
+              </div>
+              <div className='flex-1 text-center'>
+                <ToolTip
+                  text={tx.from}
+                  href={`${ROUTER.ADDRESSES}/${tx.from}`}
+                />
+              </div>
+              <div className='flex-1 text-center'>
+                <ToolTip
+                  text={tx.to}
+                  href={`${ROUTER.ADDRESSES}/${tx.to}`}
+                />
+              </div>
+              <div className='flex-1 text-center'>{tx.value}</div>
+              <div className='flex-1 text-center'>{tx.gasUsed}</div>
+              <div className='flex-1 text-center'>{tx.txType}</div>
+              <div className='flex-1 text-center'>{tx.value}</div>
+            </div>
+
+          ))
+        }
         {
           txs?.length === 0 && (
             <div className='w-full flex justify-center mt-10'>
@@ -67,8 +66,6 @@ function TxsTable({ txs }: props) {
             </div>
           )
         }
-      </div>
-    </div>
     </div>
   )
 }

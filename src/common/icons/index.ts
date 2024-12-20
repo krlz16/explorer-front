@@ -19,4 +19,5 @@ export { default as RightIcon } from './RightIcon';
 export { default as BtcIcon } from './BtcIcon';
 export { default as TxDensityIcon } from './TxDensityIcon';
 export { default as HashIcon } from './HashIcon';
+export { default as CopyIcon } from './CopyIcon';
 export { default as Logo } from './Logo';

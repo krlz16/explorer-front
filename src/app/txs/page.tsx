@@ -16,10 +16,11 @@ export default async function page(props: IPageProps) {
         <TxIcon className='w-6 h-6' />
         Transactions
       </h1>
-      <TxsTable txs={response?.data} />
       <Pagination
+        text='Total Addresses: '
         data={response!.pagination}
       />
+      <TxsTable txs={response?.data} />
     </div>
   )
 }

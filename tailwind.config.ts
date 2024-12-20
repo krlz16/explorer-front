@@ -11,6 +11,7 @@ export default {
       colors: {
         'gray-700': 'var(--gray-700)',
         'gray-500': 'var(--gray-500)',
+        'gray-600': 'var(--gray-600)',
 
         'brand-purple': 'var(--brand-purple)',
         'brand-green': 'var(--brand-green)',
@@ -23,6 +24,7 @@ export default {
 
         'white-100': 'var(--white-100)',
         'white-400': 'var(--white-400)',
+        'success': 'var(--success)',
 
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -30,6 +32,13 @@ export default {
       backgroundColor: {
         'primary': 'var(--bg-primary)',
         'secondary': 'var(--bg-secondary)',
+        'btn-secondary': 'var(--btn-secondary)',
+        'success': 'var(--bg-success)',
+        'fail': 'var(--bg-fail)',
+      },
+      textColor: {
+        'success': 'var(--text-success)',
+        'fail': 'var(--text-fail)',
       },
       height: {
         '25': '100px',
@@ -38,6 +47,9 @@ export default {
       },
       boxShadow: {
         'line': 'inset 0 -1px 0 0 #3a3a3a'
+      },
+      borderColor: {
+        'line': 'var(--border)',
       }
     },
   },

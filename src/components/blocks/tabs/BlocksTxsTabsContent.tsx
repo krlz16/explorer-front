@@ -8,9 +8,9 @@ type props = {
   itxsData: IInternalTxs[] | undefined
 }
 
-const BlocksTabsContent = ({ currentTap, txsData, itxsData }: props) => {
+const BlocksTxsTabsContent = ({ currentTap, txsData, itxsData }: props) => {
   if (currentTap === "txs") return <TxsTable txs={txsData} />;
   if (currentTap === "itxs") return <InternalTxsTable itxs={itxsData} />;
   return null;
 };
-export default BlocksTabsContent 
+export default BlocksTxsTabsContent 

@@ -30,10 +30,9 @@ interface PageHeaderProps {
   children?: React.ReactNode;
   tabContents: TabContent[];
   navigationsBtns?: React.ReactNode
-  titleColor: string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, buttons, themeBtn, tabContents, navigationsBtns, titleColor }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, buttons, themeBtn, tabContents, navigationsBtns }) => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -52,8 +51,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, button
   return (
     <Card className="w-full mt-6">
       <div className="rounded-xl">
-        <Link href={breadcrumb.path} className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-green text-${titleColor}`}>
-          <ReturIcon className={`fill-${titleColor}`} />
+        <Link href={breadcrumb.path} className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-orange`}>
+          <ReturIcon className='fill-brand-orange' />
           { `All ${breadcrumb.name}` }
         </Link>
         <div className="flex justify-between">

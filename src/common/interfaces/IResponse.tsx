@@ -11,6 +11,6 @@ export interface INavigation {
 
 export type DataResponse<T> = {
   data: T
-  pagination: IPagination
-  navigation: INavigation
+  pagination?: IPagination
+  navigation?: INavigation
 } | null;

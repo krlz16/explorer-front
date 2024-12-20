@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #121212;
-  --bg-secondary: #252525;
+  --bg-primary: #000;
+  --bg-secondary: #131313;
   --gray-700: #3A3A3A;
+  --gray-600: #2a2a2a;
   --gray-500: #515151;
+
+  --btn-secondary: #262626;
 
   --brand-purple: #9e76ff;
   --brand-green: #79C600;
@@ -19,6 +22,13 @@
 
   --white-100: #FBFBFB;
   --white-400: #B8B8B8;
+
+  --border: #484848;
+
+  --bg-success: #3D942099;
+  --text-success: #EAF4DB;
+  --bg-fail: #AA2F2F;
+  --text-fail: #F2CBCB;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,4 +48,20 @@ body {
   background-color: var(--bg-primary);
   color: var(--white-100);
   font-family: 'Rootstock Sans Body', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7d7d7d;
+  border-radius: 20px;
+  border: 1px solid #313131;
+}
+
+::-webkit-scrollbar-track {
+  background: #363636;
+  border-radius: 12px;
 }

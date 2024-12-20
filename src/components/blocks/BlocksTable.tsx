@@ -1,9 +1,10 @@
-import { ROUTER } from '@/common/constants';
 import { BlockIcon } from '@/common/icons';
 import { IBlocks } from '@/common/interfaces/Blocks';
-import ToolTip from '@/components/control/ToolTip';
+import { parseDecimals } from '@/common/utils/ParseDecimals';
+import ToolTip from '../control/ToolTip';
 import Link from 'next/link';
-import React from 'react';
+import { ROUTER } from '@/common/constants';
+import { parseDate } from '@/common/utils/Time';
 
 type props = {
   blocks: IBlocks[] | undefined
@@ -11,62 +12,35 @@ type props = {
 
 function BlocksTable({ blocks }: props) {
   return (
-    <div>
-      <div className='flex overflow-scroll md:overflow-hidden md:w-full'>
-      <div className='w-[700px] md:w-[100%]'>
-        <table className='w-[700px] md:w-[100%] mt-10 px-3 table-fixed'>
-          <thead className='px-3 bg-zinc-800'>
-            <tr className='text-white-400 font-medium h-13 bg-secondary px-3 text-center'>
-              <th className='w-24'></th>
-              <th className='px-2 text-left'>Number</th>
-              <th className='w-10'>Txs</th>
-              <th>Hash</th>
-              <th>Miner</th>
-              <th>Size</th>
-              <th>Timestamp</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              blocks?.map((b) => (
-                <tr key={b.id} className='h-13 shadow-line text-white-400 hover:bg-secondary px-3'>
-                  <td className='w-24'>
-                    <div className='flex justify-start items-center'>
-                      <div className='w-10 h-10 rounded-full bg-[#252525] ml-4 flex justify-center items-center'>
-                        <BlockIcon />
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <Link href={`${ROUTER.BLOCKS.INDEX}/${b.number}`}>
-                      { b.number }
-                    </Link>
-                  </td>
-                  <td className='text-center w-10'>{ b.transactions }</td>
-                  <td className='text-center'>
-                    <ToolTip text={b.hash} />
-                  </td>
-                  <td className='text-center'>
-                    <ToolTip text={b.miner} />
-                  </td>
-                  <td className='text-center'>{ b.size }</td>
-                  <td className='text-center'>{ b.timestamp }</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-        {
-          blocks?.length === 0 && (
-            <div className='w-full flex justify-center mt-10'>
-            <span className='text-6xl italic text-zinc-800'>No Blocks</span>
-            </div>
-          )
-        }
+    <div className='w-full mt-6'>
+      <div className='w-full bg-secondary rounded-tl-xl rounded-tr-xl flex h-13 p-5'>
+        <div className='w-12 text-center'></div>
+        <div className='flex-1 text-center'>Block</div>
+        <div className='flex-1 text-center'>Txs</div>
+        <div className='flex-1 text-center'>Hash</div>
+        <div className='flex-1 text-center'>Miner</div>
+        <div className='flex-1 text-center'>Size</div>
+        <div className='flex-1 text-center'>Timestamp</div>
       </div>
+      {
+        blocks?.map((b, i) => (
+          <div key={i} className='flex h-13 p-5 hover:bg-secondary text-white-400'>
+            <div className='w-12 text-center'>
+              <BlockIcon />
+            </div>
+            <div className='flex-1 text-center text-brand-orange'>
+              <Link href={`${ROUTER.BLOCKS.INDEX}/${b.number}`}>{parseDecimals(b.number)}</Link>
+            </div>
+            <div className='flex-1 text-center'>{b.transactions}</div>
+            <div className='flex-1 text-center'><ToolTip text={b.hash} /></div>
+            <div className='flex-1 text-center'><ToolTip text={b.miner} className='text-brand-orange' /></div>
+            <div className='flex-1 text-center'>{b.size}</div>
+            <div className='flex-1 text-center'>{parseDate(b.timestamp).timeAgo}</div>
+          </div>
+        ))
+      }
     </div>
-    </div>
-  )
+  );
 }
 
-export default BlocksTable
+export default BlocksTable;

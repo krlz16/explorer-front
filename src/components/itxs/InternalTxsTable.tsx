@@ -1,8 +1,8 @@
 import { ROUTER } from '@/common/constants';
 import { TxIcon } from '@/common/icons';
 import { IInternalTxs } from '@/common/interfaces/Txs';
+import { parseDate } from '@/common/utils/Time';
 import ToolTip from '@/components/control/ToolTip';
-import Link from 'next/link';
 import React from 'react';
 
 type props = {
@@ -11,49 +11,45 @@ type props = {
 
 function InternalTxsTable({ itxs }: props) {
   return (
-    <div>
-      <div className='flex overflow-scroll md:overflow-hidden md:w-full'>
-      <div className='w-[700px] md:w-[100%]'>
-        <table className='w-[700px] md:w-[100%] mt-10 px-3 table-fixed'>
-          <thead className='px-3 bg-zinc-800'>
-            <tr className='text-white2 text-sm font-medium h-[52px] bg-secondary px-3 text-center'>
-              <th className='w-24'></th>
-              <th>from</th>
-              <th>to</th>
-              <th>type</th>
-              <th>Timestamp</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody>
+    <div className='w-full mt-6'>
+      <div className='w-full bg-secondary rounded-tl-xl rounded-tr-xl flex h-13 p-5'>
+        <div className='w-12 text-center'></div>
+        <div className='flex-1 text-center'>From</div>
+        <div className='flex-1 text-center'>To</div>
+        <div className='flex-1 text-center'>Type</div>
+        <div className='flex-1 text-center'>Timestamp</div>
+        <div className='flex-1 text-center'>Value</div>
+      </div>
             {
               itxs?.map((itx, i) => (
-                <tr key={i} className='h-[52px] border-b-[1px] text-white-400 border-b-zinc-800 hover:bg-secondary px-3'>
-                  <td className='w-24'>
-                    <div className='flex justify-start items-center'>
-                      <div className='w-10 h-10 rounded-full bg-[#252525] ml-4 flex justify-center items-center'>
-                        <TxIcon />
-                      </div>
-                    </div>
-                  </td>
-                  <td className='text-center'>
-                    <Link href={`${ROUTER.TXS}/${itx.from}`}>
-                      <ToolTip text={ itx.from } />
-                    </Link>
-                  </td>
-                  <td className='text-center'>
-                    <Link href={`${ROUTER.TXS}/${itx.to}`}>
-                      <ToolTip text={ itx.to } />
-                    </Link>
-                  </td>
-                  <td className='text-center'>{ itx.type }</td>
-                  <td className='text-center'>{ itx.timestamp } </td>
-                  <td className='text-center'>{ itx.value } </td>
-                </tr>
+                <div key={i} className='flex h-13 p-5 hover:bg-secondary text-white-400'>
+                  <div className='w-12 text-center'>
+                    <TxIcon />
+                  </div>
+                  <div className='flex-1 text-center text-brand-orange'>
+                    <ToolTip
+                      text={itx.from}
+                      href={`${ROUTER.ADDRESSES}/${itx.from}`}
+                    />
+                  </div>
+                  <div className='flex-1 text-center'>
+                    <ToolTip
+                      text={itx.to}
+                      href={`${ROUTER.ADDRESSES}/${itx.to}`}
+                    />
+                  </div>
+                  <div className='flex-1 text-center'>
+                    { itx.type }
+                  </div>
+                  <div className='flex-1 text-center'>
+                    { parseDate(itx.timestamp).timeAgo }
+                  </div>
+                  <div className='flex-1 text-center'>
+                    { itx.value }
+                  </div>
+                </div>
               ))
             }
-          </tbody>
-        </table>
         {
           itxs?.length === 0 && (
             <div className='w-full flex justify-center mt-10'>
@@ -61,8 +57,6 @@ function InternalTxsTable({ itxs }: props) {
             </div>
           )
         }
-      </div>
-    </div>
     </div>
   )
 }

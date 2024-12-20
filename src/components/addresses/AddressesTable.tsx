@@ -2,7 +2,6 @@ import { ROUTER } from '@/common/constants';
 import { AddressIcon } from '@/common/icons';
 import { IAddresses } from '@/common/interfaces/Addresses';
 import ToolTip from '@/components/control/ToolTip';
-import Link from 'next/link';
 import React from 'react';
 
 type props = {
@@ -37,9 +36,10 @@ function AddressesTable({ addresses }: props) {
                     </div>
                   </td>
                   <td className=''>
-                    <Link href={`${ROUTER.ADDRESSES}/${a.address}`}>
-                      <ToolTip text={a.address} />
-                    </Link>
+                    <ToolTip
+                      text={a.address}
+                      href={`${ROUTER.ADDRESSES}/${a.address}`}
+                    />
                   </td>
                   <td className='text-center'>{ a.balance }</td>
                   <td className='text-center'>{ a.type }</td>
