@@ -12,8 +12,8 @@ function Sidebar() {
   const color = {
     [ROUTER.HOME]: "bg-brand-orange",
     [ROUTER.BLOCKS.INDEX]: "bg-brand-green",
-    [ROUTER.TXS]: "bg-brand-orange",
-    [ROUTER.ADDRESSES]: "bg-brand-pink",
+    [ROUTER.TXS.INDEX]: "bg-brand-orange",
+    [ROUTER.ADDRESSES.INDEX]: "bg-brand-pink",
     [ROUTER.TOKENS]: "bg-brand-cyan",
   }
   return (
@@ -50,17 +50,17 @@ function Sidebar() {
           />
           <SidebarItem
             label="Transacciones"
-            isActive={isActive(ROUTER.TXS)}
+            isActive={isActive(ROUTER.TXS.INDEX)}
             className="bg-brand-orange"
-            link={ROUTER.TXS}
-            icon={<TxIcon className={isActive(ROUTER.TXS) ? '!fill-black' : 'fill-white-400'} />}
+            link={ROUTER.TXS.INDEX}
+            icon={<TxIcon className={isActive(ROUTER.TXS.INDEX) ? '!fill-black' : 'fill-white-400'} />}
           />
           <SidebarItem
             label="Addresses"
-            isActive={isActive(ROUTER.ADDRESSES)}
+            isActive={isActive(ROUTER.ADDRESSES.INDEX)}
             className="bg-brand-pink"
-            link={ROUTER.ADDRESSES}
-            icon={<AddressIcon className={isActive(ROUTER.ADDRESSES) ? '!fill-black' : 'fill-white-400'} />}
+            link={ROUTER.ADDRESSES.INDEX}
+            icon={<AddressIcon className={isActive(ROUTER.ADDRESSES.INDEX) ? '!fill-black' : 'fill-white-400'} />}
           />
           <SidebarItem
             label="Tokens"

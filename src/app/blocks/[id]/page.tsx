@@ -1,7 +1,7 @@
 'use client';
 
 import TableLoader from "@/components/loaders/TableLoader";
-import Button from "@/components/generals/Button";
+import Button from "@/components/ui/Button";
 import BlocksTabsContent from "@/components/blocks/tabs/BlocksTxsTabsContent";
 import { IInternalTxs, ITxs } from "@/common/interfaces/Txs";
 import { useTab } from "@/hooks/useTab";
@@ -12,19 +12,22 @@ import { BLOCKS_URL_TABS } from "@/components/blocks/tabs/BlocksTabs";
 export default function BlockPage() {
   const urlId = useParams();
   const { changeTab, currentTap } = useTab({ defaultTab: BLOCKS_URL_TABS[0].tab });
-
+  console.log('currentTap: ', currentTap);
+  
   const currentUrl = BLOCKS_URL_TABS.find((u) => u.tab === currentTap);
-  console.log('currentUrl: ', currentUrl);
 
   if (!currentUrl?.url) {
     return <div>tab Invalid data</div>;
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, loading, error } = useFetch(`${currentUrl?.url}/${urlId.id}`);
+  console.log('data: ', data);
   console.log('loading: ', loading);
 
-  if (loading) return <div><TableLoader /></div>;
-  if (error) return <div>Error</div>;
+  if (loading || !data) return <div><TableLoader /></div>;
+  if (error) return <div className='w-full flex justify-center mt-10'>
+  <span className='text-3xl italic text-gray-700'>Something was wrong try again</span>
+</div>;
 
 
   return (

@@ -1,8 +1,8 @@
 export interface IPagination {
-    currentPage: number
-    total: number
-    totalPages: number
-  }
+  currentPage: number
+  total: number
+  totalPages: number
+}
   
 export interface INavigation {
   next: number | string | undefined

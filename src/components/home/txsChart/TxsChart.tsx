@@ -2,12 +2,12 @@
 import React, { useEffect, useRef } from 'react';
 import Chart, { ChartOptions } from 'chart.js/auto';
 import { getRelativePosition } from 'chart.js/helpers';
-import Card from '@/components/generals/Card';
+import Card from '@/components/ui/Card';
 import { IBlocks } from '@/common/interfaces/Blocks';
 
 const TxsChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
-  const chartInstance = useRef<Chart | null>(null);
+  const chartInstance = useRef<Chart | null>();
   const reverseData = blocks?.reverse();
   const dataBlocks = reverseData?.map((block) => block.txDensity);
   const labels = reverseData?.map((block) => `Block #${block.number}`);
@@ -46,7 +46,7 @@ const TxsChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
     };
 
 
-    chartInstance.current = new Chart(ctx, {
+    chartInstance.current = new Chart(ctx!, {
       type: 'line',
       data: data,
       options: {
@@ -129,7 +129,7 @@ const TxsChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
         chartInstance.current.destroy();
       }
     };
-  }, [blocks, dataBlocks, labels]);
+  }, [blocks, dataBlocks, labels, reverseData]);
 
   return (
     <Card className='h-50 w-full bg-secondary'>

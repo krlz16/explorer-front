@@ -1,8 +1,10 @@
 import { ROUTER } from '@/common/constants';
 import { AddressIcon } from '@/common/icons';
 import { IAddresses } from '@/common/interfaces/Addresses';
-import ToolTip from '@/components/control/ToolTip';
+import { parseDecimals } from '@/common/utils/ParseDecimals';
+import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
+import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 
 type props = {
   addresses: IAddresses[] | undefined
@@ -10,57 +12,43 @@ type props = {
 
 function AddressesTable({ addresses }: props) {
   return (
-    <div>
-      <div className='flex overflow-scroll md:overflow-hidden md:w-full'>
-      <div className='w-[700px] md:w-[100%]'>
-        <table className='w-[700px] md:w-[100%] mt-10 px-3 table-fixed'>
-          <thead className='px-3 bg-zinc-800'>
-            <tr className='text-white-400 font-medium h-13 bg-secondary px-3 text-center'>
-              <th className='w-24'></th>
-              <th>Address</th>
-              <th className='px-2 text-center'>Balance</th>
-              <th>Type</th>
-              <th>Updated at block</th>
-              <th>Rns</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              addresses?.map((a) => (
-                <tr key={a.id} className='h-13 shadow-line text-white-400 hover:bg-secondary px-3'>
-                  <td className='w-24'>
-                    <div className='flex justify-start items-center'>
-                      <div className='w-10 h-10 rounded-full bg-[#252525] ml-4 flex justify-center items-center'>
-                        <AddressIcon />
-                      </div>
-                    </div>
-                  </td>
-                  <td className=''>
-                    <ToolTip
-                      text={a.address}
-                      href={`${ROUTER.ADDRESSES}/${a.address}`}
-                    />
-                  </td>
-                  <td className='text-center'>{ a.balance }</td>
-                  <td className='text-center'>{ a.type }</td>
-                  <td className='text-center'>{ a.blockNumber }</td>
-                  <td className='text-center'></td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-        {
-          addresses?.length === 0 && (
-            <div className='w-full flex justify-center mt-10'>
-            <span className='text-6xl italic text-zinc-800'>No Addresses</span>
-            </div>
-          )
-        }
-      </div>
-    </div>
-    </div>
-  )
+    <Table>
+      <TableHeader>
+        <TableCell className="w-12 text-center flex-initial" />
+        <TableCell>Address</TableCell>
+        <TableCell>Balance</TableCell>
+        <TableCell>Type</TableCell>
+        <TableCell>Updated at block</TableCell>
+        <TableCell>Rns</TableCell>
+      </TableHeader>
+      {
+        addresses?.map((a, i) => (
+          <TableRow key={i}>
+            <TableCell className='w-12 flex justify-center flex-initial'>
+              <AddressIcon />
+            </TableCell>
+            <TableCell>
+              <ToolTip
+                text={a.address}
+                href={`${ROUTER.ADDRESSES.INDEX}/${a.address}`}
+              />
+            </TableCell>
+            <TableCell>
+              {parseDecimals(a?.balance, 4)} RBTC
+            </TableCell>
+            <TableCell>
+              {a.type}
+            </TableCell>
+            <TableCell>
+              {parseDecimals(a.blockNumber)}
+            </TableCell>
+            <TableCell>
+            </TableCell>
+          </TableRow>
+        ))
+      }
+    </Table>
+  );
 }
 
-export default AddressesTable
+export default AddressesTable;

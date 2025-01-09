@@ -2,7 +2,7 @@ import { BlockIcon, TxIcon } from '@/common/icons'
 import { ITxs } from '@/common/interfaces/Txs'
 import { parseDecimals } from '@/common/utils/ParseDecimals'
 import { parseDate } from '@/common/utils/Time'
-import ToolTip from '@/components/control/ToolTip'
+import ToolTip from '@/components/ui/ToolTip'
 import React from 'react'
 
 type props = {

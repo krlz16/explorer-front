@@ -14,10 +14,10 @@ const Accordion = ({ title, children }: props) => {
   };
 
   return (
-    <div className="w-full shadow-line">
+    <div className="w-full">
       <button
         onClick={toggleAccordion}
-        className="w-full text-left flex justify-between items-center bg-secondary transition p-4 rounded-2xl outline-none"
+        className="w-full text-left flex justify-between items-center bg-secondary transition p-4 rounded-xl outline-none"
       >
         <span className="font-medium">{title}</span>
         <svg

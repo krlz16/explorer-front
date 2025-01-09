@@ -1,45 +1,50 @@
 import { BlockIcon } from '@/common/icons';
 import { IBlocks } from '@/common/interfaces/Blocks';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
-import ToolTip from '../control/ToolTip';
+import ToolTip from '../ui/ToolTip';
 import Link from 'next/link';
 import { ROUTER } from '@/common/constants';
 import { parseDate } from '@/common/utils/Time';
+import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 
 type props = {
-  blocks: IBlocks[] | undefined
-}
+  blocks: IBlocks[] | undefined;
+};
 
 function BlocksTable({ blocks }: props) {
   return (
-    <div className='w-full mt-6'>
-      <div className='w-full bg-secondary rounded-tl-xl rounded-tr-xl flex h-13 p-5'>
-        <div className='w-12 text-center'></div>
-        <div className='flex-1 text-center'>Block</div>
-        <div className='flex-1 text-center'>Txs</div>
-        <div className='flex-1 text-center'>Hash</div>
-        <div className='flex-1 text-center'>Miner</div>
-        <div className='flex-1 text-center'>Size</div>
-        <div className='flex-1 text-center'>Timestamp</div>
-      </div>
-      {
-        blocks?.map((b, i) => (
-          <div key={i} className='flex h-13 p-5 hover:bg-secondary text-white-400'>
-            <div className='w-12 text-center'>
-              <BlockIcon />
-            </div>
-            <div className='flex-1 text-center text-brand-orange'>
-              <Link href={`${ROUTER.BLOCKS.INDEX}/${b.number}`}>{parseDecimals(b.number)}</Link>
-            </div>
-            <div className='flex-1 text-center'>{b.transactions}</div>
-            <div className='flex-1 text-center'><ToolTip text={b.hash} /></div>
-            <div className='flex-1 text-center'><ToolTip text={b.miner} className='text-brand-orange' /></div>
-            <div className='flex-1 text-center'>{b.size}</div>
-            <div className='flex-1 text-center'>{parseDate(b.timestamp).timeAgo}</div>
-          </div>
-        ))
-      }
-    </div>
+    <Table>
+      <TableHeader>
+        <TableCell className="w-12 flex-initial" />
+        <TableCell>Block</TableCell>
+        <TableCell>Txs</TableCell>
+        <TableCell>Hash</TableCell>
+        <TableCell>Miner</TableCell>
+        <TableCell>Size</TableCell>
+        <TableCell>Timestamp</TableCell>
+      </TableHeader>
+      {blocks?.map((b, i) => (
+        <TableRow key={i}>
+          <TableCell className="w-12 flex justify-center flex-initial">
+            <BlockIcon />
+          </TableCell>
+          <TableCell className="text-brand-orange">
+            <Link href={`${ROUTER.BLOCKS.INDEX}/${b.number}`}>
+              {parseDecimals(b.number)}
+            </Link>
+          </TableCell>
+          <TableCell>{b.transactions}</TableCell>
+          <TableCell>
+            <ToolTip text={b.hash} />
+          </TableCell>
+          <TableCell>
+            <ToolTip text={b.miner} className="text-brand-orange" />
+          </TableCell>
+          <TableCell>{b.size}</TableCell>
+          <TableCell>{parseDate(b.timestamp).timeAgo}</TableCell>
+        </TableRow>
+      ))}
+    </Table>
   );
 }
 

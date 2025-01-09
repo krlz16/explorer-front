@@ -1,9 +1,11 @@
 import { fetchData } from "@/app/lib/data"
 import { ROUTER } from "@/common/constants"
-import { AddressIcon, BlockIcon, MinerIcon, TokenIcon, TxIcon } from "@/common/icons"
+import { AddressIcon } from "@/common/icons"
 import { IAddresses } from "@/common/interfaces/Addresses"
-import Card from "@/components/generals/Card"
-import DataList from "@/components/generals/DataList"
+import { ADDRESSES_BTN_TABS } from "@/components/addresses/tabs/AddressesTabs"
+import Code from "@/components/addresses/tabs/Code"
+import General from "@/components/addresses/tabs/General"
+import Card from "@/components/ui/Card"
 import PageHeader from "@/components/page/PageHeader"
 
 type props = {
@@ -15,41 +17,32 @@ type props = {
 
 export default async function layout({ children, params }:props) {
   const addressParam = (await params).address;
-  const response = await fetchData<IAddresses>(`${ROUTER.ADDRESSES}/${addressParam}`)
+  const response = await fetchData<IAddresses>(`${ROUTER.ADDRESSES.INDEX}/${addressParam}`)
   const address = response?.data;
-
-  const items = [
-    { label: <TxIcon />, value: address?.address },
-    { label: <BlockIcon />, value: address?.blockNumber },
-    { label: <TokenIcon />, value: address?.id },
-    { label: <MinerIcon />, value: address?.type },
-  ];
 
   return (
     <Card pd="p0">
       <PageHeader
-        breadcrumb={{ name: 'Addresses', path: ROUTER.ADDRESSES }}
+        breadcrumb={{ name: 'Addresses', path: ROUTER.ADDRESSES.INDEX }}
         icon={<AddressIcon />}
-        title="Address"
-        titleColor="brand-pink"
+        title={`${address?.type}`}
         themeBtn="bg-brand-pink text-white"
-        buttons={[
-          { label: 'General', tab: 'general' },
-          { label: 'Code', tab: 'code' },
-        ]}
+        buttons={ADDRESSES_BTN_TABS}
         tabContents={[
           {
             tab: 'general',
             content: (
-              <DataList items={items} />
+              <General
+                address={address}
+              />
             )
           },
           {
             tab: 'code',
             content: (
-              <Card pd="p3" className="w-fit h-40 text-xs text-white-400 bg-primary break-all overflow-y-scroll">
-                { address?.code }
-              </Card>
+              <Code
+                code={address?.code}
+              />
             )
           }
         ]}

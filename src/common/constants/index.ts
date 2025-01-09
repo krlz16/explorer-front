@@ -5,10 +5,29 @@ export const ROUTER = {
   STATS: '/stats',
   BLOCKS: {
     INDEX: '/blocks',
-    TXS: '/blocks/txs',
-    ITXS: '/blocks/itxs'
   },
-  TXS: '/txs',
-  ADDRESSES: '/addresses',
-  TOKENS: '/tokens'
+  TXS: {
+    INDEX: '/txs',
+    BLOCK: '/txs/block',
+    ADDRESS: '/txs/address'
+  },
+  ADDRESSES: {
+    INDEX: '/addresses',
+    TOKENS: '/tokens',
+    EVENTS: '/events',
+    TTRANSFER: '/ttransfers',
+    ACCOUNT: '/account',
+    BALANCES: '/balances'
+  },
+  TOKENS: '/tokens',
+  ITXS: {
+    INDEX: '/itxs',
+    BLOCK: '/itxs/block',
+    TX: '/itxs/tx',
+    ADDRESS: '/itxs/address'
+  },
+  EVENTS: {
+    INDEX: '/events',
+    ADDRESS: '/events/address'
+  }
 }

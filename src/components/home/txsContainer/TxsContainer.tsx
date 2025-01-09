@@ -20,7 +20,7 @@ export default function TxsContainer() {
         ))
       }
       <div className="mt-6 w-full text-center">
-        <Link href={ROUTER.TXS} className="hover:underline flex justify-center items-center gap-2">
+        <Link href={ROUTER.TXS.INDEX} className="hover:underline flex justify-center items-center gap-2">
           See all txs
           <RightArrowIcon />
         </Link>

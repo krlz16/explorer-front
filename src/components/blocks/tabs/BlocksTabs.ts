@@ -6,6 +6,6 @@ export const BLOCKS_BTN_TABS = [
 ]
 
 export const BLOCKS_URL_TABS = [
-  { url: ROUTER.BLOCKS.TXS, label: 'Transactions', tab: 'txs' },
-  { url: ROUTER.BLOCKS.ITXS, label: 'Internal Transactions', tab: 'itxs' }
+  { url: ROUTER.TXS.BLOCK, label: 'Transactions', tab: 'txs' },
+  { url: ROUTER.ITXS.BLOCK, label: 'Internal Transactions', tab: 'itxs' }
 ]

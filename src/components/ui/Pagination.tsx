@@ -2,7 +2,7 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@/common/icons'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import React from 'react'
-import Button from '../generals/Button'
+import Button from './Button'
 import { parseDecimals } from '@/common/utils/ParseDecimals'
 type props = {
   data: {

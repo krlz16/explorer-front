@@ -1,56 +1,53 @@
 'use client';
 
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import TableLoader from "@/components/loaders/TableLoader";
-import Button from "@/components/generals/Button";
+import Button from "@/components/ui/Button";
 import useFetch from "@/hooks/useFetch";
-import { ROUTER } from "@/common/constants";
-import TxsTable from "@/components/txs/TxsTable";
-import { ITxs } from "@/common/interfaces/Txs";
+import { IInternalTxs, ITxs } from "@/common/interfaces/Txs";
+import { useParams } from "next/navigation";
+import { ADDRESSES_URL_TABS } from "@/components/addresses/tabs/AddressesTabs";
+import { useTab } from "@/hooks/useTab";
+import AddressesTxsTabsContent from "@/components/addresses/tabs/AddressesTxsTabsContent";
+import { IEvents } from "@/common/interfaces/IEvents";
 
-type ITab = 'itxs' | 'txs';
 export default function Page() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const urlParams = useParams();
-  const params = new URLSearchParams(searchParams?.toString());
+  const hash = useParams();
+
+  const { changeTab, currentTap } = useTab({ defaultTab: ADDRESSES_URL_TABS[0].tab });
   
-  const currentTap = searchParams?.get("tab") as ITab || 'txs';
+  const currentUrl = ADDRESSES_URL_TABS.find((a) => a.tab === currentTap);
 
-  const { data, error, loading} = useFetch<ITxs[]>(`${ROUTER.ADDRESSES}/txs/${urlParams.address}`)
-
-  const changeTab = (newTab: string) => {
-    const tabParam = newTab.toLowerCase();
-    params.set('tab', tabParam);
-    router.push(`${pathname}?${params}`);
-  };
+  if (!currentUrl?.url) {
+    return <div>tab Invalid data</div>;
+  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data, loading, error } = useFetch(`${currentUrl?.url}/${hash.address}`);
 
   if (loading) return <div><TableLoader /></div>;
   if (error) return <div>Error</div>;
-
-  const btns = [
-    {label: 'Transactions', handle: 'txs'},
-    {label: 'Internal Transactions', handle: 'itxs'},
-  ]
 
   return (
     <div className="mt-10 p-6">
       <div className="flex gap-4">
         {
-          btns.map((btn, i) => (
+          ADDRESSES_URL_TABS.map((btn, i) => (
             <Button
               key={i}
               label={btn.label}
-              onClick={() => changeTab(btn.handle)}
-              className={ currentTap === btn.handle ? 'bg-brand-pink text-white' : ''}
+              onClick={() => changeTab(btn.tab)}
+              className={ currentTap === btn.tab ? 'bg-brand-pink text-white' : ''}
             />
           ))
         }
       </div>
 
       <div className="mt-4">
-        <TxsTable txs={data?.data} />
+        <AddressesTxsTabsContent
+          currentTap={currentTap}
+          itxs={data?.data as IInternalTxs[]}
+          txs={data?.data as ITxs[]}
+          events={data?.data as IEvents[]}
+        />
       </div>
     </div>
   );

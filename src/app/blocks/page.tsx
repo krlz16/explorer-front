@@ -1,16 +1,13 @@
 
-import { IBlocks } from '@/common/interfaces/Blocks';
 import BlocksTable from '../../components/blocks/BlocksTable'
-import { fetchData } from '../lib/data'
-import Pagination from '@/components/control/Pagination';
+import Pagination from '@/components/ui/Pagination';
 import { IPageProps } from '@/common/interfaces/RouterParams';
-import { ROUTER } from '@/common/constants';
-import { ArrowLeftIcon, ArrowRightIcon, BlockIcon, TxIcon } from '@/common/icons';
-import Button from '@/components/generals/Button';
+import { BlockIcon, TxIcon } from '@/common/icons';
+import { fetchBlocks } from '@/services/blocks';
 
 export default async function page(props: IPageProps) {
   const params = await props.searchParams;
-  const response = await fetchData<IBlocks[]>(ROUTER.BLOCKS.INDEX, params, 60)
+  const response = await fetchBlocks(params);
   return (
     <div className='w-full'>
       <h1 className="font-bold text-3xl flex gap-3 items-center mt-10">
@@ -48,7 +45,7 @@ export default async function page(props: IPageProps) {
       </div>
       <Pagination
         text='Total Blocks: '
-        data={response!.pagination}
+        data={response!.pagination!}
       />
       <BlocksTable
         blocks={response?.data}

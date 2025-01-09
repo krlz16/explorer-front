@@ -17,7 +17,7 @@ export interface IBlocks {
   gasUsed: number;
   timestamp: string;
   transactions: number;
-  uncles: string;
+  uncles: string[];
   minimumGasPrice: string;
   bitcoinMergedMiningHeader: string;
   bitcoinMergedMiningCoinbaseTransaction: string;
@@ -30,4 +30,5 @@ export interface IBlocks {
   totalDifficultyInEH: number;
   blockHashrateInMHs: number;
   txDensity: number
+  time: string
 }

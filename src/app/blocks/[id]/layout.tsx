@@ -1,8 +1,6 @@
-import { fetchData } from "@/app/lib/data";
-import { ROUTER } from "@/common/constants";
-import { IBlocks } from "@/common/interfaces/Blocks";
 import BlockContentPage from "@/components/blocks/BlockContentPage";
-import Card from "@/components/generals/Card";
+import Card from "@/components/ui/Card";
+import { fetchOneBlock } from "@/services/blocks";
 
 type props = {
   params: Promise<{
@@ -12,7 +10,7 @@ type props = {
 }
 export default async function layout({ children, params }: props) {
   const { id } = await params
-  const response = await fetchData<IBlocks>(`${ROUTER.BLOCKS.INDEX}/${id}`);
+  const response = await fetchOneBlock(id);
   const block = response?.data;
 
   return (

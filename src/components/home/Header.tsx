@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../generals/Button'
+import Button from '../ui/Button'
 import Navbar from '../navegations/Navbar'
 
 function Header() {

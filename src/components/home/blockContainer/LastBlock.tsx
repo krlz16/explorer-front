@@ -1,8 +1,8 @@
 'use client'
 import { MinerIcon, TxDensityIcon, TxIcon } from '@/common/icons'
 import { parseDecimals } from '@/common/utils/ParseDecimals';
-import ToolTip from '@/components/control/ToolTip';
-import Card from '@/components/generals/Card'
+import ToolTip from '@/components/ui/ToolTip';
+import Card from '@/components/ui/Card'
 import { useHomeDataContext } from '@/context/HomeContext';
 import React from 'react'
 

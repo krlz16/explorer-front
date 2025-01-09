@@ -1,6 +1,6 @@
 
 import { fetchData } from '../lib/data'
-import Pagination from '@/components/control/Pagination';
+import Pagination from '@/components/ui/Pagination';
 import { IPageProps } from '@/common/interfaces/RouterParams';
 import TokensTable from '@/components/tokens/TokensTable';
 import { ITokens } from '@/common/interfaces/Tokens';
@@ -13,7 +13,8 @@ export default async function page(props: IPageProps) {
     <div className='w-full'>
       <TokensTable tokens={response?.data} />
       <Pagination
-        data={response!.pagination}
+        text='Total tokens'
+        data={response!.pagination!}
       />
     </div>
   )

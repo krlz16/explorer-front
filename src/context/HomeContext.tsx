@@ -83,7 +83,7 @@ export const HomeContext = ({ children }: { children: React.ReactNode }) => {
   // TXS
   const fetchTxs = async () => {
     const params = { take_data: 10 };
-    const response = await fetchData<ITxs[]>(ROUTER.TXS, params, 5);
+    const response = await fetchData<ITxs[]>(ROUTER.TXS.INDEX, params, 5);
     setTxs(response?.data);
     saveTxsToCache(response?.data);
   }

@@ -1,4 +1,4 @@
-import Card from '@/components/generals/Card'
+import Card from '@/components/ui/Card'
 import React from 'react'
 
 type props = {

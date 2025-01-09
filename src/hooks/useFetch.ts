@@ -1,7 +1,7 @@
 // useFetch.tsx
 'use client'
 import { fetchData } from "@/app/lib/data";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface IPagination {
   currentPage: number
@@ -32,7 +32,8 @@ const useFetch = <T>(url: string): Params<T> => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<ErrorType>(null);
 
-  const fetchingData = async () => {
+  const fetchingData = useCallback(async () => {
+    setData(null);
     setLoading(true);
     setError(null);
     try {
@@ -43,7 +44,8 @@ const useFetch = <T>(url: string): Params<T> => {
     } finally {
       setLoading(false);
     }
-  }
+  }, [url])
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -53,8 +55,7 @@ const useFetch = <T>(url: string): Params<T> => {
       controller.abort();
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
+  }, [fetchingData, url]);
 
   return { data, loading, error }
 }

@@ -1,6 +1,6 @@
 import { BlockIcon, TxDensityIcon, TxIcon } from "@/common/icons"
 import { IBlocks } from "@/common/interfaces/Blocks"
-import ToolTip from "../../control/ToolTip"
+import ToolTip from "../../ui/ToolTip"
 import { parseDecimals } from "@/common/utils/ParseDecimals"
 import { parseDate } from "@/common/utils/Time"
 

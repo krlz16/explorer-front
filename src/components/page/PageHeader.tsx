@@ -3,8 +3,8 @@ import React from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ReturIcon } from "@/common/icons";
-import Card from "../generals/Card";
-import Button from "../generals/Button";
+import Card from "../ui/Card";
+import Button from "../ui/Button";
 
 interface BreadcrumbProps {
   name: string;
@@ -24,7 +24,7 @@ interface TabContent {
 interface PageHeaderProps {
   breadcrumb: BreadcrumbProps;
   icon: React.ReactNode;
-  title: string;
+  title: string | undefined;
   buttons: ButtonProps[];
   themeBtn: string;
   children?: React.ReactNode;
@@ -38,11 +38,11 @@ const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, button
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams?.toString());
-  const currentTap = searchParams?.get("_ctab") || buttons[0].tab;
+  const currentTap = searchParams?.get("_ctab") || buttons[0]?.tab;
 
   const currentContent = tabContents.find((tab) => tab.tab === currentTap)?.content;
 
-  const handleTabClick = (label: string) => {
+  const handleTab = (label: string) => {
     const tabParam = label.toLowerCase();
     params.set('_ctab', tabParam);
     router.push(`${pathname}?${params}`);
@@ -51,9 +51,14 @@ const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, button
   return (
     <Card className="w-full mt-6">
       <div className="rounded-xl">
-        <Link href={breadcrumb.path} className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-orange`}>
-          <ReturIcon className='fill-brand-orange' />
-          { `All ${breadcrumb.name}` }
+        <Link
+          href={breadcrumb.path}
+          className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-orange`}
+        >
+          <ReturIcon
+            className='fill-brand-orange'
+          />
+          All {breadcrumb.name}
         </Link>
         <div className="flex justify-between">
           <h1 className="flex gap-3 items-center text-3xl font-medium">
@@ -67,7 +72,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, button
               key={index}
               label={button.label}
               className={currentTap === button.tab ? themeBtn : ""}
-              onClick={() => handleTabClick(button.tab)}
+              onClick={() => handleTab(button.tab)}
             />
           ))}
         </div>

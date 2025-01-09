@@ -1,5 +1,5 @@
 'use client'
-import Button from '../generals/Button'
+import Button from '../ui/Button'
 import { LeftIcon, RightIcon } from '@/common/icons';
 import { useRouter } from 'next/navigation';
 import { INavigation } from '@/common/interfaces/IResponse';

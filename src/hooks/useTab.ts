@@ -18,7 +18,5 @@ export const useTab = ({ defaultTab }: props) => {
     router.push(`${pathname}?${params}`);
   };
 
- 
-
   return { changeTab, currentTap };
 };

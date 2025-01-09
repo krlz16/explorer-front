@@ -5,20 +5,44 @@ export interface ITxs {
   to: string
   value: string
   gasUsed: number,
+  gas: number
+  gasPrice: string
   timestamp: string,
   txType: string
+  transactionIndex: number
+  nonce: number
+  input: string
   receipt: {
     logs: ILogs[]
+    status: string
   },
 }
 
 export interface IInternalTxs {
-  from: string
-  to: string
-  value: string
-  timestamp: string,
-  type: string
-  internalTxId: string,
+  internalTxId: string;
+  transactionHash: string;
+  blockNumber: number;
+  blockHash: string;
+  transactionPosition: number;
+  type: string;
+  subtraces: number;
+  traceAddress: string;
+  result?: {
+    gasUsed: string;
+    output: string;
+  };
+  index: number;
+  timestamp: string;
+  datetime: string;
+  error: string | null;
+  action: {
+    callType: string;
+    from: string;
+    to: string;
+    gas: string;
+    input: string;
+    value: string;
+  }
 }
 
 export interface ILogs {
@@ -34,17 +58,19 @@ export interface ILogs {
   signature: string;
   abi: {
     anonymous: boolean;
-    inputs: {
-      indexed: boolean;
-      name: string;
-      type: string;
-    }[];
+    inputs: EventInput[];
     name: string;
     type: string;
   };
-  args: string[];
+  args?: string[];
   _addresses: string[];
   eventId: string;
   timestamp: number;
   txStatus: string;
+}
+
+interface EventInput {
+  indexed: boolean;
+  name: string;
+  type: string;
 }
