@@ -19,6 +19,11 @@ export interface IEvents {
   transactionIndex: number;
   txStatus: string;
   address_in_event: AddressInEvent[];
+  totalSupply: number;
+  contrant_detail: {
+    name: string;
+    symbol: string;
+  };
 }
 
 interface EventAbiInput {
@@ -38,5 +43,3 @@ interface AddressInEvent {
   address: string;
   isEventEmitterAddress: boolean;
 }
-
-

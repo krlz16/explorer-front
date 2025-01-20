@@ -1,5 +1,5 @@
 
-export const parseDecimals = (data?: number, decimals: number = 2) => {
+export const parseDecimals = (data?: number | string, decimals: number = 2) => {
   if (data === undefined || data === 0) return '0';
   
   const value = Number(data);

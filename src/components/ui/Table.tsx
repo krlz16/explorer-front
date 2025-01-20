@@ -4,6 +4,11 @@ type TableProps = {
   children: React.ReactNode;
 };
 
+type TableCellProps = {
+  children?: React.ReactNode;
+  className?: string;
+};
+
 export const Table = ({ children }: TableProps) => {
   return <div className='w-full mt-6'>{children}</div>;
 };
@@ -14,11 +19,6 @@ export const TableHeader = ({ children }: TableProps) => {
 
 export const TableRow = ({ children }: TableProps) => {
   return <div className='flex h-13 p-4 hover:bg-secondary text-white-400'>{children}</div>;
-};
-
-type TableCellProps = {
-  children?: React.ReactNode;
-  className?: string;
 };
 
 export const TableCell = ({ children, className = 'flex-1 text-center' }: TableCellProps) => {

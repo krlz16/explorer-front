@@ -12,7 +12,7 @@ function Sidebar() {
   const color = {
     [ROUTER.HOME]: "bg-brand-orange",
     [ROUTER.BLOCKS.INDEX]: "bg-brand-green",
-    [ROUTER.TXS.INDEX]: "bg-brand-orange",
+    [ROUTER.TXS.INDEX]: "bg-brand-purple",
     [ROUTER.ADDRESSES.INDEX]: "bg-brand-pink",
     [ROUTER.TOKENS]: "bg-brand-cyan",
   }
@@ -51,7 +51,7 @@ function Sidebar() {
           <SidebarItem
             label="Transacciones"
             isActive={isActive(ROUTER.TXS.INDEX)}
-            className="bg-brand-orange"
+            className="bg-brand-purple"
             link={ROUTER.TXS.INDEX}
             icon={<TxIcon className={isActive(ROUTER.TXS.INDEX) ? '!fill-black' : 'fill-white-400'} />}
           />

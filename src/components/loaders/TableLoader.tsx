@@ -4,7 +4,7 @@ function TableLoader() {
   return (
     <div className="animate-pulse w-full">
       <div className='w-[30%] h-6 bg-c-gray1 rounded-xl'></div>
-      <table className='w-full mt-10'>
+      <table className='w-full'>
         <thead>
           <tr className='w-full flex'>
             <th className='h-[30px] flex-1 bg-zinc-700 mb-6 rounded'></th>

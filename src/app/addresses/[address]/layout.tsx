@@ -1,23 +1,22 @@
-import { fetchData } from "@/app/lib/data"
 import { ROUTER } from "@/common/constants"
 import { AddressIcon } from "@/common/icons"
-import { IAddresses } from "@/common/interfaces/Addresses"
 import { ADDRESSES_BTN_TABS } from "@/components/addresses/tabs/AddressesTabs"
 import Code from "@/components/addresses/tabs/Code"
 import General from "@/components/addresses/tabs/General"
 import Card from "@/components/ui/Card"
 import PageHeader from "@/components/page/PageHeader"
+import { fetchAddress } from "@/services/addresses"
 
 type props = {
   params: Promise<{
-    address: number
+    address: string
   }>,
   children: React.ReactNode
 }
 
 export default async function layout({ children, params }:props) {
   const addressParam = (await params).address;
-  const response = await fetchData<IAddresses>(`${ROUTER.ADDRESSES.INDEX}/${addressParam}`)
+  const response = await fetchAddress(addressParam);
   const address = response?.data;
 
   return (

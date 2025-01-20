@@ -2,17 +2,19 @@
 
 type props = {
   className?: string
-  label?: string
+  label?: string | React.ReactNode
   icon?: React.ReactNode
   onClick?: React.MouseEventHandler<HTMLButtonElement>
-  type?: 'primary' | 'secondary'
+  type?: 'primary' | 'secondary' | 'icon' | 'outline'
   disabled?: boolean
 }
 
 function Button({ onClick, className, label, icon, type = 'primary', disabled = false }:props) {
   const BTN_TYPE = {
-    primary: 'px-6 border border-white-400 hover:bg-gray-700 hover:text-white',
-    secondary: 'px-4 bg-btn-secondary hover:bg-gray-700 disabled:cursor-not-allowed disabled:hover:bg-btn-secondary text-gray-400 hover:text-gray-400'
+    icon: 'bg-btn-secondary h-9 px-4 hover:bg-gray-500',
+    primary: 'px-6 hover:bg-gray-700 hover:text-white',
+    secondary: 'px-4 bg-btn-secondary hover:bg-gray-700 disabled:cursor-not-allowed disabled:hover:bg-btn-secondary text-gray-400 hover:text-gray-400',
+    outline: 'bg-primary hover:border-white text-white font-bold !rounded-3xl border w-[110px] after:w-[110px] after:h-10 after:rounded-3xl after:mt-2 after:ml-1 after:-z-10 after:absolute after:border'
   }
   return (
     <button className={`${className} ${BTN_TYPE[type]} hover:border-transparent text-sm h-10 max-h-fit rounded-xl flex items-center justify-center gap-3`}

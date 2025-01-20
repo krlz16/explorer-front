@@ -20,7 +20,6 @@ function Pagination({ data, text }: props) {
   params.set('page_data', data.currentPage.toString());
 
   const handlePage = (value: number) => {
-    console.log('value: ', value);
     params.set('page_data', value.toString());
     router.push(`${pathname}?${params.toString()}`);
     router.refresh();

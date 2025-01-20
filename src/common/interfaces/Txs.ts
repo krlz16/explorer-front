@@ -34,7 +34,7 @@ export interface IInternalTxs {
   index: number;
   timestamp: string;
   datetime: string;
-  error: string | null;
+  error: string | undefined;
   action: {
     callType: string;
     from: string;

@@ -16,11 +16,12 @@ export default function PageNavigation({ navigation, route }: props) {
   }
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-2">
       { navigation?.prev && (
           <Button
             className="border-none"
-            label="Previous"
+            type='icon'
+            label=""
             icon={<LeftIcon />}
             onClick={() => navigationPage(navigation?.prev)}
           />
@@ -29,8 +30,9 @@ export default function PageNavigation({ navigation, route }: props) {
       {
         navigation?.next && (
           <Button
-            className="border-none flex-row-reverse"
-            label="Next"
+            className="border-none"
+            type='icon'
+            label=""
             icon={<RightIcon />}
             onClick={() => navigationPage(navigation?.next)}
           />

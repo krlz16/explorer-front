@@ -1,59 +1,43 @@
-import { fetchData } from "@/app/lib/data"
 import { ROUTER } from "@/common/constants"
-import { AddressIcon } from "@/common/icons"
-import { ITxs } from "@/common/interfaces/Txs"
+import { ReturIcon, TxIcon } from "@/common/icons"
 import Card from "@/components/ui/Card"
-import PageHeader from "@/components/page/PageHeader"
-import LogsContainer from "@/components/txs/Logs/LogsContainer"
-import TxDetail from "@/components/txs/tabs/TxDetail"
-import { TXS_BTN_TABS } from "@/components/txs/tabs/TxsTabs"
+import Link from "next/link"
+import ToolTip from "@/components/ui/ToolTip"
+import { TxsDataContextProvider } from "@/context/TxsContext"
+import { fetchTxsByHash } from "@/services/transactions"
 
 type props = {
   params: Promise<{
-    hash: number
+    hash: string
   }>,
   children: React.ReactNode
 }
 
 export default async function layout({ children, params }:props) {
   const txParam = (await params).hash;
-  const response = await fetchData<ITxs>(`${ROUTER.TXS.INDEX}/${txParam}`)
+  const response = await fetchTxsByHash(txParam);
   const tx = response?.data;
 
   return (
-    <Card pd="p0">
-      <PageHeader
-        breadcrumb={{ name: 'Transactions', path: ROUTER.TXS.INDEX }}
-        icon={<AddressIcon className="w-6 h-6" />}
-        title="Transaction"
-        themeBtn="bg-brand-orange text-black"
-        buttons={TXS_BTN_TABS}
-        tabContents={[
-          {
-            tab: 'tx',
-            content: (
-              <TxDetail tx={tx} />
-            ),
-          },
-          {
-            tab: 'logs',
-            content: (
-              <LogsContainer
-                logs={tx?.receipt.logs}
-              />
-            ),
-          },
-          {
-            tab: 'ttranfers',
-            content: (
-              <div className="text-sm text-white-100 font-semibold text-center mt-10">The Transaction Does Not Contain Token Transfer Events</div>
-            ),
-          },
-        ]}
+    <Card pd="p0" className="mb-14 mt-6">
+      <Link
+        href={ROUTER.TXS.INDEX}
+        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-orange`}
       >
-        
-      </PageHeader>
-      { children }
+        <ReturIcon
+          className='fill-brand-orange'
+        />
+        All Transactions
+      </Link>
+      <h1 className="flex gap-3 items-center text-3xl font-medium">
+        <TxIcon className="w-6 h-6" /> Transaction detail
+      </h1>
+      <div className="text-white-400 mt-6">
+        Transaction hash <span className="text-brand-purple"><ToolTip text={tx?.hash} trim={24} /></span>
+      </div>
+      <TxsDataContextProvider tx={tx}>
+        { children }
+      </TxsDataContextProvider>
     </Card>
   )
 }

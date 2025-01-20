@@ -1,12 +1,12 @@
 import { ROUTER } from '@/common/constants';
-import { TxIcon } from '@/common/icons';
 import { ITxs } from '@/common/interfaces/Txs';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
 import ToolTip from '@/components/ui/ToolTip';
 import Link from 'next/link';
 import React from 'react';
-import Badge from '../ui/Badge';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
+import { parseDate } from '@/common/utils/Time';
+import Status from '../ui/Status';
 
 type props = {
   txs: ITxs[] | undefined
@@ -16,30 +16,35 @@ function TxsTable({ txs }: props) {
   return (
     <Table>
       <TableHeader>
-        <TableCell className="w-8 text-center flex-initial" />
         <TableCell>Hash</TableCell>
+        <TableCell>Status</TableCell>
         <TableCell>Block</TableCell>
+        <TableCell>Ago</TableCell>
         <TableCell>From</TableCell>
         <TableCell>To</TableCell>
         <TableCell>Value</TableCell>
         <TableCell>GasUsed</TableCell>
-        <TableCell>Type</TableCell>
-        <TableCell>Status</TableCell>
+        {/* <TableCell>Type</TableCell> */}
       </TableHeader>
       {
         txs?.map((tx, i) => (
           <TableRow key={i}>
-            <TableCell className='!w-8 flex justify-center flex-initial'>
-              <TxIcon />
-            </TableCell>
-            <TableCell className='text-brand-orange'>
+            <TableCell>
               <ToolTip
                 text={tx.hash}
                 href={`${ROUTER.TXS.INDEX}/${tx.hash}`}
               />
             </TableCell>
             <TableCell>
-              <Link href={`${ROUTER.BLOCKS.INDEX}/${tx.blockNumber}`}>{parseDecimals(tx.blockNumber)}</Link>
+              <Status value={Number(tx.receipt?.status)} />
+            </TableCell>
+            <TableCell>
+              <Link href={`${ROUTER.BLOCKS.INDEX}/${tx.blockNumber}`}>
+                {parseDecimals(tx.blockNumber)}
+              </Link>
+            </TableCell>
+            <TableCell>
+              { parseDate(tx.timestamp).timeAgo }
             </TableCell>
             <TableCell>
               <ToolTip
@@ -53,12 +58,9 @@ function TxsTable({ txs }: props) {
                 href={`${ROUTER.ADDRESSES.INDEX}/${tx.to}`}
               />
             </TableCell>
-            <TableCell>{tx.value}</TableCell>
-            <TableCell>{tx.gasUsed}</TableCell>
-            <TableCell>{tx.txType}</TableCell>
-            <TableCell>
-              {Number(tx.receipt?.status) ? <Badge text="SUCCESSFUL" type="success" /> : <Badge text="FAIL" type="fail" />}
-            </TableCell>
+            <TableCell>{`${parseDecimals(tx.value, 6)} RBTC`}</TableCell>
+            <TableCell>{parseDecimals(tx.gasUsed)}</TableCell>
+            {/* <TableCell>{tx.txType}</TableCell> */}
           </TableRow>
         ))
       }

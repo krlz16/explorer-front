@@ -1,14 +1,12 @@
-import { fetchData } from '../lib/data';
 import Pagination from '@/components/ui/Pagination';
-import { IAddresses } from '@/common/interfaces/Addresses';
 import AddressesTable from '@/components/addresses/AddressesTable';
 import { IPageProps } from '@/common/interfaces/RouterParams';
-import { ROUTER } from '@/common/constants';
 import { AddressIcon } from '@/common/icons';
+import { fetchAddresses } from '@/services/addresses';
 
 export default async function Page(props: IPageProps) {
   const params = await props.searchParams;
-  const response = await fetchData<IAddresses[]>(ROUTER.ADDRESSES.INDEX, params);
+  const response = await fetchAddresses(params);
   console.log('response: ', response?.pagination);
   return (
     <div className='w-full'>

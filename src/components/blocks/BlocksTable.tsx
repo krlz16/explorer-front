@@ -17,31 +17,31 @@ function BlocksTable({ blocks }: props) {
       <TableHeader>
         <TableCell className="w-12 flex-initial" />
         <TableCell>Block</TableCell>
+        <TableCell>Timestamp</TableCell>
         <TableCell>Txs</TableCell>
         <TableCell>Hash</TableCell>
         <TableCell>Miner</TableCell>
         <TableCell>Size</TableCell>
-        <TableCell>Timestamp</TableCell>
       </TableHeader>
       {blocks?.map((b, i) => (
         <TableRow key={i}>
           <TableCell className="w-12 flex justify-center flex-initial">
             <BlockIcon />
           </TableCell>
-          <TableCell className="text-brand-orange">
+          <TableCell className="text-brand-green">
             <Link href={`${ROUTER.BLOCKS.INDEX}/${b.number}`}>
               {parseDecimals(b.number)}
             </Link>
           </TableCell>
+          <TableCell>{parseDate(b.timestamp).timeAgo}</TableCell>
           <TableCell>{b.transactions}</TableCell>
           <TableCell>
             <ToolTip text={b.hash} />
           </TableCell>
           <TableCell>
-            <ToolTip text={b.miner} className="text-brand-orange" />
+            <ToolTip text={b.miner} className="text-brand-green" />
           </TableCell>
           <TableCell>{b.size}</TableCell>
-          <TableCell>{parseDate(b.timestamp).timeAgo}</TableCell>
         </TableRow>
       ))}
     </Table>

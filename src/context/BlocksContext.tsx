@@ -2,10 +2,11 @@
 import React, { createContext, useContext, useState } from "react";
 import { IBlocks } from "@/common/interfaces/Blocks";
 import { ITxs, IInternalTxs } from "@/common/interfaces/Txs";
+import { INavigation } from "@/common/interfaces/IResponse";
 
 interface DataContextType {
-  blockData: IBlocks | undefined;
-  setBlockData: React.Dispatch<React.SetStateAction<IBlocks | undefined>>;
+  block: IBlocks | undefined;
+  navigation: INavigation | undefined,
   txsData: ITxs[] | undefined;
   setTxsData: React.Dispatch<React.SetStateAction<ITxs[] | undefined>>;
   itxsData: IInternalTxs[] | undefined;
@@ -14,16 +15,23 @@ interface DataContextType {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-export const BlocksDataProvider = ({ children }: { children: React.ReactNode }) => {
-  const [blockData, setBlockData] = useState<IBlocks | undefined>(undefined);
+export const BlocksDataProvider = ({
+  block,
+  navigation,
+  children
+}: {
+  block: IBlocks | undefined,
+  navigation: INavigation | undefined,
+  children: React.ReactNode
+}) => {
   const [txsData, setTxsData] = useState<ITxs[] | undefined>(undefined);
   const [itxsData, setItxsData] = useState<IInternalTxs[] | undefined>(undefined);
 
   return (
     <DataContext.Provider
       value={{
-        blockData,
-        setBlockData,
+        block,
+        navigation,
         txsData,
         setTxsData,
         itxsData,

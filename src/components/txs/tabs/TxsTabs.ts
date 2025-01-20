@@ -1,9 +1,10 @@
 import { ROUTER } from "@/common/constants"
 
 export const TXS_BTN_TABS = [
-  { label: 'Transaction', tab: 'tx' },
-  { label: 'Logs', tab: `logs` },
-  { label: 'Token transfer', tab: 'ttranfers' },
+  { label: 'Overview', tab: 'overview' },
+  { label: 'Internal Transantions', tab: 'itxs' },
+  { label: 'Logs', tab: 'logs' },
+  { label: 'Token transfer', tab: 'ttransfer' },
 ]
 
 export const TXS_URL_TABS = [

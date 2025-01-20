@@ -8,6 +8,8 @@ function Log({ log }: { log: ILogs }) {
     <Card pd="p0" className="w-full border border-gray-500 my-3 text-white-400">
       <Accordion
         title={`${log.logIndex} ${log.address} ${log.event}`}
+        styles={true}
+        className='text-brand-purple'
         >
         <div className="flex shadow-line p-3 w-full">
           <div className="w-2/12">Log Index</div>

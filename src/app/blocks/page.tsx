@@ -35,7 +35,7 @@ export default async function page(props: IPageProps) {
         </div>
         <div className='h-20 w-full p-4 rounded-xl bg-secondary flex justify-between items-center'>
           <div>
-            <div className='font-bold text-2xl'>4,901,138</div>
+            <div className='font-bold text-2xl'>5,970,172</div>
             <div className='text-sm text-white-400'>Last Safe Block</div>
           </div>
           <div>

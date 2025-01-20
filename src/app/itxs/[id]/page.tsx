@@ -1,12 +1,17 @@
 import { fetchData } from "@/app/lib/data";
 import { ROUTER } from "@/common/constants";
-import { TxIcon } from "@/common/icons";
+import { ReturIcon, TxIcon } from "@/common/icons";
 import { IInternalTxs } from "@/common/interfaces/Txs";
-import { parseDate } from "@/common/utils/Time";
+import { parseDecimals } from "@/common/utils/ParseDecimals";
 import ListContent from "@/components/generals/ListContent";
 import ListItem from "@/components/generals/ListItem";
-import PageHeader from "@/components/page/PageHeader";
+import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import Date from "@/components/ui/Date";
+import Status from "@/components/ui/Status";
+import ToolTip from "@/components/ui/ToolTip";
+import Link from "next/link";
 
 type props = {
   params: Promise<{
@@ -18,49 +23,54 @@ export default async function page({params}: props) {
   const txParam = (await params).id;
   const response = await fetchData<IInternalTxs>(`${ROUTER.ITXS.INDEX}/${txParam}`)
   const itx = response?.data;
-  const { timeAgo, formattedDate } = parseDate(itx?.timestamp);
   return (
-    <Card pd="p0">
-      <PageHeader
-        breadcrumb={{ name: 'Transactions', path: ROUTER.BLOCKS.INDEX }}
-        icon={<TxIcon className="w-6 h-6" />}
-        title={`Internal Transaction`}
-        themeBtn="bg-brand-green text-black"
-        buttons={[
-          {
-            label: 'Overview',
-            tab: 'overview'
-          }
-        ]}
-        tabContents={[
-          {
-            tab: 'overview',
-            content: (
-              <ListContent>
-                <ListItem title="From" value={itx?.action.from} />
-                <ListItem title="To" value={itx?.action.to} />
-                <ListItem title="Type" value={itx?.type} />
-                <ListItem title="Call Type" value={itx?.action.callType} />
-                <ListItem title="Input" value={itx?.action.input} />
-                <ListItem title="Value" value={itx?.action.value} />
-                <ListItem
-                  title="Status"
-                  value={itx?.error ? 'Failed' : 'SUCCESS'}
-                />
-                <ListItem title="Timestamp" value={`${timeAgo} | ${formattedDate}`} />
-                <ListItem title="Transaction" value={itx?.transactionHash} />
-                <ListItem title="Block Hash" value={itx?.blockHash} />
-                <ListItem title="Block Number" value={itx?.blockNumber} />
-                <ListItem title="Gas" value={itx?.action.gas} />
-                <ListItem title="Gas Used" value={itx?.result?.gasUsed} />
-                <ListItem title="Output" value={itx?.result?.output} />
-                <ListItem title="Error" value={itx?.error} />
-              </ListContent>
-            )
-          }
-        ]}
-        >
-      </PageHeader>
+    <Card pd="p0" className="mt-6">
+      <Link
+        href={ROUTER.TXS.INDEX}
+        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-orange`}
+      >
+        <ReturIcon
+          className='fill-brand-orange'
+        />
+        All Transactions
+      </Link>
+      <h1 className="flex gap-3 items-center text-3xl font-medium">
+        <TxIcon className="w-6 h-6" /> Internal Transaction
+      </h1>
+      <div className="text-white-400 mt-6">
+        Internal Transaction ID <span className="text-brand-purple"><ToolTip text={itx?.internalTxId} trim={0} /></span>
+      </div>
+
+      <Button
+        label='Overview'
+        className='bg-btn-secondary text-white mt-6'
+      />
+
+      <ListContent className="mt-6">
+        <ListItem title="Transaction" value={itx?.transactionHash} type="tooltip" className="text-brand-purple" />
+        <ListItem title="Block Hash" value={itx?.blockHash} type="tooltip" className="text-brand-purple" />
+        <ListItem title="Timestamp" value={<Date date={itx?.timestamp} />} />
+        <ListItem title="Block Number" value={parseDecimals(itx?.blockNumber)} />
+
+        <hr className="border-gray-700 border-[1px] my-2" />
+        <ListItem title="From" value={itx?.action.from} type="tooltip" className="text-brand-purple" />
+        <ListItem title="To" value={itx?.action.to} type="tooltip" className="text-brand-purple" />
+        <hr className="border-gray-700 border-[1px] my-2" />
+
+        <ListItem title="Type" value={<Badge text={itx!.type!} type="info" />} />
+        <ListItem title="Input" value={itx?.action.input} className="bg-gray-600 rounded-xl px-4 py-1 break-all max-h-16 overflow-y-auto" />
+        <ListItem title="Value" value={`${itx?.action.value} RBTC`} />
+        <ListItem
+          title="Status"
+          value={<Status value={!itx?.error} />}
+        />
+          {/* value={itx?.error ? 'Failed' : 'Success'} */}
+        
+        <ListItem title="Gas" value={parseDecimals(itx?.action.gas)} />
+        <ListItem title="Gas Used" value={parseDecimals(itx?.result?.gasUsed)} />
+        <ListItem title="Output" value={itx?.result?.output} className="bg-gray-600 rounded-xl px-4 py-1 break-all max-h-16 overflow-y-auto" />
+        <ListItem title="Error" value={itx?.error} />
+      </ListContent>
     </Card>
   )
 }

@@ -28,6 +28,7 @@ export const ROUTER = {
   },
   EVENTS: {
     INDEX: '/events',
-    ADDRESS: '/events/address'
+    ADDRESS: '/events/address',
+    TX: '/events/tx'
   }
 }

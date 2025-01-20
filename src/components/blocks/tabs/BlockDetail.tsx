@@ -1,34 +1,92 @@
-import { IBlocks } from '@/common/interfaces/Blocks'
+import { ROUTER } from '@/common/constants'
 import { parseDecimals } from '@/common/utils/ParseDecimals'
-import { parseDate } from '@/common/utils/Time'
 import ListContent from '@/components/generals/ListContent'
 import ListItem from '@/components/generals/ListItem'
-import React from 'react'
+import PageNavigation from '@/components/page/PageNavigation'
+import Accordion from '@/components/ui/Accordion'
+import Date from '@/components/ui/Date'
+import { useBlocksDataContext } from '@/context/BlocksContext'
 
-function BlockDetail({ block }: { block: IBlocks | undefined }) {
-  const { formattedDate, timeAgo } = parseDate(block?.timestamp);
+function BlockDetail() {
+  const { block, navigation } = useBlocksDataContext();
+  
   return (
-    <ListContent className=''>
-      <ListItem title='Block' value={block?.number} />
-      <ListItem title='Txs' value={block?.transactions} />
-      <ListItem title='Hash' value={block?.hash} />
-      <ListItem title='Miner' value={block?.miner} />
-      <ListItem title='Size' value={block?.size} />
-      <ListItem title='Timestamp' value={`${timeAgo} | ${formattedDate}`} />
-      <ListItem title='Parent Hash' value={block?.parentHash} />
-      <ListItem title='Difficulty' value={`${block?.difficultyInGH.toFixed(2)} MH`} />
-      <ListItem title='Total Difficulty' value={`${block?.totalDifficultyInEH.toFixed(2)} EH`} />
-      <ListItem title='Gas Limit' value={parseDecimals(block?.gasLimit)} />
-      <ListItem title='Gas Used' value={parseDecimals(block?.gasUsed)} />
-      <ListItem title='Minimun Gas Price' value={`${block?.minimumGasPrice} Gwei`} />
-      <ListItem title='Time' value={block?.time} />
-      <ListItem title='Tx Density' value={`${block?.txDensity.toFixed(2)} txs/s`} />
-      <ListItem title='Hash Rate' value={`${block?.blockHashrateInMHs.toFixed(2)} MHs`} />
-      <ListItem title='Extra Data' value={block?.extraData} />
-      <ListItem title='Sha3uncles' value={block?.sha3Uncles} />
-      <ListItem title='Uncle Count' value={block?.uncles.length} />
-      <ListItem title='Uncles' value={block?.uncles} />
-    </ListContent>
+    <div>
+      <ListContent>
+        <ListItem title="Block:" value={
+          <div className='flex gap-2 items-center'>
+            <div>{parseDecimals(block?.number)}</div>
+            <PageNavigation
+              route={ROUTER.BLOCKS.INDEX}
+              navigation={navigation}
+            />
+          </div>
+        } />
+        <ListItem title="Timestamp:" value={<Date date={block?.timestamp} /> }
+        />
+        <ListItem title="Size:" value={block?.size} />
+        <ListItem title="Transactions:" value={`${block?.transactions} in this block`} />
+        <ListItem
+          title="Hash:"
+          type='tooltip' value={block?.miner}
+          trim={0}
+        />
+
+        <hr className="border-gray-700 border-[1px] my-2" />
+
+        <ListItem
+          title="Hash:"
+          type='tooltip' value={block?.hash}
+          trim={0}
+        />
+        <ListItem title="Difficulty:" value={`${parseDecimals(block?.difficultyInGH)} GH`} />
+        <ListItem title="Total Difficulty:" value={`${parseDecimals(block?.totalDifficultyInEH)} EH`} />
+
+        <hr className="border-gray-700 border-[1px] my-2" />
+
+        <ListItem title="Gas Used:" value={parseDecimals(block?.gasUsed)} />
+        <ListItem title="Gas Limit:" value={parseDecimals(block?.gasLimit)} />
+        <ListItem title="Minimum Gas Price:" value={parseDecimals(block?.minimumGasPrice)} />
+      </ListContent>
+
+      <Accordion title="More details" subtitle='Less details' styles={false} className='text-brand-green'>
+        <ListContent className="mt-0 bg-secondary rounded-lg p-4">
+          <ListItem
+            title="Bitcoin Merged Mining Header"
+            type='tooltip' value={block?.bitcoinMergedMiningHeader}
+            trim={24}
+          />
+          <ListItem
+            title="Bitcoin Merged Mining Coinbase Transaction"
+            type='tooltip' value={block?.bitcoinMergedMiningCoinbaseTransaction}
+            trim={24}
+          />
+          <ListItem
+            title="Bitcoin Merged Mining Merkle Proof"
+            type='tooltip'
+            value={block?.bitcoinMergedMiningMerkleProof}
+            trim={24}
+          />
+          <ListItem
+            title="Hash For Merged Mining"
+            type='tooltip'
+            value={block?.hashForMergedMining}
+            trim={24}
+          />
+          <hr className="border-gray-700 border-[1px] my-2" />
+          <ListItem
+            title="Parent Hash:"
+            type='tooltip' value={block?.parentHash}
+            trim={0}
+          />
+          <ListItem
+            title="Sha3uncles:"
+            type='tooltip' value={block?.sha3Uncles}
+            trim={0}
+          />
+        </ListContent>
+      </Accordion>
+    </div>
   )
 }
 
