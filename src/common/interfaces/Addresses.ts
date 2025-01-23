@@ -17,4 +17,28 @@ export interface IAddresses {
     internalTxId: string
   }
   interfaces: string[]
+  totalSupply: number
+}
+
+export interface IContractDetail {
+  request: {
+    address: string
+    bytecode: string
+    deployedBytecode: string
+    imports: [
+      {
+        contents: string
+        file: string
+      }
+    ]
+    version: string
+    settings: {
+      evmVersion: string
+      optimizer: {
+        enabled: boolean
+        runs: number
+      }
+    }
+  }
+  timestamp: string
 }

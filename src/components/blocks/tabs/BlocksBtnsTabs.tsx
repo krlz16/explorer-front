@@ -5,7 +5,7 @@ import { BLOCKS_URL_TABS } from './BlocksTabs'
 import { useTab } from '@/hooks/useTab';
 
 function BlocksBtnsTabs() {
-  const { changeTab, currentTap } = useTab({ defaultTab: BLOCKS_URL_TABS[0].tab });
+  const { changeTab, currentTab } = useTab({ defaultTab: BLOCKS_URL_TABS[0].tab });
   
   return (
     <div className="my-4 flex">
@@ -15,7 +15,7 @@ function BlocksBtnsTabs() {
             key={i}
             label={btn.label}
             onClick={() => changeTab(btn.tab)}
-            className={ currentTap === btn.tab ? 'bg-brand-green text-black' : ''}
+            className={ currentTab === btn.tab ? 'bg-brand-green text-black' : ''}
           />
         ))
       }

@@ -3,7 +3,6 @@ import React from 'react'
 import ToolTip from '../ui/ToolTip'
 import { ROUTER } from '@/common/constants'
 import { parseDecimals } from '@/common/utils/ParseDecimals'
-import { TxIcon } from '@/common/icons'
 import Link from 'next/link'
 import { parseDate } from '@/common/utils/Time'
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table'
@@ -15,7 +14,6 @@ function EventsTable({ events }: props) {
   return (
     <Table>
       <TableHeader>
-        <TableCell className="w-12 text-center" />
         <TableCell>Event</TableCell>
         <TableCell>Address</TableCell>
         <TableCell>Arguments</TableCell>
@@ -25,10 +23,7 @@ function EventsTable({ events }: props) {
         {
           events?.map((e, i) => (
             <TableRow key={i} >
-              <TableCell className='w-12 text-center'>
-                <TxIcon />
-              </TableCell>
-              <TableCell>
+              <TableCell className='text-brand-pink !text-left'>
                 {e.event}
               </TableCell>
               <TableCell>

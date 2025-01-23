@@ -17,7 +17,8 @@ export const ROUTER = {
     EVENTS: '/events',
     TTRANSFER: '/ttransfers',
     ACCOUNT: '/account',
-    BALANCES: '/balances'
+    BALANCES: '/balances',
+    CONTRACT: '/addresses/contract'
   },
   TOKENS: '/tokens',
   ITXS: {

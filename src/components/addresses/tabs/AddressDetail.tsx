@@ -1,13 +1,11 @@
-import { IAddresses } from "@/common/interfaces/Addresses";
-import { parseDate } from "@/common/utils/Time";
+'use client'
 import ListContent from "@/components/generals/ListContent";
 import ListItem from "@/components/generals/ListItem";
+import Date from "@/components/ui/Date";
+import { useAddressDataContext } from "@/context/AddressContext";
 
-type props = {
-  address: IAddresses | undefined
-}
-function General({ address }: props) {
-  console.log('address: ', address?.type);
+function AddressDetail() {
+  const { address } = useAddressDataContext();
   // const generalsItems = [
   //   { label: 'Address', value: address?.address },
   //   { label: 'Balance', value: `${address?.balance} RBTC` },
@@ -38,18 +36,28 @@ function General({ address }: props) {
   //   { label: 'Total Supply', value: address?.createdByTx.internalTxId },
   // ];
 
-  const { timeAgo, formattedDate } = parseDate(address?.createdByTx?.timestamp);
-
   return (
     <ListContent>
-      <ListItem title="Address" value={address?.address} />
-      <ListItem title="Balance" value={`${address?.balance} RBTC`} />
-      <ListItem title="Type" value={address?.type} />
-      <ListItem title="Block" value={address?.blockNumber} />
-      <ListItem title="Timestamp" value={`${timeAgo} | ${formattedDate}`} />
-      <ListItem title="Internal Tx" value={address?.createdByTx?.internalTxId} />
+      {
+        address?.type === 'contract' ? (
+          <>
+            <ListItem title="Contract Name:" value={address?.name} />
+            <ListItem title="Symbol:" value={address?.symbol} />
+            <ListItem title="Timestamp" value={<Date date={address?.createdByTx?.timestamp} />} />
+            <ListItem title="Total Supply" value={address?.totalSupply} />
+          </>
+        )
+        : 
+        (
+          <>
+            <ListItem title="Balance" value={`${address?.balance} RBTC`} />
+            <ListItem title="Type" value={address?.type} />
+          </>
+        )
+      }
+      <ListItem title="Updated at block:" value={address?.blockNumber} />
     </ListContent>
   )
 }
 
-export default General
+export default AddressDetail

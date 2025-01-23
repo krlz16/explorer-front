@@ -6,27 +6,32 @@ type props = {
   info?: string
   value?: React.ReactNode | string
   className?: string
-  type?: 'tooltip' | 'normal'
+  type?: 'tooltip' | 'normal' | 'simple'
   text?: string
   trim?: number
 }
 function ListItem({ title, value, className, type = 'normal', text, trim = 0 }: props) {
   if (!value) return
   return (
-    <div className="flex items-center py-3">
+    <div className={`flex items-center w-full ${type === 'simple' ? 'py-1' : 'py-3'}`}>
       <div className="w-3/12 flex items-center gap-2">
-        <div>
-          <InfoIcon />
-        </div>
+      {
+        type !== 'simple' && (
+          <div>
+            <InfoIcon />
+          </div>
+        )
+      }
         {title}
       </div>
       <div className={`w-9/12 text-white-100 break-words ${className}`}>
-        { type === 'tooltip' && (
+        { type === 'tooltip' ? (
           <ToolTip
             text={value as string || text} trim={trim} 
           />)
+          :
+          value
         }
-        { type === 'normal' && value}
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 // useFetch.tsx
 'use client'
-import { fetchData } from "@/app/lib/data";
+import { fetchData } from "@/services/api";
 import { useCallback, useEffect, useState } from "react";
 
 interface IPagination {
