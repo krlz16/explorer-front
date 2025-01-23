@@ -1,4 +1,4 @@
-import { IAddresses, IContractDetail } from "@/common/interfaces/Addresses";
+import { IAddresses, IContractVerification } from "@/common/interfaces/Addresses";
 import { fetchData } from "./api";
 import { ROUTER } from "@/common/constants";
 
@@ -12,7 +12,7 @@ export async function fetchAddress(address: string) {
   return response;
 }
 
-export async function fetchContractDetail(address: string) {
-  const response = await fetchData<IContractDetail>(`${ROUTER.ADDRESSES.CONTRACT}/${address}`)
+export async function fetchContractVerification(address: string) {
+  const response = await fetchData<IContractVerification>(`${ROUTER.ADDRESSES.CONTRACT_VERIFICATION}/${address}`)
   return response;
 }

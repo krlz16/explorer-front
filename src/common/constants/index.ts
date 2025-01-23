@@ -18,7 +18,7 @@ export const ROUTER = {
     TTRANSFER: '/ttransfers',
     ACCOUNT: '/account',
     BALANCES: '/balances',
-    CONTRACT: '/addresses/contract'
+    CONTRACT_VERIFICATION: '/addresses/verification'
   },
   TOKENS: '/tokens',
   ITXS: {
