@@ -27,7 +27,7 @@ export async function fetchData<T>(url: string, params?: object, revalidate: num
 
     const data = await response.json();
     return data as DataResponse<T>;
-  } catch (error) {
+  } catch (error: any) {
     console.log('error: ', error);
     throw new Error('fetch error');
   }
