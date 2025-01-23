@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTxsDataContext } from '@/context/TxsContext'
 import ToolTip from '@/components/ui/ToolTip';
+import Code from '@/components/ui/Code';
 
 function LogsContainer() {
   const { tx } = useTxsDataContext();
@@ -37,9 +38,7 @@ function LogsContainer() {
               <div className='flex items-center gap-8 mt-5'>
                 <div className='w-1/12 text-end text-white-400'>Data</div>
                 <div className='flex-1'>
-                  <div className='bg-gray-600 rounded-xl px-4 py-1 break-all max-h-16 overflow-y-auto'>
-                    { log.data }
-                  </div>
+                  <Code code={log.data} />
                 </div>
               </div>
             </div>

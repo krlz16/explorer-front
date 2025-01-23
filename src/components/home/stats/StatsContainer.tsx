@@ -1,9 +1,9 @@
-import { fetchData } from '@/app/lib/data'
 import { ROUTER } from '@/common/constants'
 import React from 'react'
 import Stat from './Stat'
 import { HashrateIcon, RbtcIcon, UsersIcon } from '@/common/icons'
 import { parseDecimals } from '@/common/utils/ParseDecimals'
+import { fetchData } from '@/services/api'
 
 interface IStats {
   activeAccounts: number,

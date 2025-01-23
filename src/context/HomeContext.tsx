@@ -1,9 +1,9 @@
 'use client'
-import { fetchData } from "@/app/lib/data";
 import { ROUTER } from "@/common/constants";
 import { IBlocks } from "@/common/interfaces/Blocks";
 import { DataResponse } from "@/common/interfaces/IResponse";
 import { ITxs } from "@/common/interfaces/Txs";
+import { fetchData } from "@/services/api";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface IHomeContext {

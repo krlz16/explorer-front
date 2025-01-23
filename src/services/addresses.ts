@@ -1,4 +1,4 @@
-import { IAddresses } from "@/common/interfaces/Addresses";
+import { IAddresses, IContractDetail } from "@/common/interfaces/Addresses";
 import { fetchData } from "./api";
 import { ROUTER } from "@/common/constants";
 
@@ -9,5 +9,10 @@ export async function fetchAddresses(params: object) {
 
 export async function fetchAddress(address: string) {
   const response = await fetchData<IAddresses>(`${ROUTER.ADDRESSES.INDEX}/${address}`)
+  return response;
+}
+
+export async function fetchContractDetail(address: string) {
+  const response = await fetchData<IContractDetail>(`${ROUTER.ADDRESSES.CONTRACT}/${address}`)
   return response;
 }

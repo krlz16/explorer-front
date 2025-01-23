@@ -5,6 +5,7 @@ import { useTxsDataContext } from '@/context/TxsContext';
 import Date from '@/components/ui/Date';
 import Status from '@/components/ui/Status';
 import Badge from '@/components/ui/Badge';
+import Code from '@/components/ui/Code';
 
 function TxDetail() {
   const { tx } = useTxsDataContext();
@@ -34,9 +35,7 @@ function TxDetail() {
       <ListItem title='Gas Price' value={tx?.gasPrice} />
       <ListItem title='Gas Used' value={parseDecimals(tx?.gasUsed)} />
       <ListItem title='Input' value={
-        <div className='bg-gray-600 rounded-xl px-4 py-1 break-all max-h-16 overflow-y-auto'>
-        { tx?.input }
-      </div>
+        <Code code={tx?.input} />
       } />
       {/* <ListItem title='type' value={tx?.txType} /> */}
       {/* <ListItem title='Nonce' value={tx?.nonce} /> */}

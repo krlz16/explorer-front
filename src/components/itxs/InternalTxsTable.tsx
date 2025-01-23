@@ -29,7 +29,7 @@ function InternalTxsTable({ itxs }: props) {
             <TableCell>
               <Badge
                 className='capitalize'
-                text={itx.action.callType}
+                text={itx.action?.callType}
                 type='info'
               />
             </TableCell>
