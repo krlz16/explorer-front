@@ -1,11 +1,11 @@
 'use client'
-import { IAddresses, IContractDetail } from "@/common/interfaces/Addresses";
+import { IAddresses, IContractVerification } from "@/common/interfaces/Addresses";
 import { createContext, useContext, useState } from "react";
 
 interface DataContextType {
   address: IAddresses | undefined
-  contractDetail: IContractDetail | undefined
-  setContractDetail: React.Dispatch<React.SetStateAction<IContractDetail | undefined>>;
+  contractVerification: IContractVerification | undefined
+  setContractVerification: React.Dispatch<React.SetStateAction<IContractVerification | undefined>>;
   
 }
 
@@ -19,13 +19,13 @@ export const AddressDataProvider = (
   address: IAddresses | undefined,
   children: React.ReactNode,
  }) => {
-  const [contractDetail, setContractDetail] = useState<IContractDetail | undefined>(undefined);
+  const [contractVerification, setContractVerification] = useState<IContractVerification | undefined>(undefined);
   return (
     <DataContext.Provider
       value={{
         address,
-        contractDetail,
-        setContractDetail,
+        contractVerification,
+        setContractVerification,
       }}
     >
       {children}

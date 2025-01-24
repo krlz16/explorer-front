@@ -12,7 +12,7 @@ import Date from '@/components/ui/Date'
 type ISubtab = 'code' | 'abi' | 'bytecode';
 
 function ContractGeneral() {
-  const { address, contractDetail: contract } = useAddressDataContext();
+  const { address, contractVerification: contract } = useAddressDataContext();
   const optimizer = contract?.request.settings.optimizer;
   const [subTab, setSubTab] = useState<ISubtab>('code');
 
@@ -54,19 +54,23 @@ function ContractGeneral() {
           />
         </ListContent>
       </div>
-      <div className='flex'>
+      <div className='flex gap-2'>
         <Button
           label='Code'
           className='bg-btn-secondary'
           onClick={() => setSubTab('code')}
+          type='small'
         />
         <Button
           label='ABI'
           onClick={() => setSubTab('abi')}
+          type='small'
         />
         <Button
           label='Bytecode'
-          onClick={() => setSubTab('bytecode')}
+          onClick={() => setSubTab('bytecode')
+        }
+          type='small'
         />
       </div>
       { subTab === 'code' && <ContractCode />}

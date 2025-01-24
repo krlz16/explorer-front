@@ -20,9 +20,11 @@ export interface IAddresses {
   totalSupply: number
 }
 
-export interface IContractDetail {
+export interface IContractVerification {
+  id: string
+  match: boolean
+  abi: any[]
   request: {
-    address: string
     bytecode: string
     deployedBytecode: string
     imports: [

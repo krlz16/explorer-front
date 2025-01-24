@@ -6,23 +6,23 @@ import { useTab } from "@/hooks/useTab";
 import AddressDetail from "@/components/addresses/tabs/AddressDetail";
 import ContractDetail from "@/components/addresses/Contract/ContractDetail";
 import { useEffect } from "react";
-import { fetchContractDetail } from "@/services/addresses";
+import { fetchContractVerification } from "@/services/addresses";
 import { useAddressDataContext } from "@/context/AddressContext";
 
 export default function Page() {
-  const { address, setContractDetail } = useAddressDataContext();
+  const { address, setContractVerification } = useAddressDataContext();
   const { changeTab, currentTab } = useTab({ defaultTab: ADDRESSES_BTN_TABS[0].tab });
 
   useEffect(() => {
-    const getContractDetail = async () => {
+    const getContractVerification = async () => {
       if (currentTab !== 'contract') return;
-      const response = await fetchContractDetail(address!.address);
-      setContractDetail(response?.data);
+      const response = await fetchContractVerification(address!.address);
+      setContractVerification(response?.data);
       console.log('response: ', response);
     }
 
-    getContractDetail();
-  }, [currentTab, address, setContractDetail]);
+    getContractVerification();
+  }, [currentTab, address, setContractVerification]);
   
   return (
     <div className="mt-6">
