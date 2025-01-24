@@ -22,6 +22,7 @@ export const ROUTER = {
   },
   VERIFY: {
     GET_SOLC: 'https://solc-bin.ethereum.org/bin/list.json',
+    GET_EVM: '/verifications/getEvmVersions',
   },
   TOKENS: '/tokens',
   ITXS: {

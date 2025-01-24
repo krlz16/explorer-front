@@ -16,7 +16,7 @@ type VerificationMethodComponentProps = {
   setIsToggleOn?: (isToggleOn: boolean) => void;
 };
 
-const VerificationMethodComponent = ({
+const FormDropdown = ({
   title,
   selectedOption,
   setSelectedOption,
@@ -97,4 +97,4 @@ const VerificationMethodComponent = ({
   );
 };
 
-export default VerificationMethodComponent;
+export default FormDropdown;
