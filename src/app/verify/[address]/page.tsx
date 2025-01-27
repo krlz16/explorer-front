@@ -14,6 +14,7 @@ import FormInputField from '@/components/ui/FormInputField';
 import GeneralDetailsSection from '@/components/verify/GeneralDetailsSection';
 import AdvancedDetailsSection from '@/components/verify/AdvancedDetailsSection';
 import ConstructorArgumentsSection from '@/components/verify/ConstructorArgumentsSection';
+import ContractLibrariesSection from '@/components/verify/ContractLibrariesSection';
 
 export default function Page() {
   // const hash = useParams();
@@ -41,6 +42,15 @@ export default function Page() {
   const [solcVersions, setSolcVersions] = useState<IBuildStructure | undefined>(
     undefined
   );
+  const [libraries, setLibraries] = useState<
+    { libraryName: string; libraryAddress: string }[]
+  >([
+    {
+      libraryName: '',
+      libraryAddress: '',
+    },
+  ]);
+
   useEffect(() => {
     fetchSolcVersions();
     fetchEVMVersions();
@@ -126,6 +136,25 @@ export default function Page() {
     console.log('loaded files:', files);
   };
 
+  //Handle library section
+  const handleAddLibrary = () => {
+    setLibraries([...libraries, { libraryName: '', libraryAddress: '' }]);
+  };
+
+  const handleRemoveLibrary = (index: number) => {
+    setLibraries(libraries.filter((_, i) => i !== index));
+  };
+
+  const handleLibraryChange = (
+    index: number,
+    field: 'libraryName' | 'libraryAddress',
+    value: string
+  ) => {
+    const updatedLibraries = [...libraries];
+    updatedLibraries[index][field] = value;
+    setLibraries(updatedLibraries);
+  };
+
   return (
     <div className="mt-10 p-6 items-center flex flex-col">
       <div className="p-4 rounded-lg w-4/5">
@@ -157,30 +186,12 @@ export default function Page() {
             abiEncoded={abiEncoded}
             setAbiEncoded={setAbiEncoded}
           />
-          <div className="text-lg text-white-400 text-lg mt-4">
-            Contract Libraries
-          </div>
-          <Divider />
-          <div className="flex items-center gap-4 mt-4">
-            <div className="w-1/3">
-              <FormInputField
-                title="Library Name"
-                placeholder="0x..."
-                value={constructorArgs}
-                setValue={setConstructorArgs}
-                maxLength={100}
-              />
-            </div>
-            <div className="flex-1">
-              <FormInputField
-                title="Library Contract Address"
-                placeholder="Name"
-                value={contractName}
-                setValue={setContractName}
-                maxLength={50}
-              />
-            </div>
-          </div>
+          <ContractLibrariesSection
+            libraries={libraries}
+            handleAddLibrary={handleAddLibrary}
+            handleRemoveLibrary={handleRemoveLibrary}
+            handleLibraryChange={handleLibraryChange}
+          />
         </Card>
       </div>
     </div>
