@@ -2,7 +2,6 @@
 
 // import { useParams } from 'next/navigation';
 import Card from '@/components/ui/Card';
-import Divider from '@/components/ui/Divider';
 import { DropDownOption } from '@/components/ui/FormDropdown';
 import { useEffect, useState } from 'react';
 
@@ -10,7 +9,6 @@ import { VerificationMethods } from '@/constants/verificationConstants';
 import { IBuildStructure } from '@/common/interfaces/ISolc';
 import { fetchData, fetchDataExt } from '@/services/api';
 import { ROUTER } from '@/common/constants';
-import FormInputField from '@/components/ui/FormInputField';
 import GeneralDetailsSection from '@/components/verify/GeneralDetailsSection';
 import AdvancedDetailsSection from '@/components/verify/AdvancedDetailsSection';
 import ConstructorArgumentsSection from '@/components/verify/ConstructorArgumentsSection';
@@ -172,27 +170,31 @@ export default function Page() {
             compilerVersion={compilerVersion}
             setCompilerVersion={setCompilerVersion}
           />
-          <AdvancedDetailsSection
-            optimizationOn={optimizationOn}
-            setOptimizationOn={setOptimizationOn}
-            optimizationValue={optimizationValue}
-            setOptimizationValue={setOptimizationValue}
-            availableEvmVersions={availableEvmVersions}
-            evmVersion={evmVersion}
-            setEVMVersion={setEVMVersion}
-          />
+          {verifMethod === VerificationMethods[0] && (
+            <AdvancedDetailsSection
+              optimizationOn={optimizationOn}
+              setOptimizationOn={setOptimizationOn}
+              optimizationValue={optimizationValue}
+              setOptimizationValue={setOptimizationValue}
+              availableEvmVersions={availableEvmVersions}
+              evmVersion={evmVersion}
+              setEVMVersion={setEVMVersion}
+            />
+          )}
           <ConstructorArgumentsSection
             constructorArgs={constructorArgs}
             setConstructorArgs={setConstructorArgs}
             abiEncoded={abiEncoded}
             setAbiEncoded={setAbiEncoded}
           />
-          <ContractLibrariesSection
-            libraries={libraries}
-            handleAddLibrary={handleAddLibrary}
-            handleRemoveLibrary={handleRemoveLibrary}
-            handleLibraryChange={handleLibraryChange}
-          />
+          {verifMethod === VerificationMethods[0] && (
+            <ContractLibrariesSection
+              libraries={libraries}
+              handleAddLibrary={handleAddLibrary}
+              handleRemoveLibrary={handleRemoveLibrary}
+              handleLibraryChange={handleLibraryChange}
+            />
+          )}
           <div className="flex justify-end mt-4">
             <Button label={'Verify Contract'} onClick={() => {}} type="brand" />
           </div>

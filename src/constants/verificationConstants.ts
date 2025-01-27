@@ -1,4 +1,3 @@
-
 export const VerificationMethods = [
   {
     key: 'solidity',
@@ -7,5 +6,5 @@ export const VerificationMethods = [
   {
     key: 'standard',
     title: 'Standard JSON Input',
-  }
-]
+  },
+];
