@@ -1,26 +1,28 @@
-"use client";
+'use client';
 
-import { useParams } from "next/navigation";
-import Card from "@/components/ui/Card";
-import Divider from "@/components/ui/Divider";
-import FormDropdownComponent, {
-  DropDownOption,
-} from "@/components/ui/FormDropdown";
-import { useEffect, useState } from "react";
+// import { useParams } from 'next/navigation';
+import Card from '@/components/ui/Card';
+import Divider from '@/components/ui/Divider';
+import { DropDownOption } from '@/components/ui/FormDropdown';
+import { useEffect, useState } from 'react';
 
-import { VerificationMethods } from "@/constants/verificationConstants";
-import { IBuildStructure } from "@/common/interfaces/ISolc";
-import { fetchData, fetchDataExt } from "@/services/api";
-import { ROUTER } from "@/common/constants";
-import FormInputField from "@/components/ui/FormInputField";
-import FormUploadFile from "@/components/ui/FormUploadFile";
+import { VerificationMethods } from '@/constants/verificationConstants';
+import { IBuildStructure } from '@/common/interfaces/ISolc';
+import { fetchData, fetchDataExt } from '@/services/api';
+import { ROUTER } from '@/common/constants';
+import FormInputField from '@/components/ui/FormInputField';
+import GeneralDetailsSection from '@/components/verify/GeneralDetailsSection';
+import AdvancedDetailsSection from '@/components/verify/AdvancedDetailsSection';
+import ConstructorArgumentsSection from '@/components/verify/ConstructorArgumentsSection';
 
 export default function Page() {
-  const hash = useParams();
+  // const hash = useParams();
   const [isNightly, setIsNightly] = useState(false);
   const [optimizationOn, setOptimizationOn] = useState(false);
-  const [contractName, setContractName] = useState<string>("");
-  const [optimizationValue, setOptimizationValue] = useState<string>("");
+  const [abiEncoded, setAbiEncoded] = useState(false);
+  const [contractName, setContractName] = useState<string>('');
+  const [optimizationValue, setOptimizationValue] = useState<string>('');
+  const [constructorArgs, setConstructorArgs] = useState<string>('');
   const [filteredCompilers, setFilteredCompilers] = useState<DropDownOption[]>(
     []
   );
@@ -54,6 +56,7 @@ export default function Page() {
         setSolcVersions(data as IBuildStructure);
       }
     } catch (error) {
+      console.log('error', error);
       return undefined;
     }
   };
@@ -65,6 +68,7 @@ export default function Page() {
       setEVMVersion(formatedData[0]);
       setAvailableEvmVersions(formatedData);
     } catch (error) {
+      console.log('error', error);
       return undefined;
     }
   };
@@ -73,7 +77,7 @@ export default function Page() {
       if (isNightly) {
         const sortedBuilds = [...solcVersions.builds].sort((a, b) => {
           const parseVersion = (version: string) =>
-            version.split(".").map(Number);
+            version.split('.').map(Number);
 
           const [majorA, minorA, patchA] = parseVersion(a.version);
           const [majorB, minorB, patchB] = parseVersion(b.version);
@@ -91,7 +95,7 @@ export default function Page() {
         setCompilerVersion(filteredCompilers[0]);
         return;
       }
-      const limitVersion = process.env.NEXT_PUBLIC_LTS_SOL_VERSION || "0.8.24";
+      const limitVersion = process.env.NEXT_PUBLIC_LTS_SOL_VERSION || '0.8.24';
       const filteredCompilers = filterReleasesByVersion(
         solcVersions?.releases,
         limitVersion
@@ -105,8 +109,8 @@ export default function Page() {
     versionLimit: string
   ): DropDownOption[] => {
     const isVersionLessThan = (v1: string, v2: string): boolean => {
-      const [major1, minor1, patch1] = v1.split(".").map(Number);
-      const [major2, minor2, patch2] = v2.split(".").map(Number);
+      const [major1, minor1, patch1] = v1.split('.').map(Number);
+      const [major2, minor2, patch2] = v2.split('.').map(Number);
 
       if (major1 !== major2) return major1 < major2;
       if (minor1 !== minor2) return minor1 < minor2;
@@ -115,73 +119,68 @@ export default function Page() {
 
     return Object.entries(releases)
       .filter(([version]) => isVersionLessThan(version, versionLimit))
-      .map(([key, value]) => ({ key, title: key }));
+      .map(([key]) => ({ key, title: key }));
   };
 
   const handleFileDrop = (files: File[]) => {
-    console.log("loaded files:", files);
+    console.log('loaded files:', files);
   };
 
   return (
     <div className="mt-10 p-6 items-center flex flex-col">
       <div className="p-4 rounded-lg w-4/5">
         <Card className="bg-secondary flex flex-col">
-          <div className="text-lg text-white-400 text-lg">General Details</div>
+          <GeneralDetailsSection
+            handleFileDrop={handleFileDrop}
+            isNightly={isNightly}
+            setIsNightly={setIsNightly}
+            contractName={contractName}
+            setContractName={setContractName}
+            filteredCompilers={filteredCompilers}
+            verifMethod={verifMethod}
+            setVerifMethod={setVerifMethod}
+            compilerVersion={compilerVersion}
+            setCompilerVersion={setCompilerVersion}
+          />
+          <AdvancedDetailsSection
+            optimizationOn={optimizationOn}
+            setOptimizationOn={setOptimizationOn}
+            optimizationValue={optimizationValue}
+            setOptimizationValue={setOptimizationValue}
+            availableEvmVersions={availableEvmVersions}
+            evmVersion={evmVersion}
+            setEVMVersion={setEVMVersion}
+          />
+          <ConstructorArgumentsSection
+            constructorArgs={constructorArgs}
+            setConstructorArgs={setConstructorArgs}
+            abiEncoded={abiEncoded}
+            setAbiEncoded={setAbiEncoded}
+          />
+          <div className="text-lg text-white-400 text-lg mt-4">
+            Contract Libraries
+          </div>
           <Divider />
-          <FormDropdownComponent
-            title="Verification Method"
-            selectedOption={verifMethod}
-            setSelectedOption={setVerifMethod}
-            elements={VerificationMethods}
-          />
-          {compilerVersion && (
-            <FormDropdownComponent
-              title="Compiler Version"
-              selectedOption={compilerVersion}
-              setSelectedOption={setCompilerVersion}
-              elements={filteredCompilers}
-              toggleLabel="Include night builds"
-              isToggleOn={isNightly}
-              setIsToggleOn={setIsNightly}
-            />
-          )}
-          <FormInputField
-            title="Contract Name"
-            value={contractName}
-            setValue={setContractName}
-            placeholder="Contract name"
-            maxLength={50}
-          />
-          <FormUploadFile
-            title="Upload Source Files"
-            onFileDrop={handleFileDrop}
-            placeholder="Drag and drop your .sol or .json files here"
-            allowMultiple={false}
-            acceptedFormats={[".sol"]}
-          />
-          <div className="text-lg text-white-400 text-lg">Advanced Details</div>
-          <Divider />
-          <FormInputField
-            title="Optimization Runs"
-            placeholder="Optimization value"
-            value={optimizationValue}
-            setValue={setOptimizationValue}
-            maxLength={15}
-            isDisabled={!optimizationOn}
-            toggleLabel="Enable optimization"
-            isToggleOn={optimizationOn}
-            setIsToggleOn={(state) => {
-              setOptimizationOn(state);
-            }}
-          />
-          {evmVersion && (
-            <FormDropdownComponent
-              title="EVM Version"
-              selectedOption={evmVersion}
-              setSelectedOption={setEVMVersion}
-              elements={availableEvmVersions}
-            />
-          )}
+          <div className="flex items-center gap-4 mt-4">
+            <div className="w-1/3">
+              <FormInputField
+                title="Library Name"
+                placeholder="0x..."
+                value={constructorArgs}
+                setValue={setConstructorArgs}
+                maxLength={100}
+              />
+            </div>
+            <div className="flex-1">
+              <FormInputField
+                title="Library Contract Address"
+                placeholder="Name"
+                value={contractName}
+                setValue={setContractName}
+                maxLength={50}
+              />
+            </div>
+          </div>
         </Card>
       </div>
     </div>

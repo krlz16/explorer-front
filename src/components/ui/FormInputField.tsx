@@ -3,25 +3,27 @@ import { InfoIcon } from "@/common/icons";
 
 type InputFieldComponentProps = {
   title: string;
-  placeholder?: string;
   value: string;
   setValue: (value: string) => void;
+  placeholder?: string;
+  toggleLabel?: string;
   maxLength?: number;
   isDisabled?: boolean;
-  toggleLabel?: string;
   isToggleOn?: boolean;
+  isLarge?: boolean;
   setIsToggleOn?: (isToggleOn: boolean) => void;
 };
 
 const FormInputField = ({
   title,
-  placeholder = "",
   value,
   setValue,
+  placeholder = "",
+  toggleLabel = "",
   maxLength = 40,
   isDisabled = false,
-  toggleLabel = "",
   isToggleOn = false,
+  isLarge = false,
   setIsToggleOn = () => {},
 }: InputFieldComponentProps) => {
   return (
@@ -32,17 +34,31 @@ const FormInputField = ({
           <div className="text-white font-medium ml-2">{title}</div>
         </div>
       </div>
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        className={`w-full bg-gray-700 text-white-400 font-medium px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 ${
-          isDisabled ? "cursor-not-allowed opacity-50" : ""
-        }`}
-        maxLength={maxLength}
-        disabled={isDisabled}
-      />
+      {isLarge ? (
+        <textarea
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className={`w-full bg-gray-700 text-white-400 font-medium px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 resize-none ${
+            isDisabled ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          maxLength={maxLength}
+          disabled={isDisabled}
+          rows={3}
+        />
+      ) : (
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className={`w-full bg-gray-700 text-white-400 font-medium px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 ${
+            isDisabled ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          maxLength={maxLength}
+          disabled={isDisabled}
+        />
+      )}
       {toggleLabel !== "" && (
         <div className="mt-4 flex items-center">
           <div

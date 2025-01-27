@@ -38,7 +38,9 @@ const FormUploadFile = ({
 
       const validFiles = filterFilesByFormat(filesArray);
 
-      const newFiles = allowMultiple ? validFiles : [validFiles[0]].filter(Boolean);
+      const newFiles = allowMultiple
+        ? validFiles
+        : [validFiles[0]].filter(Boolean);
 
       setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
       onFileDrop(newFiles);
@@ -52,7 +54,9 @@ const FormUploadFile = ({
 
       const validFiles = filterFilesByFormat(filesArray);
 
-      const newFiles = allowMultiple ? validFiles : [validFiles[0]].filter(Boolean);
+      const newFiles = allowMultiple
+        ? validFiles
+        : [validFiles[0]].filter(Boolean);
 
       setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
       onFileDrop(newFiles);
@@ -86,14 +90,14 @@ const FormUploadFile = ({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        onClick={() => document.getElementById("fileInput")?.click()} // Abrir input al hacer clic
+        onClick={() => document.getElementById("fileInput")?.click()}
       >
         <input
           id="fileInput"
           type="file"
           className="hidden"
-          multiple={allowMultiple} // Configuración para permitir múltiples archivos
-          accept={acceptedFormats.join(",")} // Formatos aceptados
+          multiple={allowMultiple}
+          accept={acceptedFormats.join(",")}
           onChange={handleFileSelect}
         />
         <p className="text-white-400">{placeholder}</p>
