@@ -15,6 +15,7 @@ import GeneralDetailsSection from '@/components/verify/GeneralDetailsSection';
 import AdvancedDetailsSection from '@/components/verify/AdvancedDetailsSection';
 import ConstructorArgumentsSection from '@/components/verify/ConstructorArgumentsSection';
 import ContractLibrariesSection from '@/components/verify/ContractLibrariesSection';
+import Button from '@/components/ui/Button';
 
 export default function Page() {
   // const hash = useParams();
@@ -192,6 +193,9 @@ export default function Page() {
             handleRemoveLibrary={handleRemoveLibrary}
             handleLibraryChange={handleLibraryChange}
           />
+          <div className="flex justify-end mt-4">
+            <Button label={'Verify Contract'} onClick={() => {}} type="brand" />
+          </div>
         </Card>
       </div>
     </div>
