@@ -1,5 +1,5 @@
-import React from "react";
-import { InfoIcon } from "@/common/icons";
+import React from 'react';
+import { InfoIcon } from '@/common/icons';
 
 type InputFieldComponentProps = {
   title: string;
@@ -18,8 +18,8 @@ const FormInputField = ({
   title,
   value,
   setValue,
-  placeholder = "",
-  toggleLabel = "",
+  placeholder = '',
+  toggleLabel = '',
   maxLength = 40,
   isDisabled = false,
   isToggleOn = false,
@@ -40,7 +40,7 @@ const FormInputField = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           className={`w-full bg-gray-700 text-white-400 font-medium px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 resize-none ${
-            isDisabled ? "cursor-not-allowed opacity-50" : ""
+            isDisabled ? 'cursor-not-allowed opacity-50' : ''
           }`}
           maxLength={maxLength}
           disabled={isDisabled}
@@ -53,19 +53,19 @@ const FormInputField = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           className={`w-full bg-gray-700 text-white-400 font-medium px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 ${
-            isDisabled ? "cursor-not-allowed opacity-50" : ""
+            isDisabled ? 'cursor-not-allowed opacity-50' : ''
           }`}
           maxLength={maxLength}
           disabled={isDisabled}
         />
       )}
-      {toggleLabel !== "" && (
+      {toggleLabel !== '' && (
         <div className="mt-4 flex items-center">
           <div
             className={`w-5 h-5 flex items-center justify-center rounded-sm border cursor-pointer ${
               isToggleOn
-                ? "bg-primary-600 border-primary-600"
-                : "bg-transparent border-gray-400"
+                ? 'bg-primary-600 border-primary-600'
+                : 'bg-transparent border-gray-400'
             }`}
             onClick={() => setIsToggleOn && setIsToggleOn(!isToggleOn)}
           >

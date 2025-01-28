@@ -14,6 +14,7 @@ import AdvancedDetailsSection from '@/components/verify/AdvancedDetailsSection';
 import ConstructorArgumentsSection from '@/components/verify/ConstructorArgumentsSection';
 import ContractLibrariesSection from '@/components/verify/ContractLibrariesSection';
 import Button from '@/components/ui/Button';
+import { validateForm } from '@/components/verify/VerifierProcessor';
 
 export default function Page() {
   // const hash = useParams();
@@ -154,6 +155,15 @@ export default function Page() {
     setLibraries(updatedLibraries);
   };
 
+  //Submit verification section
+  const handleSubmitVerification = () => {
+    validateForm({
+      contractName,
+      files: [],
+      optimizationOn,
+      optimizationValue,
+    });
+  };
   return (
     <div className="mt-10 p-6 items-center flex flex-col">
       <div className="p-4 rounded-lg w-4/5">
@@ -196,7 +206,11 @@ export default function Page() {
             />
           )}
           <div className="flex justify-end mt-4">
-            <Button label={'Verify Contract'} onClick={() => {}} type="brand" />
+            <Button
+              label={'Verify Contract'}
+              onClick={handleSubmitVerification}
+              type="brand"
+            />
           </div>
         </Card>
       </div>

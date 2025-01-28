@@ -67,7 +67,7 @@ export default function GeneralDetailsSection({
       <FormUploadFile
         title="Upload Source Files"
         onFileDrop={handleFileDrop}
-        placeholder="Drag and drop your .sol or .json files here"
+        placeholder="Drop file or click here"
         allowMultiple={true}
         acceptedFormats={['.sol']}
       />
