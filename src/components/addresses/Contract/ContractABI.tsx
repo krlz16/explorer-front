@@ -8,7 +8,7 @@ function ContractABI({ abi }: { abi:string | undefined }) {
       <Code
         height='h-52'
         code={abi}
-        />
+      />
     </div>
   )
 }
