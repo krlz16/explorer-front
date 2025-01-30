@@ -19,7 +19,6 @@ function AddressesTable({ addresses }: props) {
         <TableCell>Balance</TableCell>
         <TableCell>Type</TableCell>
         <TableCell>Updated at block</TableCell>
-        <TableCell>Rns</TableCell>
       </TableHeader>
       {
         addresses?.map((a, i) => (
@@ -36,13 +35,11 @@ function AddressesTable({ addresses }: props) {
             <TableCell>
               {parseDecimals(a?.balance, 4)} RBTC
             </TableCell>
-            <TableCell>
+            <TableCell className='text-brand-pink'>
               {a.type}
             </TableCell>
             <TableCell>
               {parseDecimals(a.blockNumber)}
-            </TableCell>
-            <TableCell>
             </TableCell>
           </TableRow>
         ))

@@ -15,28 +15,27 @@ import TokenTransfersTable from "@/components/transfer/TokenTransfersTable";
 
 export default function Page() {
   const { tx, itxsData, setItxsData, tokensData, setTokensData } = useTxsDataContext();
-  const { changeTab, currentTap } = useTab({ defaultTab: TXS_BTN_TABS[0].tab });
+  const { changeTab, currentTab } = useTab({ defaultTab: TXS_BTN_TABS[0].tab });
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getInternalTxsByTxHash = async () => {
-      if (currentTap !== 'itxs' || itxsData?.length) return;
+      if (currentTab !== 'itxs' || itxsData?.length) return;
       setLoading(true);
       const data = await fetchInternalTxsByTxHash(tx!.hash!);
       setItxsData(data?.data);
       setLoading(false);
     }
     const getTransferEventByTxhash = async () => {
-      if (currentTap !== 'ttransfer' || tokensData?.length) return;
+      if (currentTab !== 'ttransfer' || tokensData?.length) return;
       setLoading(true);
       const data = await fetchTransferEventByTxhash(tx!.hash!);
-      console.log('data: ', data);
       setTokensData(data?.data);
       setLoading(false);
     }
     getInternalTxsByTxHash();
     getTransferEventByTxhash();
-  }, [currentTap, itxsData?.length, setItxsData, setTokensData, tokensData?.length, tx]);
+  }, [currentTab, itxsData?.length, setItxsData, setTokensData, tokensData?.length, tx]);
 
   return (
     <div className="mt-6">
@@ -46,7 +45,7 @@ export default function Page() {
             <Button
               key={i}
               label={btn.label}
-              className={currentTap === btn.tab ? 'bg-btn-secondary text-white' : ""}
+              className={currentTab === btn.tab ? 'bg-btn-secondary text-white' : ""}
               onClick={() => changeTab(btn.tab)}
             />
           ))
@@ -54,10 +53,10 @@ export default function Page() {
       </div>
       <div className="mt-6">
         { loading && <TableLoader />}
-        { (currentTap === 'overview' && !loading) && <TxDetail />}
-        { (currentTap === 'itxs' && !loading) && <InternalTxsTable itxs={itxsData} />}
-        { (currentTap === 'logs' && !loading) && <LogsContainer />}
-        { (currentTap === 'ttransfer' && !loading) && 
+        { (currentTab === 'overview' && !loading) && <TxDetail />}
+        { (currentTab === 'itxs' && !loading) && <InternalTxsTable itxs={itxsData} />}
+        { (currentTab === 'logs' && !loading) && <LogsContainer />}
+        { (currentTab === 'ttransfer' && !loading) && 
           <>
             {
               tokensData?.length ? 

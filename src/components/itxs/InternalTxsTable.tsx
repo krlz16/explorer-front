@@ -12,7 +12,6 @@ type props = {
 }
 
 function InternalTxsTable({ itxs }: props) {
-  console.log('itxs: ', itxs);
   return (
     <Table>
       <TableHeader>
@@ -29,7 +28,7 @@ function InternalTxsTable({ itxs }: props) {
             <TableCell>
               <Badge
                 className='capitalize'
-                text={itx.action.callType}
+                text={itx.action?.callType}
                 type='info'
               />
             </TableCell>

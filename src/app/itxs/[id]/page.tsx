@@ -1,8 +1,8 @@
-import { fetchData } from "@/app/lib/data";
 import { ROUTER } from "@/common/constants";
 import { ReturIcon, TxIcon } from "@/common/icons";
 import { IInternalTxs } from "@/common/interfaces/Txs";
 import { parseDecimals } from "@/common/utils/ParseDecimals";
+import Code from "@/components/ui/Code";
 import ListContent from "@/components/generals/ListContent";
 import ListItem from "@/components/generals/ListItem";
 import Badge from "@/components/ui/Badge";
@@ -12,6 +12,7 @@ import Date from "@/components/ui/Date";
 import Status from "@/components/ui/Status";
 import ToolTip from "@/components/ui/ToolTip";
 import Link from "next/link";
+import { fetchData } from "@/services/api";
 
 type props = {
   params: Promise<{
@@ -58,7 +59,7 @@ export default async function page({params}: props) {
         <hr className="border-gray-700 border-[1px] my-2" />
 
         <ListItem title="Type" value={<Badge text={itx!.type!} type="info" />} />
-        <ListItem title="Input" value={itx?.action.input} className="bg-gray-600 rounded-xl px-4 py-1 break-all max-h-16 overflow-y-auto" />
+        <ListItem title="Input" value={<Code code={itx?.action.input} />} />
         <ListItem title="Value" value={`${itx?.action.value} RBTC`} />
         <ListItem
           title="Status"
@@ -68,7 +69,7 @@ export default async function page({params}: props) {
         
         <ListItem title="Gas" value={parseDecimals(itx?.action.gas)} />
         <ListItem title="Gas Used" value={parseDecimals(itx?.result?.gasUsed)} />
-        <ListItem title="Output" value={itx?.result?.output} className="bg-gray-600 rounded-xl px-4 py-1 break-all max-h-16 overflow-y-auto" />
+        <ListItem title="Output" value={<Code code={itx?.result?.output} />} />
         <ListItem title="Error" value={itx?.error} />
       </ListContent>
     </Card>

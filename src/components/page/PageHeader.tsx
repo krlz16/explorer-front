@@ -38,9 +38,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, button
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams?.toString());
-  const currentTap = searchParams?.get("_ctab") || buttons[0]?.tab;
+  const currentTab = searchParams?.get("_ctab") || buttons[0]?.tab;
 
-  const currentContent = tabContents.find((tab) => tab.tab === currentTap)?.content;
+  const currentContent = tabContents.find((tab) => tab.tab === currentTab)?.content;
 
   const handleTab = (label: string) => {
     const tabParam = label.toLowerCase();
@@ -71,7 +71,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ breadcrumb, icon, title, button
             <Button
               key={index}
               label={button.label}
-              className={currentTap === button.tab ? themeBtn : ""}
+              className={currentTab === button.tab ? themeBtn : ""}
               onClick={() => handleTab(button.tab)}
             />
           ))}

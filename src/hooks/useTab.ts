@@ -10,7 +10,7 @@ export const useTab = ({ defaultTab }: props) => {
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams?.toString());
 
-  const currentTap = searchParams?.get("tab") || defaultTab;
+  const currentTab = searchParams?.get("tab") || defaultTab;
 
   const changeTab = (newTab: string) => {
     const tabParam = newTab.toLowerCase();
@@ -18,5 +18,5 @@ export const useTab = ({ defaultTab }: props) => {
     router.push(`${pathname}?${params}`);
   };
 
-  return { changeTab, currentTap };
+  return { changeTab, currentTab };
 };

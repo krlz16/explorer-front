@@ -1,8 +1,8 @@
-import { fetchData } from '@/app/lib/data'
 import { ROUTER } from '@/common/constants'
 import React from 'react'
 import TxsChart from './TxsChart';
 import { IBlocks } from '@/common/interfaces/Blocks';
+import { fetchData } from '@/services/api';
 
 export default async function TxsChartContainer() {
   const params = {

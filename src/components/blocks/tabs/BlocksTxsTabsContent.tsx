@@ -3,14 +3,14 @@ import InternalTxsTable from "@/components/itxs/InternalTxsTable";
 import TxsTable from "@/components/txs/TxsTable";
 
 type props = {
-  currentTap: string
+  currentTab: string
   txsData: ITxs[] | undefined
   itxsData: IInternalTxs[] | undefined
 }
 
-const BlocksTxsTabsContent = ({ currentTap, txsData, itxsData }: props) => {
-  if (currentTap === "txs") return <TxsTable txs={txsData} />;
-  if (currentTap === "itxs") return <InternalTxsTable itxs={itxsData} />;
+const BlocksTxsTabsContent = ({ currentTab, txsData, itxsData }: props) => {
+  if (currentTab === "txs") return <TxsTable txs={txsData} />;
+  if (currentTab === "itxs") return <InternalTxsTable itxs={itxsData} />;
   return null;
 };
 export default BlocksTxsTabsContent 
