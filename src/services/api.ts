@@ -35,8 +35,7 @@ export async function fetchData<T>(
     const data = await response.json();
     return data as DataResponse<T>;
   } catch (error) {
-    console.log('error: ', error);
-    throw new Error('fetch error');
+    throw new Error(`fetch error ${error}`);
   }
 }
 
@@ -69,7 +68,31 @@ export async function fetchDataExt<T>(
     const data = await response.json();
     return data as T;
   } catch (error) {
-    console.log('error: ', error);
-    throw new Error('fetch error');
+    throw new Error(`fetch error ${error}`);
+  }
+}
+
+export async function postData<T>(
+  url: string,
+  body: object,
+  files: File[]
+): Promise<T> {
+  try {
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(body));
+    if (files.length > 0) {
+      formData.append('file', files[0], files[0].name);
+    }
+    const response = await fetch(`${API_URL}${url}`, {
+      method: 'POST',
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error('Fetch error');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(`fetch error ${error}`);
   }
 }

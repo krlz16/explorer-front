@@ -1,46 +1,57 @@
-
 export interface IAddresses {
   id: number;
+  isVerified: boolean;
   address: string;
   isNative: boolean;
-  type: string;
+  type: 'account' | 'contract';
   name?: string | null;
   symbol?: string | null;
   balance: number;
   blockNumber: number;
-  code: string
+  code: string;
+  deployedCode: string;
   createdByTx?: {
-    timestamp: string
+    timestamp: string;
     receipt: {
-      transactionHash: string
-    }
-    internalTxId: string
-  }
-  interfaces: string[]
-  totalSupply: number
+      transactionHash: string;
+    };
+    internalTxId: string;
+  };
+  interfaces: string[];
+  totalSupply: number;
 }
 
 export interface IContractVerification {
-  id: string
-  match: boolean
-  abi: any[]
+  id: string;
+  match: boolean;
+  abi: [];
   request: {
-    bytecode: string
-    deployedBytecode: string
+    name: string;
+    bytecode: string;
+    deployedBytecode: string;
     imports: [
       {
-        contents: string
-        file: string
-      }
-    ]
-    version: string
+        contents: string;
+        file: string;
+      },
+    ];
+    version: string;
     settings: {
-      evmVersion: string
+      evmVersion: string;
       optimizer: {
-        enabled: boolean
-        runs: number
-      }
-    }
-  }
-  timestamp: string
+        enabled: boolean;
+        runs: number;
+      };
+    };
+  };
+  result: {
+    encodedConstructorArguments: string;
+  };
+  sources: [
+    {
+      file: string;
+      content: string;
+    },
+  ];
+  timestamp: string;
 }

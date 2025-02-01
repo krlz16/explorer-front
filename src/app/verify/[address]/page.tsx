@@ -1,6 +1,5 @@
 'use client';
 
-// import { useParams } from 'next/navigation';
 import Card from '@/components/ui/Card';
 import { DropDownOption } from '@/components/ui/FormDropdown';
 import { useEffect, useState } from 'react';
@@ -14,16 +13,35 @@ import AdvancedDetailsSection from '@/components/verify/AdvancedDetailsSection';
 import ConstructorArgumentsSection from '@/components/verify/ConstructorArgumentsSection';
 import ContractLibrariesSection from '@/components/verify/ContractLibrariesSection';
 import Button from '@/components/ui/Button';
-import { validateForm } from '@/components/verify/VerifierProcessor';
+import {
+  BuilderRequestParams,
+  submitRequest,
+  validateForm,
+} from '@/components/verify/VerifierProcessor';
+import { useAddressDataContext } from '@/context/AddressContext';
+import { IVerificationResponse } from '@/common/interfaces/IVerificationResponse';
+import VerificationModal from '@/components/verify/VerificationModal';
+
+export type Errors = {
+  contractName: string;
+  files: string;
+  optimizationValue: string;
+};
 
 export default function Page() {
-  // const hash = useParams();
+  const { address } = useAddressDataContext();
   const [isNightly, setIsNightly] = useState(false);
   const [optimizationOn, setOptimizationOn] = useState(false);
   const [abiEncoded, setAbiEncoded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [contractName, setContractName] = useState<string>('');
   const [optimizationValue, setOptimizationValue] = useState<string>('');
   const [constructorArgs, setConstructorArgs] = useState<string>('');
+  const [files, setFiles] = useState<File[]>([]);
+  const [responseVerification, setResponseVerification] = useState<
+    IVerificationResponse | undefined
+  >(undefined);
   const [filteredCompilers, setFilteredCompilers] = useState<DropDownOption[]>(
     []
   );
@@ -42,6 +60,11 @@ export default function Page() {
   const [solcVersions, setSolcVersions] = useState<IBuildStructure | undefined>(
     undefined
   );
+  const [errors, setErrors] = useState<Errors>({
+    contractName: '',
+    files: '',
+    optimizationValue: '',
+  });
   const [libraries, setLibraries] = useState<
     { libraryName: string; libraryAddress: string }[]
   >([
@@ -133,7 +156,7 @@ export default function Page() {
   };
 
   const handleFileDrop = (files: File[]) => {
-    console.log('loaded files:', files);
+    setFiles(files);
   };
 
   //Handle library section
@@ -156,16 +179,45 @@ export default function Page() {
   };
 
   //Submit verification section
-  const handleSubmitVerification = () => {
-    validateForm({
-      contractName,
-      files: [],
-      optimizationOn,
-      optimizationValue,
-    });
+  const handleSubmitVerification = async () => {
+    try {
+      const errors = validateForm({
+        contractName,
+        files: files,
+        optimizationOn,
+        optimizationValue,
+      });
+      setErrors(errors);
+      if (Object.values(errors).some((error) => error !== '')) {
+        return;
+      }
+      setIsLoading(true);
+      setIsModalOpen(true);
+      const builderRequestParams: BuilderRequestParams = {
+        address: address!.address,
+        optimizationOn,
+        optimizationValue,
+        evmVersion: evmVersion?.key,
+        contractName,
+        compilerVersion: compilerVersion?.key ?? '',
+        files,
+        libraries,
+        constructorArgs,
+        abiEncoded,
+        verifMethod,
+      };
+      const response = await submitRequest(builderRequestParams);
+      console.log('response', response);
+      setResponseVerification(response);
+      setIsLoading(false);
+    } catch (error) {
+      console.log('error', error);
+      setIsLoading(false);
+    }
   };
+
   return (
-    <div className="mt-10 p-6 items-center flex flex-col">
+    <div className="px-4 py-2 items-center flex flex-col">
       <div className="p-4 rounded-lg w-4/5">
         <Card className="bg-secondary flex flex-col">
           <GeneralDetailsSection
@@ -179,6 +231,8 @@ export default function Page() {
             setVerifMethod={setVerifMethod}
             compilerVersion={compilerVersion}
             setCompilerVersion={setCompilerVersion}
+            errorContractName={errors.contractName}
+            errorFiles={errors.files}
           />
           {verifMethod === VerificationMethods[0] && (
             <AdvancedDetailsSection
@@ -189,6 +243,7 @@ export default function Page() {
               availableEvmVersions={availableEvmVersions}
               evmVersion={evmVersion}
               setEVMVersion={setEVMVersion}
+              errorMessage={errors.optimizationValue}
             />
           )}
           <ConstructorArgumentsSection
@@ -213,6 +268,14 @@ export default function Page() {
             />
           </div>
         </Card>
+        {isModalOpen && (
+          <VerificationModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            responseVerification={responseVerification}
+            isLoading={isLoading}
+          />
+        )}
       </div>
     </div>
   );

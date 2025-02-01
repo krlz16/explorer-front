@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "@canvasjs/charts": "^3.10.19",
-    "@rsksmart/rsk-utils": "^1.1.0",
+    "@rsksmart/rsk-utils": "^2.0.5",
     "@types/highlightjs": "^9.12.6",
     "axios": "^1.7.8",
+    "bignumber.js": "^7.2.1",
     "chart.js": "^4.4.7",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",

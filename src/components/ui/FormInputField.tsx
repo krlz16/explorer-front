@@ -12,6 +12,7 @@ type InputFieldComponentProps = {
   isToggleOn?: boolean;
   isLarge?: boolean;
   setIsToggleOn?: (isToggleOn: boolean) => void;
+  errorMessage?: string;
 };
 
 const FormInputField = ({
@@ -25,6 +26,7 @@ const FormInputField = ({
   isToggleOn = false,
   isLarge = false,
   setIsToggleOn = () => {},
+  errorMessage,
 }: InputFieldComponentProps) => {
   return (
     <div className="p-4 rounded-lg">
@@ -41,7 +43,7 @@ const FormInputField = ({
           onChange={(e) => setValue(e.target.value)}
           className={`w-full bg-gray-700 text-white-400 font-medium px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 resize-none ${
             isDisabled ? 'cursor-not-allowed opacity-50' : ''
-          }`}
+          } ${errorMessage && 'border border-red-500'}`}
           maxLength={maxLength}
           disabled={isDisabled}
           rows={3}
@@ -54,7 +56,7 @@ const FormInputField = ({
           onChange={(e) => setValue(e.target.value)}
           className={`w-full bg-gray-700 text-white-400 font-medium px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 ${
             isDisabled ? 'cursor-not-allowed opacity-50' : ''
-          }`}
+          } ${errorMessage && 'border border-red-500'}`}
           maxLength={maxLength}
           disabled={isDisabled}
         />

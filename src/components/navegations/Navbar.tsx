@@ -2,8 +2,8 @@
 import { ROUTER } from '@/common/constants';
 import { usePathname } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
-import { isAddress } from '@rsksmart/rsk-utils/dist/addresses';
-import { isHexString, isTxOrBlockHash, add0x } from '@rsksmart/rsk-utils/dist/strings';
+import { isAddress } from '@rsksmart/rsk-utils';
+import { isHexString, isTxOrBlockHash, add0x } from '@rsksmart/rsk-utils';
 import { fetchOneBlock } from '@/services/blocks';
 import { IBlocks } from '@/common/interfaces/Blocks';
 

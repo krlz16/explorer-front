@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ArrowDownIcon, InfoIcon } from "@/common/icons";
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowDownIcon, InfoIcon } from '@/common/icons';
 
 export type DropDownOption = {
   key: string;
@@ -21,7 +21,7 @@ const FormDropdown = ({
   selectedOption,
   setSelectedOption,
   elements,
-  toggleLabel = "",
+  toggleLabel = '',
   isToggleOn = false,
   setIsToggleOn = () => {},
 }: VerificationMethodComponentProps) => {
@@ -37,9 +37,9 @@ const FormDropdown = ({
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -78,13 +78,13 @@ const FormDropdown = ({
           </ul>
         )}
       </div>
-      {toggleLabel !== "" && (
+      {toggleLabel !== '' && (
         <div className="mt-4 flex items-center">
           <div
             className={`w-5 h-5 flex items-center justify-center rounded-sm border cursor-pointer ${
               isToggleOn
-                ? "bg-primary-600 border-primary-600"
-                : "bg-transparent border-gray-400"
+                ? 'bg-primary-600 border-primary-600'
+                : 'bg-transparent border-gray-400'
             }`}
             onClick={() => setIsToggleOn(!isToggleOn)}
           >

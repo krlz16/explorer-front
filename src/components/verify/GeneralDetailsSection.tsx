@@ -22,6 +22,8 @@ type Props = {
   setVerifMethod: (verifMethod: DropDownOption) => void;
   compilerVersion: DropDownOption | undefined;
   setCompilerVersion: (compilerVersion: DropDownOption) => void;
+  errorContractName?: string;
+  errorFiles?: string;
 };
 
 export default function GeneralDetailsSection({
@@ -35,6 +37,8 @@ export default function GeneralDetailsSection({
   setVerifMethod,
   compilerVersion,
   setCompilerVersion,
+  errorContractName,
+  errorFiles,
 }: Props) {
   return (
     <Fragment>
@@ -63,13 +67,15 @@ export default function GeneralDetailsSection({
         setValue={setContractName}
         placeholder="Contract name"
         maxLength={50}
+        errorMessage={errorContractName}
       />
       <FormUploadFile
         title="Upload Source Files"
         onFileDrop={handleFileDrop}
         placeholder="Drop file or click here"
-        allowMultiple={true}
-        acceptedFormats={['.sol']}
+        allowMultiple={verifMethod.key === 'solidity'}
+        acceptedFormats={verifMethod.key === 'solidity' ? ['.sol'] : ['.json']}
+        errorMessage={errorFiles}
       />
     </Fragment>
   );

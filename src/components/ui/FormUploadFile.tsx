@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { InfoIcon } from "@/common/icons";
+import React, { useState } from 'react';
+import { InfoIcon } from '@/common/icons';
 
 type FileUploadComponentProps = {
   title: string;
@@ -7,14 +7,16 @@ type FileUploadComponentProps = {
   placeholder?: string;
   allowMultiple?: boolean;
   acceptedFormats?: string[];
+  errorMessage?: string;
 };
 
 const FormUploadFile = ({
   title,
   onFileDrop,
-  placeholder = "Drop file or click here",
-  allowMultiple = true,
+  placeholder = 'Drop file or click here',
+  allowMultiple = false,
   acceptedFormats = [],
+  errorMessage,
 }: FileUploadComponentProps) => {
   const [isDragActive, setIsDragActive] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
@@ -85,19 +87,19 @@ const FormUploadFile = ({
       </div>
       <div
         className={`flex items-center justify-center w-full text-white-400 border-2 border-dashed rounded-lg py-10 cursor-pointer ${
-          isDragActive ? "border-primary-600" : "border-gray-400"
-        }`}
+          isDragActive ? 'border-primary-600' : 'border-gray-400'
+        } ${errorMessage && 'border-red-500'}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        onClick={() => document.getElementById("fileInput")?.click()}
+        onClick={() => document.getElementById('fileInput')?.click()}
       >
         <input
           id="fileInput"
           type="file"
           className="hidden"
           multiple={allowMultiple}
-          accept={acceptedFormats.join(",")}
+          accept={acceptedFormats.join(',')}
           onChange={handleFileSelect}
         />
         <p className="text-white-400">{placeholder}</p>

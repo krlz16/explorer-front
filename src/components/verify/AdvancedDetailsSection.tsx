@@ -16,6 +16,7 @@ type Props = {
   availableEvmVersions: DropDownOption[];
   evmVersion: DropDownOption | undefined;
   setEVMVersion: (evmVersion: DropDownOption | undefined) => void;
+  errorMessage?: string;
 };
 
 export default function AdvancedDetailsSection({
@@ -26,6 +27,7 @@ export default function AdvancedDetailsSection({
   availableEvmVersions,
   evmVersion,
   setEVMVersion,
+  errorMessage,
 }: Props) {
   return (
     <Fragment>
@@ -45,6 +47,7 @@ export default function AdvancedDetailsSection({
         setIsToggleOn={(state) => {
           setOptimizationOn(state);
         }}
+        errorMessage={optimizationOn ? errorMessage : ''}
       />
       {evmVersion && (
         <FormDropdownComponent
