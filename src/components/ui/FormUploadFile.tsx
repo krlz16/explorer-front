@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InfoIcon } from '@/common/icons';
 
 type FileUploadComponentProps = {
   title: string;
-  onFileDrop: (files: File[]) => void;
+  files: File[] | undefined;
+  setFiles: (files: File[]) => void;
   placeholder?: string;
   allowMultiple?: boolean;
   acceptedFormats?: string[];
@@ -12,14 +13,24 @@ type FileUploadComponentProps = {
 
 const FormUploadFile = ({
   title,
-  onFileDrop,
   placeholder = 'Drop file or click here',
+  setFiles,
   allowMultiple = false,
   acceptedFormats = [],
   errorMessage,
+  files,
 }: FileUploadComponentProps) => {
   const [isDragActive, setIsDragActive] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+
+  useEffect(() => {
+    if (uploadedFiles) {
+      setFiles(uploadedFiles);
+    }
+    if (!files) {
+      setUploadedFiles([]);
+    }
+  }, [uploadedFiles, files]);
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -34,7 +45,9 @@ const FormUploadFile = ({
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragActive(false);
-
+    if (!allowMultiple && files && files?.length > 0) {
+      return;
+    }
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const filesArray = Array.from(e.dataTransfer.files);
 
@@ -45,12 +58,14 @@ const FormUploadFile = ({
         : [validFiles[0]].filter(Boolean);
 
       setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-      onFileDrop(newFiles);
       e.dataTransfer.clearData();
     }
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!allowMultiple && files && files?.length > 0) {
+      return;
+    }
     if (e.target.files && e.target.files.length > 0) {
       const filesArray = Array.from(e.target.files);
 
@@ -61,7 +76,6 @@ const FormUploadFile = ({
         : [validFiles[0]].filter(Boolean);
 
       setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-      onFileDrop(newFiles);
     }
   };
 
@@ -92,7 +106,12 @@ const FormUploadFile = ({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        onClick={() => document.getElementById('fileInput')?.click()}
+        onClick={() => {
+          if (!allowMultiple && files && files.length > 0) {
+            return;
+          }
+          document.getElementById('fileInput')?.click();
+        }}
       >
         <input
           id="fileInput"
@@ -105,12 +124,11 @@ const FormUploadFile = ({
         <p className="text-white-400">{placeholder}</p>
       </div>
 
-      {/* Lista de archivos subidos */}
-      {uploadedFiles.length > 0 && (
+      {files && files.length > 0 && (
         <div className="mt-4">
           <h4 className="text-white font-medium mb-2">Uploaded Files:</h4>
           <ul className="list-disc list-inside text-white-400">
-            {uploadedFiles.map((file, index) => (
+            {files.map((file, index) => (
               <li key={index} className="flex items-center justify-between">
                 <span>{file.name}</span>
                 <button

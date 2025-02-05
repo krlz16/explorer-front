@@ -15,6 +15,7 @@ import ContractLibrariesSection from '@/components/verify/ContractLibrariesSecti
 import Button from '@/components/ui/Button';
 import {
   BuilderRequestParams,
+  isFilenameValid,
   submitRequest,
   validateForm,
 } from '@/components/verify/VerifierProcessor';
@@ -38,7 +39,7 @@ export default function Page() {
   const [contractName, setContractName] = useState<string>('');
   const [optimizationValue, setOptimizationValue] = useState<string>('');
   const [constructorArgs, setConstructorArgs] = useState<string>('');
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<File[] | undefined>([]);
   const [responseVerification, setResponseVerification] = useState<
     IVerificationResponse | undefined
   >(undefined);
@@ -78,6 +79,27 @@ export default function Page() {
     fetchSolcVersions();
     fetchEVMVersions();
   }, []);
+  useEffect(() => {
+    setFiles(undefined);
+    setErrors({
+      contractName: '',
+      files: '',
+      optimizationValue: '',
+    });
+  }, [verifMethod]);
+  useEffect(() => {
+    if (files && files.length > 0 && contractName !== '') {
+      const isValid = isFilenameValid(contractName, files);
+      if (!isValid) {
+        setErrors((prev) => ({
+          ...prev,
+          contractName: 'File(s) name must match the contract name.',
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, contractName: '' }));
+      }
+    }
+  }, [files]);
 
   const fetchSolcVersions = async (): Promise<IBuildStructure | undefined> => {
     try {
@@ -155,10 +177,6 @@ export default function Page() {
       .map(([key]) => ({ key, title: key }));
   };
 
-  const handleFileDrop = (files: File[]) => {
-    setFiles(files);
-  };
-
   //Handle library section
   const handleAddLibrary = () => {
     setLibraries([...libraries, { libraryName: '', libraryAddress: '' }]);
@@ -178,17 +196,33 @@ export default function Page() {
     setLibraries(updatedLibraries);
   };
 
+  const handleFilenameChange = (fileName: string) => {
+    if (files && files.length > 0) {
+      const isValid = isFilenameValid(fileName, files);
+      if (!isValid) {
+        setErrors((prev) => ({
+          ...prev,
+          contractName: 'File(s) name must match the contract name.',
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, contractName: '' }));
+      }
+    }
+    setContractName(fileName);
+  };
+
   //Submit verification section
   const handleSubmitVerification = async () => {
     try {
-      const errors = validateForm({
+      const errors = await validateForm({
         contractName,
         files: files,
         optimizationOn,
         optimizationValue,
+        verifMethod,
       });
       setErrors(errors);
-      if (Object.values(errors).some((error) => error !== '')) {
+      if (Object.values(errors).some((error) => error !== '') || !files) {
         return;
       }
       setIsLoading(true);
@@ -221,11 +255,10 @@ export default function Page() {
       <div className="p-4 rounded-lg w-4/5">
         <Card className="bg-secondary flex flex-col">
           <GeneralDetailsSection
-            handleFileDrop={handleFileDrop}
             isNightly={isNightly}
             setIsNightly={setIsNightly}
             contractName={contractName}
-            setContractName={setContractName}
+            setContractName={handleFilenameChange}
             filteredCompilers={filteredCompilers}
             verifMethod={verifMethod}
             setVerifMethod={setVerifMethod}
@@ -233,6 +266,8 @@ export default function Page() {
             setCompilerVersion={setCompilerVersion}
             errorContractName={errors.contractName}
             errorFiles={errors.files}
+            files={files}
+            setFiles={setFiles}
           />
           {verifMethod === VerificationMethods[0] && (
             <AdvancedDetailsSection

@@ -39,42 +39,96 @@ interface RequestParams {
   encodedConstructorArguments?: string;
 }
 
-export const validateForm = ({
+export const validateForm = async ({
   contractName,
   files,
   optimizationOn,
   optimizationValue,
+  verifMethod,
 }: {
   contractName: string;
-  files: File[];
+  files: File[] | undefined;
   optimizationOn: boolean;
   optimizationValue: string;
-}): Errors => {
-  const errors: Errors = {
-    contractName: '',
-    files: '',
-    optimizationValue: '',
-  };
+  verifMethod: DropDownOption;
+}): Promise<Errors> => {
+  try {
+    const errors: Errors = {
+      contractName: '',
+      files: '',
+      optimizationValue: '',
+    };
 
-  //TODO add JSON input field validations for having sources and settings section
-
-  if (!contractName || contractName.trim() === '') {
-    errors.contractName = 'Contract name is required.';
-  }
-
-  if (files.length === 0) {
-    errors.files = 'At least one file must be uploaded.';
-  }
-
-  if (optimizationOn) {
-    const runs = parseInt(optimizationValue, 10);
-    if (isNaN(runs) || runs <= 0) {
-      errors.optimizationValue =
-        'Optimization runs must be a valid number greater than 0.';
+    if (!files) {
+      errors.files = 'At least one file must be uploaded.';
+      return errors;
     }
-  }
 
-  return errors;
+    if (verifMethod.key !== 'solidity') {
+      const isValidJson = await validateJsonFile(files);
+      if (!isValidJson) {
+        errors.files =
+          'Please upload a valid JSON file, include sources and settings.';
+      }
+    }
+
+    if (!isFilenameValid(contractName, files)) {
+      errors.contractName = 'File(s) name must match the contract name.';
+    }
+
+    if (!contractName || contractName.trim() === '') {
+      errors.contractName = 'Contract name is required.';
+    }
+
+    if (files.length === 0) {
+      errors.files = 'At least one file must be uploaded.';
+    }
+
+    if (optimizationOn) {
+      const runs = parseInt(optimizationValue, 10);
+      if (isNaN(runs) || runs <= 0) {
+        errors.optimizationValue =
+          'Optimization runs must be a valid number greater than 0.';
+      }
+    }
+
+    return errors;
+  } catch (error) {
+    console.error('Error validating form:', error);
+    return {
+      contractName: 'An error occurred',
+      files: 'An error occurred',
+      optimizationValue: 'An error occurred',
+    };
+  }
+};
+
+export const isFilenameValid = (fileName: string, files: File[]): boolean => {
+  return files.some((file) => file.name.split('.')[0] === fileName);
+};
+
+const validateJsonFile = async (files: File[]): Promise<boolean> => {
+  if (files.length === 0) {
+    console.error('No file provided');
+    return false;
+  }
+  const file = files[0];
+  if (!file.name.endsWith('.json')) {
+    console.error('The file is not a JSON file.');
+    return false;
+  }
+  try {
+    const text = await file.text();
+    const jsonData = JSON.parse(text);
+    if ('sources' in jsonData && 'settings' in jsonData) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error('Invalid JSON format:', error);
+    return false;
+  }
 };
 
 export const submitRequest = async (
