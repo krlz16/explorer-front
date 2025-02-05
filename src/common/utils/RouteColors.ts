@@ -21,7 +21,7 @@ const routeStyles = {
     background: "bg-brand-pink",
     text: "text-brand-pink",
   },
-  [ROUTER.TOKENS]: {
+  [ROUTER.TOKENS.INDEX]: {
     background: "bg-brand-cyan",
     text: "text-brand-cyan",
   },

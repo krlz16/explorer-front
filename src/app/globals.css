@@ -29,6 +29,8 @@
   --text-success: #EAF4DB;
   --bg-fail: #AA2F2F;
   --text-fail: #F2CBCB;
+  --bg-pending: #FFD90099;
+  --text-pending: #F4EFDB;
 }
 
 @media (prefers-color-scheme: dark) {

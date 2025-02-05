@@ -1,3 +1,5 @@
+export type StatusType = 'SUCCESS' | 'PENDING' | 'FAIL' | 'REMOVED';
+
 export interface ITxs {
   hash: string
   blockNumber: number,
@@ -14,8 +16,8 @@ export interface ITxs {
   input: string
   receipt: {
     logs: ILogs[]
-    status: string
   },
+  status: StatusType
 }
 
 export interface IInternalTxs {

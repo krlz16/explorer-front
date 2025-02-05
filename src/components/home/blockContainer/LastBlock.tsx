@@ -3,11 +3,11 @@ import { MinerIcon, TxDensityIcon, TxIcon } from '@/common/icons'
 import { parseDecimals } from '@/common/utils/ParseDecimals';
 import ToolTip from '@/components/ui/ToolTip';
 import Card from '@/components/ui/Card'
-import { useHomeDataContext } from '@/context/HomeContext';
 import React from 'react'
+import { useAppDataContext } from '@/context/AppContext';
 
 function LastBlock() {
-  const { lastBlock: block } = useHomeDataContext();
+  const { lastBlock: block } = useAppDataContext();
 
   if (!block) return <Card className='bg-secondary w-1/2 h-50 flex flex-col animate-pulse'>
     <div className='text-lg flex gap-2 items-center'>
