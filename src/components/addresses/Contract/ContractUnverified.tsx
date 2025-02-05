@@ -23,10 +23,15 @@ function ContractUnverified() {
       <Code
         code={address?.code}
       />
-      <div className='mt-8 font-medium text-sm mb-2'>Deployed Bytecode</div>
-      <Code
-        code={address?.deployedCode}
-      />
+      {
+        address?.deployedCode && (
+        <>
+          <div className='mt-8 font-medium text-sm mb-2'>Deployed Bytecode</div>
+          <Code
+            code={address?.deployedCode}
+          />
+        </>)
+      }
     </Card>
   )
 }

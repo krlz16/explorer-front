@@ -30,7 +30,7 @@ function ContractGeneral() {
           <ListItem
             className='flex-1'
             title='Contract Name:'
-            value={address?.name}
+            value={address?.name || contract?.request.name}
             type='simple'
           />
           <ListItem

@@ -39,31 +39,44 @@ function ContractCode() {
         height='h-52'
         code={sourceCode?.content}
       />
-      <div className='flex items-center gap-1 mt-5 font-medium'><CodePageIcon /> Dependency Contracts</div>
-      <div className='my-5 flex gap-2'>
-        {
-          sources?.map((x, i) => (
-            <button
-              key={i}
-              onClick={() => handleSelectFile(x)}
-              className={`${fileSelected?.file === x.file ? 'text-brand-pink' : ''}`}
-            >
-              {x.file}
-            </button>
-          ))
-        }
-      </div>
-      <div>
-        <Code
-          height='h-52'
-          code={fileSelected?.content}
-        />
-      </div>
+      {
+        sourceCode?.content !== fileSelected?.content && (
+          <>
+            <div className='flex items-center gap-1 mt-5 font-medium'><CodePageIcon /> Dependency Contracts</div>
+            <div className='my-5 flex gap-2'>
+              {
+                sources?.map((x, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSelectFile(x)}
+                    className={`${fileSelected?.file === x.file ? 'text-brand-pink' : ''}`}
+                  >
+                    {x.file}
+                  </button>
+                ))
+              }
+            </div>
+            <div>
+              <Code
+                height='h-52'
+                code={fileSelected?.content}
+              />
+            </div>
+          </>
+        )
+      }
       <div className='mt-5'>
-        <div className='mb-4'>Encoded</div>
-        <Code
-          code={contract?.result.encodedConstructorArguments}
-        />
+        {
+          contract?.result.encodedConstructorArguments &&
+          (
+            <>
+              <div className='mb-4'>Encoded</div>
+              <Code
+                code={contract?.result.encodedConstructorArguments}
+              />
+            </>
+          )
+        }
       </div>
     </div>
   )

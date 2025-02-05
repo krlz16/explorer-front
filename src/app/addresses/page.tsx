@@ -9,7 +9,6 @@ export default async function Page(props: IPageProps) {
   console.log('params are: ', params);
 
   const response = await fetchAddresses(params);
-  console.log('response: ', response?.pagination);
   return (
     <div className="w-full">
       <h1 className="font-bold text-3xl flex gap-3 items-center mt-10">

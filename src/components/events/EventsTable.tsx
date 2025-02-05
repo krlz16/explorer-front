@@ -16,7 +16,7 @@ function EventsTable({ events }: props) {
   return (
     <Table>
       <TableHeader>
-        <TableCell>Event</TableCell>
+        <TableCell className='!text-left'>Event</TableCell>
         <TableCell>Address</TableCell>
         <TableCell>Arguments</TableCell>
         <TableCell>Timestamp</TableCell>
