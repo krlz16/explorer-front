@@ -5,7 +5,6 @@ export const isValidBlockNumber = (value: string | number, lastBlock: number) =>
   if (newValue.toString().includes('0x')) return { isBlock: false }
 
   const number = Number(newValue);
-  // optional checks lastBlock
   lastBlock = lastBlock || number;
   return {
     isBlock: number > -1 && number <= lastBlock,
