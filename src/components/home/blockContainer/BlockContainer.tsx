@@ -13,7 +13,6 @@ export default function BlockContainer() {
     const value = e.target.checked;
     setAutoUpdate(value);
     localStorage.setItem('autoupdate', value ? 'active' : 'inactive');
-
   }
   if (!blocks) return <CardLoader />
 

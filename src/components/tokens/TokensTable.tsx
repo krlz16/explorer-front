@@ -1,8 +1,9 @@
-import { TokenIcon } from '@/common/icons';
 import { ITokens } from '@/common/interfaces/Tokens';
 import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
+import { parseDecimals } from '@/common/utils/ParseDecimals';
+import { ROUTER } from '@/common/constants';
 
 type props = {
   tokens: ITokens[] | undefined
@@ -12,24 +13,22 @@ function TokensTable({ tokens }: props) {
   return (
     <Table>
       <TableHeader>
-        <TableCell className="w-12 flex-initial" />
         <TableCell>Name</TableCell>
-        <TableCell>Balance</TableCell>
+        <TableCell>Symbol</TableCell>
         <TableCell>Address</TableCell>
-        <TableCell>Created</TableCell>
+        <TableCell>Balance</TableCell>
+        <TableCell>Updated at block</TableCell>
       </TableHeader>
       {
         tokens?.map((tk, i) => (
           <TableRow key={i}>
-            <TableCell className='w-12 flex justify-center flex-initial'>
-              <TokenIcon />
-            </TableCell>
-            <TableCell>{tk.addressInfo.name}</TableCell>
-            <TableCell>{tk.balance}</TableCell>
+            <TableCell>{tk.name}</TableCell>
+            <TableCell>{tk.symbol}</TableCell>
             <TableCell>
-              <ToolTip text={tk.address} />
+              <ToolTip text={tk.address} href={`${ROUTER.ADDRESSES.INDEX}/${tk.address}`} />
             </TableCell>
-            <TableCell>{tk.blockNumber}</TableCell>
+            <TableCell>{`${tk.balance} RBTC`}</TableCell>
+            <TableCell>{parseDecimals(tk.blockNumber)}</TableCell>
           </TableRow>
         ))
       }

@@ -36,7 +36,8 @@ export default function Page() {
     if (!address) return;
   
     setLoading(true);
-  
+
+    // TODO: Improve this section
     try {
       let data;
   

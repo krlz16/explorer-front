@@ -35,10 +35,12 @@ export default {
         'btn-secondary': 'var(--btn-secondary)',
         'success': 'var(--bg-success)',
         'fail': 'var(--bg-fail)',
+        'pending': 'var(--bg-pending)',
       },
       textColor: {
         'success': 'var(--text-success)',
         'fail': 'var(--text-fail)',
+        'pending': 'var(--text-pending)',
       },
       height: {
         '25': '100px',
