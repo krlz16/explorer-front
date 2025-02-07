@@ -1,4 +1,3 @@
-import { ROUTER } from '@/common/constants';
 import { IInternalTxs } from '@/common/interfaces/Txs';
 import { parseDate } from '@/common/utils/Time';
 import ToolTip from '@/components/ui/ToolTip';
@@ -33,23 +32,26 @@ function InternalTxsTable({ itxs }: props) {
               />
             </TableCell>
             <TableCell>
-              <ToolTip href={`${ROUTER.ITXS.INDEX}/${itx.internalTxId}`}
+              <ToolTip
                 text={itx.internalTxId}              
+                type='itx'
               />
             </TableCell>
             <TableCell>
-              <Status value={itx.error === null} />
+              <Status
+                type={(itx.error === null) ? 'SUCCESS' : 'FAIL'}
+              />
             </TableCell>
             <TableCell className="text-brand-orange">
               <ToolTip
                 text={itx.action?.from}
-                href={`${ROUTER.ADDRESSES.INDEX}/${itx.action?.from}`}
+                type='address'
               />
             </TableCell>
             <TableCell>
               <ToolTip
                 text={itx.action?.to}
-                href={`${ROUTER.ADDRESSES.INDEX}/${itx.action?.to}`}
+                type='address'
               />
             </TableCell>
             <TableCell>{parseDate(itx.timestamp).timeAgo}</TableCell>

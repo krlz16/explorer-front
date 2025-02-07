@@ -31,7 +31,7 @@ export const HomeContext = ({ children }: { children: React.ReactNode }) => {
   // Blocks
   const fetchBlocks = async () => {
     const params = { take_data: 10 };
-    const response = await fetchData<IBlocks[]>(ROUTER.BLOCKS.INDEX, params, 5);
+    const response = await fetchData<IBlocks[]>(ROUTER.BLOCKS.INDEX, params, 0);
     setBlocks(response?.data);
     saveBlocksToCache(response?.data);
   }
@@ -57,7 +57,7 @@ export const HomeContext = ({ children }: { children: React.ReactNode }) => {
   // TXS
   const fetchTxs = async () => {
     const params = { take_data: 10 };
-    const response = await fetchData<ITxs[]>(ROUTER.TXS.INDEX, params, 5);
+    const response = await fetchData<ITxs[]>(ROUTER.TXS.INDEX, params, 0);
     setTxs(response?.data);
     saveTxsToCache(response?.data);
   }
@@ -88,7 +88,7 @@ export const HomeContext = ({ children }: { children: React.ReactNode }) => {
         getBlocks();
         getTxs();
       }
-    }, 30000);
+    }, 10000);
 
     return () => clearInterval(intervalId);
   // eslint-disable-next-line react-hooks/exhaustive-deps

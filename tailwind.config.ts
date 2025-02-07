@@ -52,7 +52,12 @@ export default {
       },
       borderColor: {
         'line': 'var(--border)',
-      }
+      },
+      screens: {
+        'sm': '576px',
+        'md': '1000px',
+        'lg': '1200px',
+      },
     },
   },
   plugins: [],

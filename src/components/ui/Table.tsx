@@ -21,6 +21,6 @@ export const TableRow = ({ children }: TableProps) => {
   return <div className='flex h-min-13 p-4 hover:bg-secondary text-white-400 items-center'>{children}</div>;
 };
 
-export const TableCell = ({ children, className = 'flex-1 text-center' }: TableCellProps) => {
+export const TableCell = ({ children, className = 'flex-1 text-center flex justify-center' }: TableCellProps) => {
   return <div className={`flex-1 text-center ${className}`}>{children}</div>;
 };

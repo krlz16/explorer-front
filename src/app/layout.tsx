@@ -17,13 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex">
-        <Sidebar />
-        <div className="w-full px-5">
-          <AppDataProvider>
+        <AppDataProvider>
+          <Sidebar />
+          <div className="w-full px-5">
             <Header />
             {children}
-          </AppDataProvider>
-        </div>
+          </div>
+        </AppDataProvider>
       </body>
     </html>
   );

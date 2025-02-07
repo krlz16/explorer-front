@@ -10,7 +10,7 @@ type props = {
 
 function Stat({ value, description, icon, title }: props) {
   return (
-    <Card  className="p-4 bg-secondary w-full h-25 rounded-xl flex justify-between items-center">
+    <Card className="p-4 bg-secondary w-full h-25 rounded-xl flex justify-between items-center">
       <div className="">
         <div className="text-2xl font-medium">
           <span>{value} {title}</span>

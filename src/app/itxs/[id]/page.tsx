@@ -39,7 +39,14 @@ export default async function page({params}: props) {
         <TxIcon className="w-6 h-6" /> Internal Transaction
       </h1>
       <div className="text-white-400 mt-6">
-        Internal Transaction ID <span className="text-brand-purple"><ToolTip text={itx?.internalTxId} trim={0} /></span>
+        Internal Transaction ID:
+        <span className="text-brand-purple">
+          <ToolTip
+            text={itx?.internalTxId}
+            trim={0}
+            type="itx"
+          />
+        </span>
       </div>
 
       <Button
@@ -48,14 +55,14 @@ export default async function page({params}: props) {
       />
 
       <ListContent className="mt-6">
-        <ListItem title="Transaction" value={itx?.transactionHash} type="tooltip" className="text-brand-purple" />
-        <ListItem title="Block Hash" value={itx?.blockHash} type="tooltip" className="text-brand-purple" />
+        <ListItem title="Transaction" value={itx?.transactionHash} type="tooltip" />
+        <ListItem title="Block Hash" value={itx?.blockHash} type="tooltip" />
         <ListItem title="Timestamp" value={<Date date={itx?.timestamp} />} />
         <ListItem title="Block Number" value={parseDecimals(itx?.blockNumber)} />
 
         <hr className="border-gray-700 border-[1px] my-2" />
-        <ListItem title="From" value={itx?.action.from} type="tooltip" className="text-brand-purple" />
-        <ListItem title="To" value={itx?.action.to} type="tooltip" className="text-brand-purple" />
+        <ListItem title="From" value={itx?.action.from} type="tooltip" />
+        <ListItem title="To" value={itx?.action.to} type="tooltip" />
         <hr className="border-gray-700 border-[1px] my-2" />
 
         <ListItem title="Type" value={<Badge text={itx!.type!} type="info" />} />
@@ -63,7 +70,7 @@ export default async function page({params}: props) {
         <ListItem title="Value" value={`${itx?.action.value} RBTC`} />
         <ListItem
           title="Status"
-          value={<Status value={!itx?.error} />}
+          value={<Status type={!itx?.error ? 'SUCCESS' : 'FAIL'} />}
         />
           {/* value={itx?.error ? 'Failed' : 'Success'} */}
         
