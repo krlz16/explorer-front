@@ -48,7 +48,7 @@ function Sidebar() {
       className={`${activeSidebar ? 'flex' : 'hidden'} fixed md:w-[210px] h-screen inset-0 z-50 md:z-10 md:relative`}
     >
       <div className="w-[210px] h-full bg-primary">
-        <aside className="w-[210px] pt-5 fixed top-0 left-0 h-full border-r border-line">
+        <aside className="w-[210px] pt-5 fixed xxl:relative top-0 left-0 h-full border-r border-line">
           <RskLogo className="mb-10 ml-6" />
           <SidebarItem
             label="Home"

@@ -1,4 +1,4 @@
-'use cleint';
+'use client';
 
 type props = {
   className?: string;
@@ -28,7 +28,7 @@ function Button({
   };
   return (
     <button
-      className={`${className} ${BTN_TYPE[type]} hover:border-transparent text-sm h-10 max-h-fit rounded-xl flex items-center justify-center gap-3`}
+      className={`${className} ${BTN_TYPE[type]} hover:border-transparent text-sm h-10 rounded-xl flex items-center justify-center gap-3`}
       onClick={onClick}
       disabled={disabled}
     >
