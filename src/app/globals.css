@@ -30,6 +30,8 @@
   --text-success: #eaf4db;
   --bg-fail: #aa2f2f;
   --text-fail: #f2cbcb;
+  --bg-pending: #ffd90099;
+  --text-pending: #f4efdb;
 }
 
 @media (prefers-color-scheme: dark) {

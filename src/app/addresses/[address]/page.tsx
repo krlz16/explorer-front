@@ -56,6 +56,7 @@ export default function Page() {
 
       setLoading(true);
 
+      // TODO: Improve this section
       try {
         let data;
 

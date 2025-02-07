@@ -2,20 +2,18 @@
 import Pagination from '@/components/ui/Pagination';
 import { IPageProps } from '@/common/interfaces/RouterParams';
 import TokensTable from '@/components/tokens/TokensTable';
-import { ITokens } from '@/common/interfaces/Tokens';
-import { ROUTER } from '@/common/constants';
-import { fetchData } from '@/services/api';
+import { fetchTokens } from '@/services/tokens';
 
 export default async function page(props: IPageProps) {
   const params = await props.searchParams;
-  const response = await fetchData<ITokens[]>(ROUTER.TOKENS, params)
+  const response = await fetchTokens(params);
   return (
     <div className='w-full'>
-      <TokensTable tokens={response?.data} />
       <Pagination
         text='Total tokens'
         data={response!.pagination!}
       />
+      <TokensTable tokens={response?.data} />
     </div>
   )
 }

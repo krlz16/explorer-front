@@ -23,7 +23,7 @@ function Sidebar() {
     [ROUTER.BLOCKS.INDEX]: 'bg-brand-green',
     [ROUTER.TXS.INDEX]: 'bg-brand-purple',
     [ROUTER.ADDRESSES.INDEX]: 'bg-brand-pink',
-    [ROUTER.TOKENS]: 'bg-brand-cyan',
+    [ROUTER.TOKENS.INDEX]: 'bg-brand-cyan',
   };
   return (
     <div className="w-[210px] fixed h-screen inset-0 z-10 md:relative">
@@ -91,13 +91,15 @@ function Sidebar() {
           />
           <SidebarItem
             label="Tokens"
-            isActive={isActive(ROUTER.TOKENS)}
+            isActive={isActive(ROUTER.TOKENS.INDEX)}
             className="bg-brand-cyan"
-            link={ROUTER.TOKENS}
+            link={ROUTER.TOKENS.INDEX}
             icon={
               <TokenIcon
                 className={
-                  isActive(ROUTER.TOKENS) ? '!fill-black' : 'fill-white-400'
+                  isActive(ROUTER.TOKENS.INDEX)
+                    ? '!fill-black'
+                    : 'fill-white-400'
                 }
               />
             }

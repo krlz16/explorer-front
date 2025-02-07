@@ -1,94 +1,44 @@
 import { ILogs } from '@/common/interfaces/Txs'
-import Accordion from '@/components/ui/Accordion'
-import Card from '@/components/ui/Card'
+import Code from '@/components/ui/Code'
+import ToolTip from '@/components/ui/ToolTip'
 import React from 'react'
 
-function Log({ log }: { log: ILogs }) {
+function Log({ log, i, className }: { log: ILogs, i: number, className?: string }) {
   return (
-    <Card pd="p0" className="w-full border border-gray-500 my-3 text-white-400">
-      <Accordion
-        title={`${log.logIndex} ${log.address} ${log.event}`}
-        styles={true}
-        className='text-brand-purple'
-        >
-        <div className="flex shadow-line p-3 w-full">
-          <div className="w-2/12">Log Index</div>
-          <div className="w-10/12">{log.logIndex}</div>
-        </div>
-        <div className="flex shadow-line p-3 w-full">
-          <div className="w-2/12">Address</div>
-          <div className="w-10/12">{log.address}</div>
-        </div>
-        <div className="flex shadow-line p-3 w-full">
-          <div className="w-2/12">Contract Name</div>
-          <div className="w-10/12">no name</div>
-        </div>
-        <div className="flex shadow-line p-3 w-full">
-          <div className="w-2/12">Event</div>
-          <div className="w-10/12">
-            <div className="w-full flex">
-              <div>{log.event}{'('}</div>
-                {
-                  log.abi.inputs?.map((value, i) => (
-                    <div key={i}>
-                      <div className="flex gap-1">
-                        <span className="text-brand-orange">{value.type}</span>
-                        {value.indexed && (<span>indexed</span>)}
-                        <span className={`text-white-100 ${ log.abi.inputs.length - 1 !== i && 'mr-2'}`}>
-                          {value.name}
-                          {
-                            log.abi.inputs.length - 1 !== i && ','
-                          }
-                        </span>
-                      </div>
-                    </div>
-                  ))
-                }
-              <div>{')'}</div>
-            </div>
+    <div className={`${className}`}>
+      <div className='w-8 h-8 rounded-full bg-brand-purple flex items-center justify-center text-sm'>
+        {i}
+      </div>
+      <div className='flex-1'>
+        <div className='flex items-center gap-8'>
+          <div className='w-1/12 text-end'>Address</div>
+          <div className='flex-1'>
+            <ToolTip text={log.address} trim={0} />
           </div>
         </div>
-          {
-            log?.args?.length && (
-              <div className="flex shadow-line p-3 w-full">
-              <div className="w-2/12">Argumetns</div>
-              <div className="w-10/12">
-                <div className="flex gap-1">
-                  <span className="text-white-100">To:</span>
-                  <span>{log.args[0]}</span>
+        <div className="flex w-full mt-5 gap-8">
+          <div className="w-1/12 text-white-400 text-end">Topic</div>
+          <div className="flex-1">
+            {
+              log.topics.map((t, i) => (
+                <div key={i} className='flex gap-2'>
+                  <div className='bg-gray-600 border border-gray-700 rounded-md w-4 px-1 h-5 flex items-center justify-center text-sm font-thin'>
+                    {i}
+                  </div>
+                  <div>{t}</div>
                 </div>
-                <div className="flex gap-1">
-                  <span className="text-white-100">BlockHash:</span>
-                  <span>{log.args[1]}</span>
-                </div>
-                <div className="flex gap-1">
-                  <span className="text-white-100">Value:</span>
-                  <span>{log.args[2]}</span>
-                </div>
-              </div>
-            </div>
-            )
-          }
-        <div className="flex shadow-line p-3 w-full">
-          <div className="w-2/12">Topic</div>
-          <div className="w-10/12">
-          {
-            log.topics.map((t, i) => (
-              <div key={i}>{t}</div>
-            ))
-          }
+              ))
+            }
           </div>
         </div>
-        <div className="flex shadow-line p-3 w-full">
-          <div className="w-2/12">Data</div>
-          <div className="w-10/12">{ log.data }</div>
+        <div className='flex items-center gap-8 mt-5'>
+          <div className='w-1/12 text-end text-white-400'>Data</div>
+          <div className='flex-1'>
+            <Code code={log.data} />
+          </div>
         </div>
-        <div className="flex p-3 w-full">
-          <div className="w-2/12">Event Id</div>
-          <div className="w-10/12">{log.eventId }</div>
-        </div>
-      </Accordion>
-    </Card>
+      </div>
+    </div>
   )
 }
 

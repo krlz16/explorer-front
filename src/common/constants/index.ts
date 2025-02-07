@@ -1,4 +1,5 @@
 export const API_URL = process.env.API_URL;
+export const PUBLIC_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
 
 export const ROUTER = {
   HOME: '/',
@@ -9,7 +10,7 @@ export const ROUTER = {
   TXS: {
     INDEX: '/txs',
     BLOCK: '/txs/block',
-    ADDRESS: '/txs/address'
+    ADDRESS: '/txs/address',
   },
   ADDRESSES: {
     INDEX: '/addresses',
@@ -18,26 +19,29 @@ export const ROUTER = {
     TTRANSFER: '/ttransfers',
     ACCOUNT: '/account',
     BALANCES: '/balances',
-    CONTRACT_VERIFICATION: '/addresses/verification'
+    CONTRACT_VERIFICATION: '/addresses/verification',
   },
   VERIFY: {
     GET_SOLC: 'https://solc-bin.ethereum.org/bin/list.json',
     GET_EVM: '/verifications/getEvmVersions',
   },
-  TOKENS: '/tokens',
+  TOKENS: {
+    INDEX: '/tokens',
+    SEARCH: '/tokens/search',
+  },
   ITXS: {
     INDEX: '/itxs',
     BLOCK: '/itxs/block',
     TX: '/itxs/tx',
-    ADDRESS: '/itxs/address'
+    ADDRESS: '/itxs/address',
   },
   EVENTS: {
     INDEX: '/events',
     ADDRESS: '/events/address',
     TX: '/events/tx',
-    TOKEN_TRANSFER_ADRESS: '/events/transfer'
+    TOKEN_TRANSFER_ADRESS: '/events/transfer',
   },
   BALANCES: {
-    ADDRESS: '/balances/address'
-  }
-}
+    ADDRESS: '/balances/address',
+  },
+};
