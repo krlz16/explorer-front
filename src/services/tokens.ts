@@ -1,7 +1,6 @@
-import { ITokens } from "@/common/interfaces/Tokens";
-import { fetchData } from "./api";
-import { ROUTER } from "@/common/constants";
-
+import { ITokens } from '@/common/interfaces/Tokens';
+import { fetchData } from './api';
+import { ROUTER } from '@/common/constants';
 
 export async function fetchTokens(params: object) {
   const response = await fetchData<ITokens[]>(ROUTER.TOKENS.INDEX, params);
@@ -9,6 +8,8 @@ export async function fetchTokens(params: object) {
 }
 
 export async function fetchTokenByNameOrSymbol(value: string) {
-  const response = await fetchData<ITokens[]>(`${ROUTER.TOKENS.SEARCH}/${value}`);
+  const response = await fetchData<ITokens[]>(
+    `${ROUTER.TOKENS.SEARCH}/${value}`,
+  );
   return response;
 }

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-solidity';
@@ -37,7 +37,7 @@ function Code({ code, height }: Props) {
           <code>{code}</code>
         </pre>
       ) : (
-        <div className='p-2'>{code}</div>
+        <div className="p-2">{code}</div>
       )}
     </div>
   );

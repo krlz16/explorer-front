@@ -1,30 +1,30 @@
 // useFetch.tsx
-'use client'
-import { fetchData } from "@/services/api";
-import { useCallback, useEffect, useState } from "react";
+'use client';
+import { fetchData } from '@/services/api';
+import { useCallback, useEffect, useState } from 'react';
 
 interface IPagination {
-  currentPage: number
-  total: number
-  totalPages: number
+  currentPage: number;
+  total: number;
+  totalPages: number;
 }
 export interface INavigation {
-  next: number | string | undefined
-  prev: number | string | undefined
+  next: number | string | undefined;
+  prev: number | string | undefined;
 }
 
 type Data<T> = {
-  data: T | undefined
-  pagination?: IPagination
-  navigation?: INavigation
+  data: T | undefined;
+  pagination?: IPagination;
+  navigation?: INavigation;
 } | null;
 
 type ErrorType = Error | null;
 
 interface Params<T> {
-  data: Data<T> | undefined
-  loading: boolean
-  error: ErrorType
+  data: Data<T> | undefined;
+  loading: boolean;
+  error: ErrorType;
 }
 
 const useFetch = <T>(url: string): Params<T> => {
@@ -44,7 +44,7 @@ const useFetch = <T>(url: string): Params<T> => {
     } finally {
       setLoading(false);
     }
-  }, [url])
+  }, [url]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -53,11 +53,10 @@ const useFetch = <T>(url: string): Params<T> => {
 
     return () => {
       controller.abort();
-    }
-
+    };
   }, [fetchingData, url]);
 
-  return { data, loading, error }
-}
+  return { data, loading, error };
+};
 
 export default useFetch;

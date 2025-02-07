@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useRef } from 'react';
 import Chart, { ChartOptions } from 'chart.js/auto';
 import { IBlocks } from '@/common/interfaces/Blocks';
@@ -28,8 +28,8 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             fill: false,
             borderWidth: 2,
-          }
-        ]
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -58,7 +58,7 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
               label: function (tooltipItem) {
                 const blockIndex = tooltipItem.dataIndex;
                 if (!blocks) return '';
-                const block = blocks[(blocks.length - 1) - blockIndex];
+                const block = blocks[blocks.length - 1 - blockIndex];
 
                 return [
                   `Block: ${block.number}`,
@@ -78,7 +78,7 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
               display: false,
             },
             ticks: {
-              display: false
+              display: false,
             },
           },
           y: {
@@ -93,7 +93,7 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
         onClick: (e) => {
           console.log('e: ', e);
           if (!chartInstance.current) return;
-          
+
           // const canvasPosition = getRelativePosition(e, chartInstance.current);
           // const dataX = chartInstance.current.scales.x.getValueForPixel(canvasPosition.x);
           // const dataY = chartInstance.current.scales.y.getValueForPixel(canvasPosition.y);
@@ -103,7 +103,7 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
 
           // console.log('Posición en X:', dataX, 'Posición en Y:', dataY);
         },
-      } as ChartOptions
+      } as ChartOptions,
     });
 
     return () => {
@@ -114,15 +114,12 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
   }, [blocks]);
 
   return (
-    <Card className='h-50 w-full bg-secondary'>
-      <h2 className='mb-2 text-lg font-medium'>Transaction Density</h2>
-      <div className='w-full h-32'>
-        <canvas
-          ref={chartRef}
-          style={{ width: '100%', height: '110px' }}
-        />
+    <Card className="h-50 w-full bg-secondary">
+      <h2 className="mb-2 text-lg font-medium">Transaction Density</h2>
+      <div className="w-full h-32">
+        <canvas ref={chartRef} style={{ width: '100%', height: '110px' }} />
       </div>
-  </Card>
+    </Card>
   );
 };
 

@@ -1,5 +1,5 @@
-import { ITxs } from "../interfaces/Txs";
+import { ITxs } from '../interfaces/Txs';
 
 export const parseTx = (tx: ITxs) => {
-  return tx
-}
+  return tx;
+};

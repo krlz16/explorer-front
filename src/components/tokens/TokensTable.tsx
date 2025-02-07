@@ -6,8 +6,8 @@ import { parseDecimals } from '@/common/utils/ParseDecimals';
 import { ROUTER } from '@/common/constants';
 
 type props = {
-  tokens: ITokens[] | undefined
-}
+  tokens: ITokens[] | undefined;
+};
 
 function TokensTable({ tokens }: props) {
   return (
@@ -19,19 +19,20 @@ function TokensTable({ tokens }: props) {
         <TableCell>Balance</TableCell>
         <TableCell>Updated at block</TableCell>
       </TableHeader>
-      {
-        tokens?.map((tk, i) => (
-          <TableRow key={i}>
-            <TableCell>{tk.name}</TableCell>
-            <TableCell>{tk.symbol}</TableCell>
-            <TableCell>
-              <ToolTip text={tk.address} href={`${ROUTER.ADDRESSES.INDEX}/${tk.address}`} />
-            </TableCell>
-            <TableCell>{`${tk.balance} RBTC`}</TableCell>
-            <TableCell>{parseDecimals(tk.blockNumber)}</TableCell>
-          </TableRow>
-        ))
-      }
+      {tokens?.map((tk, i) => (
+        <TableRow key={i}>
+          <TableCell>{tk.name}</TableCell>
+          <TableCell>{tk.symbol}</TableCell>
+          <TableCell>
+            <ToolTip
+              text={tk.address}
+              href={`${ROUTER.ADDRESSES.INDEX}/${tk.address}`}
+            />
+          </TableCell>
+          <TableCell>{`${tk.balance} RBTC`}</TableCell>
+          <TableCell>{parseDecimals(tk.blockNumber)}</TableCell>
+        </TableRow>
+      ))}
     </Table>
   );
 }
