@@ -40,7 +40,12 @@ function Navbar() {
       )}
       {focus && (
         <div
+          role="button"
+          tabIndex={0}
           onClick={() => setFocus(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') setFocus(false);
+          }}
           className="w-screen h-screen z-40 fixed top-0 left-0 bg-[rgba(0,0,0,0.8)]"
         ></div>
       )}

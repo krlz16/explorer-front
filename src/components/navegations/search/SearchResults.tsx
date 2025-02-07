@@ -23,12 +23,12 @@ interface ISearchResultsProps {
   loading: boolean;
 }
 
-const SearchResults: React.FC<ISearchResultsProps> = ({
+const SearchResults = ({
   searchResults,
   setInput,
   inputValue,
   loading,
-}) => {
+}: ISearchResultsProps) => {
   const { address, block, tokens, tx, searchType, rnsAddress, isResult } =
     searchResults;
   let href = '';
