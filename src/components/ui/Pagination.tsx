@@ -1,17 +1,17 @@
-'use client'
-import { ArrowLeftIcon, ArrowRightIcon } from '@/common/icons'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
-import React from 'react'
-import Button from './Button'
-import { parseDecimals } from '@/common/utils/ParseDecimals'
+'use client';
+import { ArrowLeftIcon, ArrowRightIcon } from '@/common/icons';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import React from 'react';
+import Button from './Button';
+import { parseDecimals } from '@/common/utils/ParseDecimals';
 type props = {
   data: {
-    totalPages: number,
-    currentPage: number,
-    total: number
-  }
-  text: string
-}
+    totalPages: number;
+    currentPage: number;
+    total: number;
+  };
+  text: string;
+};
 function Pagination({ data, text }: props) {
   const router = useRouter();
   const pathname = usePathname();
@@ -23,35 +23,47 @@ function Pagination({ data, text }: props) {
     params.set('page_data', value.toString());
     router.push(`${pathname}?${params.toString()}`);
     router.refresh();
-  }
+  };
 
-  if (data.total <= 50) return
+  if (data.total <= 50) return;
   return (
     <div className="flex justify-between items-center mt-6">
-      <div className='font-semibold'>{text} { parseDecimals(data.total) }</div>
+      <div className="font-semibold">
+        {text} {parseDecimals(data.total)}
+      </div>
       <div className="flex items-center gap-3">
         <div className="flex gap-3 items-center">
           <Button
-            label='First'
+            label="First"
             onClick={() => handlePage(1)}
             disabled={data.currentPage === 1}
-            type='secondary'
+            type="secondary"
           />
-          <Button onClick={() => handlePage(data.currentPage - 1)} disabled={data.currentPage <= 1}
-            icon={<ArrowLeftIcon className={`${data.currentPage <= 1 ? '!fill-gray-400' : 'fill-white'}`} />}
-            type='secondary'
-          />
-          <div className='font-semibold text-lg'>{data.currentPage}</div>
           <Button
-            onClick={() => handlePage(data.currentPage + 1)} 
-            disabled={data.currentPage >= data.totalPages} 
-            icon={<ArrowRightIcon className={`${data.currentPage >= data.totalPages ? '!fill-gray-400' : 'fill-white'}`} />}
-            type='secondary'
+            onClick={() => handlePage(data.currentPage - 1)}
+            disabled={data.currentPage <= 1}
+            icon={
+              <ArrowLeftIcon
+                className={`${data.currentPage <= 1 ? '!fill-gray-400' : 'fill-white'}`}
+              />
+            }
+            type="secondary"
+          />
+          <div className="font-semibold text-lg">{data.currentPage}</div>
+          <Button
+            onClick={() => handlePage(data.currentPage + 1)}
+            disabled={data.currentPage >= data.totalPages}
+            icon={
+              <ArrowRightIcon
+                className={`${data.currentPage >= data.totalPages ? '!fill-gray-400' : 'fill-white'}`}
+              />
+            }
+            type="secondary"
           />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Pagination
+export default Pagination;

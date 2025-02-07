@@ -1,7 +1,7 @@
-'use client'
-import { IEvents } from "@/common/interfaces/IEvents";
-import { IInternalTxs, ITxs } from "@/common/interfaces/Txs";
-import { createContext, useContext, useState } from "react";
+'use client';
+import { IEvents } from '@/common/interfaces/IEvents';
+import { IInternalTxs, ITxs } from '@/common/interfaces/Txs';
+import { createContext, useContext, useState } from 'react';
 
 interface DataContextType {
   tx: ITxs | undefined;
@@ -14,14 +14,18 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const TxsDataContextProvider = ({
   tx,
-  children
+  children,
 }: {
-  tx: ITxs | undefined,
-  children: React.ReactNode
+  tx: ITxs | undefined;
+  children: React.ReactNode;
 }) => {
-    const [itxsData, setItxsData] = useState<IInternalTxs[] | undefined>(undefined);
-    const [tokensData, setTokensData] = useState<IEvents[] | undefined>(undefined);
-  
+  const [itxsData, setItxsData] = useState<IInternalTxs[] | undefined>(
+    undefined,
+  );
+  const [tokensData, setTokensData] = useState<IEvents[] | undefined>(
+    undefined,
+  );
+
   return (
     <DataContext.Provider
       value={{
@@ -32,15 +36,15 @@ export const TxsDataContextProvider = ({
         setTokensData,
       }}
     >
-      { children }
+      {children}
     </DataContext.Provider>
-  )
-}
+  );
+};
 
 export const useTxsDataContext = () => {
   const context = useContext(DataContext);
   if (!context) {
-    throw new Error("useDataContext must be used within a DataProvider");
+    throw new Error('useDataContext must be used within a DataProvider');
   }
   return context;
-}
+};

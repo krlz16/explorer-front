@@ -1,6 +1,5 @@
-
 export interface IBalances {
-  balance: number
-  timestamp: string
-  blockNumber: number
+  balance: number;
+  timestamp: string;
+  blockNumber: number;
 }

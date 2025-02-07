@@ -15,13 +15,13 @@ import { ITxs } from '@/common/interfaces/Txs';
 import { ITokens } from '@/common/interfaces/Tokens';
 
 interface ISearchResult {
-  block: IBlocks | undefined,
-  address: IAddresses | undefined,
-  tx: ITxs | undefined,
-  tokens: ITokens[] | undefined,
-  rnsAddress: string,
-  searchType: string
-  isResult: boolean
+  block: IBlocks | undefined;
+  address: IAddresses | undefined;
+  tx: ITxs | undefined;
+  tokens: ITokens[] | undefined;
+  rnsAddress: string;
+  searchType: string;
+  isResult: boolean;
 }
 
 const InitialResult: ISearchResult = {
@@ -31,13 +31,14 @@ const InitialResult: ISearchResult = {
   tokens: undefined,
   rnsAddress: '',
   searchType: '',
-  isResult: false
+  isResult: false,
 };
 
 export function useSearch(input: string) {
   const { lastBlock } = useAppDataContext();
   const [loading, setLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<ISearchResult>(InitialResult);
+  const [searchResults, setSearchResults] =
+    useState<ISearchResult>(InitialResult);
 
   const [debouncedValue] = useDebounce(input, 1000);
 
@@ -45,7 +46,7 @@ export function useSearch(input: string) {
     if (debouncedValue) {
       fetchSearchData(debouncedValue);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
   const fetchSearchData = async (value: string) => {
@@ -99,7 +100,10 @@ export function useSearch(input: string) {
   };
 
   const fetchHashData = async (hash: string) => {
-    const [block, tx] = await Promise.all([fetchOneBlock(hash), fetchTxsByHash(hash)]);
+    const [block, tx] = await Promise.all([
+      fetchOneBlock(hash),
+      fetchTxsByHash(hash),
+    ]);
     return {
       block: block?.data || null,
       tx: tx?.data || null,

@@ -1,4 +1,3 @@
-
 export interface IEvents {
   eventId: string;
   abi: EventAbi;

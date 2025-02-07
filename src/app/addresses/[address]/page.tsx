@@ -85,7 +85,7 @@ export default function Page() {
         setLoading(false);
       }
     },
-    [setContractVerification]
+    [setContractVerification],
   );
 
   useEffect(() => {

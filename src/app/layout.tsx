@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import './globals.css'
-import Sidebar from "@/components/navegations/Sidebar";
-import Header from "@/components/navegations/Header";
-import { AppDataProvider } from "@/context/AppContext";
+import type { Metadata } from 'next';
+import './globals.css';
+import Sidebar from '@/components/navegations/Sidebar';
+import Header from '@/components/navegations/Header';
+import { AppDataProvider } from '@/context/AppContext';
 
 export const metadata: Metadata = {
-  title: "Explorer",
-  description: "RSK Explorer",
+  title: 'Explorer',
+  description: 'RSK Explorer',
 };
 
 export default function RootLayout({

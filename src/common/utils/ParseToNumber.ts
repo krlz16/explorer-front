@@ -1,4 +1,4 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
 export const weiToEther = (value: BigNumber | string) => {
   const newValue = new BigNumber(value.toString(), 16)
@@ -6,4 +6,4 @@ export const weiToEther = (value: BigNumber | string) => {
     .toNumber()
     .toFixed(4);
   return newValue || 0;
-}
+};

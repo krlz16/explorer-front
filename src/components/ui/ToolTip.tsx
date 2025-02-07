@@ -68,7 +68,7 @@ const ToolTip: React.FC<Props> = ({
             <p>{renderLinkOrText(trim2)}</p>
           </>
         ) : (
-          <span className={className}>{text}</span>
+          <span>{text}</span>
         )}
         <button onClick={handleCopy} className="ml-1">
           <CopyIcon className="fill-white-400 active:fill-white w-4 h-4" />

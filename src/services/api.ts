@@ -7,7 +7,7 @@ export async function fetchData<T>(
   url: string,
   params?: object,
   revalidate: number = 60,
-  isExternal: boolean = false
+  isExternal: boolean = false,
 ): Promise<DataResponse<T>> {
   try {
     const queryString = params
@@ -42,7 +42,7 @@ export async function fetchData<T>(
 export async function fetchDataExt<T>(
   url: string,
   params?: object,
-  revalidate: number = 60
+  revalidate: number = 60,
 ): Promise<T> {
   try {
     const queryString = params
@@ -75,7 +75,7 @@ export async function fetchDataExt<T>(
 export async function postData<T>(
   url: string,
   body: object,
-  files: File[]
+  files: File[],
 ): Promise<T> {
   try {
     const formData = new FormData();

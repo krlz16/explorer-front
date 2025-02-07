@@ -17,7 +17,9 @@ function Navbar() {
   };
 
   return (
-    <div className={`${pathname === '/' ? 'w-full' : 'w-[600px]'} mt-5 relative`}>
+    <div
+      className={`${pathname === '/' ? 'w-full' : 'w-[600px]'} mt-5 relative`}
+    >
       <input
         className="w-full h-11 rounded-lg bg-secondary text-white px-3 py-2 relative z-50"
         type="text"
@@ -29,7 +31,7 @@ function Navbar() {
       {focus && input && (
         <div className="w-full bg-secondary min-h-10 z-50 relative mt-2 rounded-lg p-4 border border-gray-500">
           <SearchResults
-            loading={loading}              
+            loading={loading}
             inputValue={input}
             searchResults={searchResults!}
             setInput={setInput}
@@ -37,7 +39,15 @@ function Navbar() {
         </div>
       )}
       {focus && (
-        <div onClick={() => setFocus(false)} className="w-screen h-screen z-40 fixed top-0 left-0 bg-[rgba(0,0,0,0.8)]"></div>
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setFocus(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') setFocus(false);
+          }}
+          className="w-screen h-screen z-40 fixed top-0 left-0 bg-[rgba(0,0,0,0.8)]"
+        ></div>
       )}
     </div>
   );

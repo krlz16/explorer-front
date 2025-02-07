@@ -8,21 +8,21 @@ import { ROUTER } from '@/common/constants';
 export async function fetchAddresses(params: object) {
   const response = await fetchData<IAddresses[]>(
     ROUTER.ADDRESSES.INDEX,
-    params
+    params,
   );
   return response;
 }
 
 export async function fetchAddress(address: string) {
   const response = await fetchData<IAddresses>(
-    `${ROUTER.ADDRESSES.INDEX}/${address}`
+    `${ROUTER.ADDRESSES.INDEX}/${address}`,
   );
   return response;
 }
 
 export async function fetchContractVerification(address: string) {
   const response = await fetchData<IContractVerification>(
-    `${ROUTER.ADDRESSES.CONTRACT_VERIFICATION}/${address}`
+    `${ROUTER.ADDRESSES.CONTRACT_VERIFICATION}/${address}`,
   );
   return response;
 }
