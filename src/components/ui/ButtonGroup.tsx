@@ -4,12 +4,19 @@ interface ButtonGroupProps {
   options: { label: string; value: string }[];
   activeValue: string;
   onChange: (value: string) => void;
-  className?: string
+  className?: string;
 }
 
-const ButtonGroup: React.FC<ButtonGroupProps> = ({ options, activeValue, onChange, className }) => {
+const ButtonGroup: React.FC<ButtonGroupProps> = ({
+  options,
+  activeValue,
+  onChange,
+  className,
+}) => {
   return (
-    <div className={`flex border border-line rounded-xl overflow-hidden max-w-fit ${className}`}>
+    <div
+      className={`flex border border-line rounded-xl overflow-hidden max-w-fit ${className}`}
+    >
       {options.map((option, index) => (
         <button
           key={option.value}
@@ -22,8 +29,8 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ options, activeValue, onChang
             index === 0
               ? 'rounded-l-xl'
               : index === options.length - 1
-              ? 'rounded-r-xl'
-              : ''
+                ? 'rounded-r-xl'
+                : ''
           }`}
         >
           {option.label}

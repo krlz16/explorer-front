@@ -9,8 +9,8 @@ import { parseDate } from '@/common/utils/Time';
 import Status from '../ui/Status';
 
 type props = {
-  txs: ITxs[] | undefined
-}
+  txs: ITxs[] | undefined;
+};
 
 function TxsTable({ txs }: props) {
   return (
@@ -26,44 +26,34 @@ function TxsTable({ txs }: props) {
         <TableCell>GasUsed</TableCell>
         {/* <TableCell>Type</TableCell> */}
       </TableHeader>
-      {
-        txs?.map((tx, i) => (
-          <TableRow key={i}>
-            <TableCell>
-              <ToolTip
-                text={tx.hash}
-                href={`${ROUTER.TXS.INDEX}/${tx.hash}`}
-              />
-            </TableCell>
-            <TableCell>
-              <Status value={Number(tx.receipt?.status)} />
-            </TableCell>
-            <TableCell>
-              <Link href={`${ROUTER.BLOCKS.INDEX}/${tx.blockNumber}`}>
-                {parseDecimals(tx.blockNumber)}
-              </Link>
-            </TableCell>
-            <TableCell>
-              { parseDate(tx.timestamp).timeAgo }
-            </TableCell>
-            <TableCell>
-              <ToolTip
-                text={tx.from}
-                href={`${ROUTER.ADDRESSES.INDEX}/${tx.from}`}
-              />
-            </TableCell>
-            <TableCell>
-              <ToolTip
-                text={tx.to}
-                href={`${ROUTER.ADDRESSES.INDEX}/${tx.to}`}
-              />
-            </TableCell>
-            <TableCell>{`${parseDecimals(tx.value, 6)} RBTC`}</TableCell>
-            <TableCell>{parseDecimals(tx.gasUsed)}</TableCell>
-            {/* <TableCell>{tx.txType}</TableCell> */}
-          </TableRow>
-        ))
-      }
+      {txs?.map((tx, i) => (
+        <TableRow key={i}>
+          <TableCell>
+            <ToolTip text={tx.hash} href={`${ROUTER.TXS.INDEX}/${tx.hash}`} />
+          </TableCell>
+          <TableCell>
+            <Status value={Number(tx.receipt?.status)} />
+          </TableCell>
+          <TableCell>
+            <Link href={`${ROUTER.BLOCKS.INDEX}/${tx.blockNumber}`}>
+              {parseDecimals(tx.blockNumber)}
+            </Link>
+          </TableCell>
+          <TableCell>{parseDate(tx.timestamp).timeAgo}</TableCell>
+          <TableCell>
+            <ToolTip
+              text={tx.from}
+              href={`${ROUTER.ADDRESSES.INDEX}/${tx.from}`}
+            />
+          </TableCell>
+          <TableCell>
+            <ToolTip text={tx.to} href={`${ROUTER.ADDRESSES.INDEX}/${tx.to}`} />
+          </TableCell>
+          <TableCell>{`${parseDecimals(tx.value, 6)} RBTC`}</TableCell>
+          <TableCell>{parseDecimals(tx.gasUsed)}</TableCell>
+          {/* <TableCell>{tx.txType}</TableCell> */}
+        </TableRow>
+      ))}
     </Table>
   );
 }

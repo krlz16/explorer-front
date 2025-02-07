@@ -1,23 +1,23 @@
 export type StatusType = 'SUCCESS' | 'PENDING' | 'FAIL' | 'REMOVED';
 
 export interface ITxs {
-  hash: string
-  blockNumber: number,
-  from: string
-  to: string
-  value: string
-  gasUsed: number,
-  gas: number
-  gasPrice: string
-  timestamp: string,
-  txType: string
-  transactionIndex: number
-  nonce: number
-  input: string
+  hash: string;
+  blockNumber: number;
+  from: string;
+  to: string;
+  value: string;
+  gasUsed: number;
+  gas: number;
+  gasPrice: string;
+  timestamp: string;
+  txType: string;
+  transactionIndex: number;
+  nonce: number;
+  input: string;
   receipt: {
-    logs: ILogs[]
-  },
-  status: StatusType
+    logs: ILogs[];
+  };
+  status: StatusType;
 }
 
 export interface IInternalTxs {
@@ -44,7 +44,7 @@ export interface IInternalTxs {
     gas: string;
     input: string;
     value: string;
-  }
+  };
 }
 
 export interface ILogs {
