@@ -5,7 +5,7 @@ import {
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
-  differenceInSeconds
+  differenceInSeconds,
 } from 'date-fns';
 
 interface Response {

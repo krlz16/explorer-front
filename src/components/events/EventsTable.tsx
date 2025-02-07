@@ -1,62 +1,52 @@
-import { IEvents } from '@/common/interfaces/IEvents'
-import React from 'react'
-import ToolTip from '../ui/ToolTip'
-import { parseDate } from '@/common/utils/Time'
-import { Table, TableCell, TableHeader, TableRow } from '../ui/Table'
-import { isAddress } from '@rsksmart/rsk-utils'
-import { weiToEther } from '@/common/utils/ParseToNumber'
-import Block from '../blocks/Block'
+import { IEvents } from '@/common/interfaces/IEvents';
+import React from 'react';
+import ToolTip from '../ui/ToolTip';
+import { parseDate } from '@/common/utils/Time';
+import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
+import { isAddress } from '@rsksmart/rsk-utils';
+import { weiToEther } from '@/common/utils/ParseToNumber';
+import Block from '../blocks/Block';
 
 type props = {
-  events: IEvents[] | undefined
-}
+  events: IEvents[] | undefined;
+};
 function EventsTable({ events }: props) {
   return (
     <Table>
       <TableHeader>
-        <TableCell className='!text-left'>Event</TableCell>
+        <TableCell className="!text-left">Event</TableCell>
         <TableCell>Address</TableCell>
         <TableCell>Arguments</TableCell>
         <TableCell>Timestamp</TableCell>
         <TableCell>Block</TableCell>
       </TableHeader>
-        {
-          events?.map((e, i) => (
-            <TableRow key={i} >
-              <TableCell className='text-brand-pink !text-left'>
-                {e.event || 'N/A' }
-              </TableCell>
-              <TableCell>
-                <ToolTip
-                  text={e.address}
-                  type='address'
-                />
-              </TableCell>
-              <TableCell>
-                {
-                  e.args?.map((a, i) => (
-                    <div key={i} className='flex justify-center'>
-                      { 
-                        isAddress(a) ?
-                        (<ToolTip text={a} />)
-                        :
-                        <span className='flex'>value: {weiToEther(a)}</span>
-                      }
-                    </div>
-                  ))
-                }
-              </TableCell>
-              <TableCell>
-                {parseDate(e.timestamp).timeAgo}
-              </TableCell>
-              <TableCell>
-                <Block number={e.blockNumber} />
-              </TableCell>
-            </TableRow>
-          ))
-        }
+      {events?.map((e, i) => (
+        <TableRow key={i}>
+          <TableCell className="text-brand-pink !text-left">
+            {e.event || 'N/A'}
+          </TableCell>
+          <TableCell>
+            <ToolTip text={e.address} type="address" />
+          </TableCell>
+          <TableCell>
+            {e.args?.map((a, i) => (
+              <div key={i} className="flex justify-center">
+                {isAddress(a) ? (
+                  <ToolTip text={a} />
+                ) : (
+                  <span className="flex">value: {weiToEther(a)}</span>
+                )}
+              </div>
+            ))}
+          </TableCell>
+          <TableCell>{parseDate(e.timestamp).timeAgo}</TableCell>
+          <TableCell>
+            <Block number={e.blockNumber} />
+          </TableCell>
+        </TableRow>
+      ))}
     </Table>
-  )
+  );
 }
 
-export default EventsTable
+export default EventsTable;

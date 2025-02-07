@@ -29,6 +29,6 @@ export interface IBlocks {
   difficultyInGH: number;
   totalDifficultyInEH: number;
   blockHashrateInMHs: number;
-  txDensity: number
-  time: string
+  txDensity: number;
+  time: string;
 }

@@ -1,10 +1,10 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 export default {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -24,39 +24,39 @@ export default {
 
         'white-100': 'var(--white-100)',
         'white-400': 'var(--white-400)',
-        'success': 'var(--success)',
+        success: 'var(--success)',
 
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
       },
       backgroundColor: {
-        'primary': 'var(--bg-primary)',
-        'secondary': 'var(--bg-secondary)',
+        primary: 'var(--bg-primary)',
+        secondary: 'var(--bg-secondary)',
         'btn-secondary': 'var(--btn-secondary)',
-        'success': 'var(--bg-success)',
-        'fail': 'var(--bg-fail)',
-        'pending': 'var(--bg-pending)',
+        success: 'var(--bg-success)',
+        fail: 'var(--bg-fail)',
+        pending: 'var(--bg-pending)',
       },
       textColor: {
-        'success': 'var(--text-success)',
-        'fail': 'var(--text-fail)',
-        'pending': 'var(--text-pending)',
+        success: 'var(--text-success)',
+        fail: 'var(--text-fail)',
+        pending: 'var(--text-pending)',
       },
       height: {
         '25': '100px',
         '13': '52px',
-        '50': '200px'
+        '50': '200px',
       },
       boxShadow: {
-        'line': 'inset 0 -1px 0 0 #3a3a3a'
+        line: 'inset 0 -1px 0 0 #3a3a3a',
       },
       borderColor: {
-        'line': 'var(--border)',
+        line: 'var(--border)',
       },
       screens: {
-        'sm': '576px',
-        'md': '1000px',
-        'lg': '1200px',
+        sm: '576px',
+        md: '1000px',
+        lg: '1200px',
       },
     },
   },

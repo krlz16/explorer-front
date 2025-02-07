@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useRef } from 'react';
 import Chart, { ChartOptions } from 'chart.js/auto';
 import { IBlocks } from '@/common/interfaces/Blocks';
@@ -33,8 +33,8 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               fill: false,
               borderWidth: 2,
-            }
-          ]
+            },
+          ],
         },
         options: {
           responsive: true,
@@ -83,7 +83,7 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
                 display: false,
               },
               ticks: {
-                display: false
+                display: false,
               },
             },
             y: {
@@ -103,15 +103,15 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
             const block = blocks[dataX];
             router.push(`${ROUTER.BLOCKS.INDEX}/${block.number}`);
           },
-        } as ChartOptions
+        } as ChartOptions,
       });
     }
   }, [blocks, router]);
 
   return (
-    <Card className='h-50 w-full bg-secondary'>
-      <h2 className='mb-2 text-lg font-medium'>Transaction Density</h2>
-      <div className='w-full h-32'>
+    <Card className="h-50 w-full bg-secondary">
+      <h2 className="mb-2 text-lg font-medium">Transaction Density</h2>
+      <div className="w-full h-32">
         <canvas ref={chartRef} style={{ width: '100%', height: '110px' }} />
       </div>
     </Card>

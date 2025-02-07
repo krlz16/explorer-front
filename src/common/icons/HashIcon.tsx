@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function HashIcon({ className }: { className?: string }) {
   return (
@@ -8,7 +8,7 @@ function HashIcon({ className }: { className?: string }) {
       <path d="M9.38.05l4.72.73-4.98 31.25-4.72-.73z"></path>
       <path d="M1.81 7.18l.03 4.75 29.89-.2-.03-4.75z"></path>
     </svg>
-  )
+  );
 }
 
-export default HashIcon
+export default HashIcon;

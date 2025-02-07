@@ -29,7 +29,7 @@ function SearchInput() {
       {focus && input && (
         <div className="w-full bg-secondary min-h-10 z-30 relative mt-2 rounded-lg p-4 border border-gray-500">
           <SearchResults
-            loading={loading}              
+            loading={loading}
             inputValue={input}
             searchResults={searchResults!}
             setInput={setInput}
@@ -37,7 +37,15 @@ function SearchInput() {
         </div>
       )}
       {focus && (
-        <div onClick={() => setFocus(false)} className="w-screen h-screen z-40 fixed top-0 left-0 bg-[rgba(0,0,0,0.8)]"></div>
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setFocus(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') setFocus(false);
+          }}
+          className="w-screen h-screen z-20 fixed top-0 left-0 bg-[rgba(0,0,0,0.8)]"
+        ></div>
       )}
     </div>
   );

@@ -1,17 +1,17 @@
-import { usePathname } from "next/navigation";
-import Button from "../ui/Button";
-import SearchInput from "./search/SearchInput";
-import RskLogo from "./RskLogo";
+import { usePathname } from 'next/navigation';
+import Button from '../ui/Button';
+import SearchInput from './search/SearchInput';
+import RskLogo from './RskLogo';
 
 function Navbar() {
   const pathname = usePathname();
-  
+
   return (
     <nav className="w-full flex justify-between items-center">
       <RskLogo className="flex md:hidden" />
-      { pathname !== '/' && <SearchInput /> }
+      {pathname !== '/' && <SearchInput />}
       <div className="ml-auto">
-        <Button label='TESTNET' type='outline' />
+        <Button label="TESTNET" type="outline" />
       </div>
     </nav>
   );

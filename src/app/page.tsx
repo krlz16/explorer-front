@@ -1,10 +1,10 @@
-import TxsContainer from "@/components/home/txsContainer/TxsContainer";
-import BlockContainer from "@/components/home/blockContainer/BlockContainer";
-import LastBlock from "@/components/home/blockContainer/LastBlock";
-import Hero from "@/components/home/Hero";
-import StatsContainer from "@/components/home/stats/StatsContainer";
-import { HomeContext } from "@/context/HomeContext";
-import TxsChartContainer from "@/components/home/txsChart/TxsChartContainer";
+import TxsContainer from '@/components/home/txsContainer/TxsContainer';
+import BlockContainer from '@/components/home/blockContainer/BlockContainer';
+import LastBlock from '@/components/home/blockContainer/LastBlock';
+import Hero from '@/components/home/Hero';
+import StatsContainer from '@/components/home/stats/StatsContainer';
+import { HomeContext } from '@/context/HomeContext';
+import TxsChartContainer from '@/components/home/txsChart/TxsChartContainer';
 
 export default async function Home() {
   return (

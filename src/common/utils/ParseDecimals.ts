@@ -1,9 +1,8 @@
-
 export const parseDecimals = (data?: number | string, decimals: number = 2) => {
   if (data === undefined || data === 0) return '0';
-  
+
   const value = Number(data);
-  
+
   const factor = Math.pow(10, decimals);
   const roundedValue = Math.ceil(value * factor) / factor;
 
@@ -11,8 +10,8 @@ export const parseDecimals = (data?: number | string, decimals: number = 2) => {
     return roundedValue.toLocaleString('en-US');
   }
 
-  return roundedValue.toLocaleString('en-US', { 
-    minimumFractionDigits: decimals, 
-    maximumFractionDigits: decimals 
+  return roundedValue.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
   });
 };

@@ -2,7 +2,10 @@ import React from 'react';
 import Badge from './Badge';
 import { StatusType } from '@/common/interfaces/Txs';
 
-const STATUS_MAP: Record<StatusType, { text: string; type: 'success' | 'fail' | 'pending' }> = {
+const STATUS_MAP: Record<
+  StatusType,
+  { text: string; type: 'success' | 'fail' | 'pending' }
+> = {
   SUCCESS: { text: 'Success', type: 'success' },
   PENDING: { text: 'Pending', type: 'pending' },
   FAIL: { text: 'Fail', type: 'fail' },
