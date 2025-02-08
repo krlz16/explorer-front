@@ -23,13 +23,15 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier
+    'plugin:prettier/recommended', // Integrates Prettier with ESLint
+    'next/core-web-vitals', // Integrates Next.js-specific rules
   ],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    'prettier/prettier': 'error', // Show Prettier errors as ESLint errors
-    'react/react-in-jsx-scope': 'off', // Disable rule for React 17+ (no need to import React)
+    'prettier/prettier': 'error', // Treat Prettier errors as ESLint errors
+    'react/react-in-jsx-scope': 'off', // React 17+ doesn't require React import
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    // Add or modify rules as needed
+    // Customize Next.js specific rules if needed
+    '@next/next/no-img-element': 'off', // Example: allow native <img> tags
   },
 };
