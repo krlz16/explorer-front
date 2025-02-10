@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className='w-full xxl:max-w-[1440px] xxl:m-auto flex'>
+      <body className='w-full xxl:max-w-[2000px] xxl:m-auto flex'>
         <AppDataProvider>
           <Sidebar />
           <div className="w-full px-5">

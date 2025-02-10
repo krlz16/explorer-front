@@ -22,7 +22,7 @@ function Date({ date, mode = 'full' }: props) {
 
   return (
     <span
-      className={`flex items-center gap-2 ${mode === 'timer' ? 'w-14' : ''}`}
+      className={`flex items-center gap-2 ${mode === 'timer' ? 'w-16' : ''}`}
     >
       {mode === 'full' && <ClockIcon />}
       {timeAgo}

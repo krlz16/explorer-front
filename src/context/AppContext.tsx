@@ -44,7 +44,7 @@ export const AppDataProvider = ({
 
   const loadBlockFromStorage = (): IBlocks | undefined => {
     const storedBlock = localStorage.getItem(CACHE_LATEST_BLOCK);
-    if (storedBlock) return JSON.parse(storedBlock);
+    if (storedBlock && storedBlock !== 'undefined') return JSON.parse(storedBlock);
     return undefined;
   };
 

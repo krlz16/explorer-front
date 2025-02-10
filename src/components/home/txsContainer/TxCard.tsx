@@ -17,13 +17,15 @@ function TxCard({ tx }: props) {
         <div className="mr-2">
           <TxIcon />
         </div>
-        <div className="font-bold">
-          <ToolTip
-            className="!text-white-100"
-            text={tx.hash}
-            showCopy={false}
-            type="hash"
-          />
+        <div className='flex flex-col justify-around h-full'>
+          <div className="font-bold leading-none">
+            <ToolTip
+              className="!text-white-100"
+              text={tx.hash}
+              showCopy={false}
+              type="hash"
+            />
+          </div>
           <div className="flex items-center text-sm gap-1 text-brand-orange">
             <BlockIcon className="w-3 h-4" />
             <Block number={tx.blockNumber} />
@@ -31,7 +33,7 @@ function TxCard({ tx }: props) {
         </div>
       </div>
       <div className="flex-1 flex justify-center">
-        <div className="text-sm w-[130px]">
+        <div className="text-sm w-[130px] flex flex-col justify-around h-full">
           <div className="flex gap-1 text-brand-orange">
             <span className="text-white-400">From:</span>
             <ToolTip text={tx.from} type="address" showCopy={false} />

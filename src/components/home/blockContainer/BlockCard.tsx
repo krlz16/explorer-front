@@ -16,8 +16,8 @@ function BlockCard({ block }: props) {
         <div className="mr-2">
           <BlockIcon />
         </div>
-        <div>
-          <div className="font-bold">
+        <div className='flex flex-col justify-around h-full'>
+          <div className="font-bold leading-none">
             <Block number={block.number} />
           </div>
           <div className="flex items-center text-sm gap-1">
@@ -31,8 +31,8 @@ function BlockCard({ block }: props) {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex justify-center">
-        <div className="w-[140px] text-white-400">
+      <div className="flex-1 flex justify-center h-full">
+        <div className="text-sm w-[140px] text-white-400 flex flex-col justify-around h-full">
           <div className="flex gap-1 items-center">
             <div>Miner</div>
             <ToolTip

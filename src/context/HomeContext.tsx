@@ -37,7 +37,7 @@ export const HomeContext = ({ children }: { children: React.ReactNode }) => {
 
   const loadBlocksFromCache = () => {
     const cachedData = localStorage.getItem(CACHE_BLOCK);
-    if (cachedData) {
+    if (cachedData && cachedData !== 'undefined') {
       return JSON.parse(cachedData);
     }
     return null;
@@ -67,7 +67,7 @@ export const HomeContext = ({ children }: { children: React.ReactNode }) => {
   };
   const loadTxsFromCache = () => {
     const cachedData = localStorage.getItem(CACHE_TXS);
-    if (cachedData) {
+    if (cachedData && cachedData !== 'undefined') {
       return JSON.parse(cachedData);
     }
     return null;
