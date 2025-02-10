@@ -8,6 +8,13 @@ interface IPagination {
   total: number;
   totalPages: number;
 }
+
+interface IBlocksPagination {
+  nextCursor: number | null;
+  prevCursor: number | null;
+  take: number;
+}
+
 export interface INavigation {
   next: number | string | undefined;
   prev: number | string | undefined;
@@ -16,6 +23,7 @@ export interface INavigation {
 type Data<T> = {
   data: T | undefined;
   pagination?: IPagination;
+  paginationBlocks?: IBlocksPagination;
   navigation?: INavigation;
 } | null;
 
