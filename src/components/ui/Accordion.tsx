@@ -26,7 +26,7 @@ const Accordion = ({
     <div className="w-full">
       <button
         onClick={toggleAccordion}
-        className={`${styles ? 'justify-start bg-secondary transition p-4 rounded-xl outline-none' : ''} ${className} w-full text-left flex items-center gap-2`}
+        className={`cursor-pointer ${styles ? 'justify-start bg-secondary transition p-4 rounded-xl outline-none' : ''} ${className} w-full text-left flex items-center gap-2`}
       >
         {isOpen ? (
           <span className="transition-transform transform rotate-180">-</span>

@@ -14,7 +14,7 @@ export default async function page(props: IPageProps) {
         <TxIcon className="w-6 h-6" />
         Transactions
       </h1>
-      <div className="mt-8 flex justify-between gap-6">
+      {/* <div className="mt-8 flex justify-between gap-6">
         <CardStat
           title="6,320"
           subtitle="Transactions (24h)"
@@ -35,7 +35,7 @@ export default async function page(props: IPageProps) {
           subtitle="Average Txn Fee (24h)"
           icon={<TxIcon className="w-7 h-7" />}
         />
-      </div>
+      </div> */}
       <Pagination text="Total Transactions: " data={response!.pagination!} />
       <TxsTable txs={response?.data} />
     </div>

@@ -19,13 +19,10 @@ function BlocksPagination({ data }: BlockPaginationProps) {
   const params = new URLSearchParams(searchParams?.toString());
 
   const handlePage = (cursor: number | null, direction: string) => {
-    console.log('direction: ', direction);
-    console.log('cursor: ', cursor);
 
     if (direction === 'next' && data.nextCursor) {
       params.set('cursor', data.nextCursor.toString());
     } else if (direction === 'prev' && data.prevCursor) {
-      console.log('data.prevCursor selected: ', data.prevCursor);
       params.set('cursor', data.prevCursor.toString());
     } else {
       params.delete('cursor'); // Reset if no cursor is available

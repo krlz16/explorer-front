@@ -17,7 +17,7 @@ function TxCard({ tx }: props) {
         <div className="mr-2">
           <TxIcon />
         </div>
-        <div className='flex flex-col justify-around h-full'>
+        <div className="flex flex-col justify-around h-full">
           <div className="font-bold leading-none">
             <ToolTip
               className="!text-white-100"
