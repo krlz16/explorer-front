@@ -6,7 +6,6 @@ import { fetchBlocks } from '@/services/blocks';
 
 export default async function page(props: IPageProps) {
   const params = await props.searchParams;
-  console.log('params in blocks page:', params);
   const response = await fetchBlocks(params);
 
   return (
