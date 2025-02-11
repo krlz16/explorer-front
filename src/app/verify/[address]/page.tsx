@@ -31,6 +31,8 @@ export type Errors = {
 
 export default function Page() {
   const { address } = useAddressDataContext();
+  const [loadingAddress, setLoadingAddress] = useState(true);
+  const [isValid, setIsValid] = useState(false);
   const [isNightly, setIsNightly] = useState(false);
   const [optimizationOn, setOptimizationOn] = useState(false);
   const [abiEncoded, setAbiEncoded] = useState(false);
@@ -44,22 +46,22 @@ export default function Page() {
     IVerificationResponse | undefined
   >(undefined);
   const [filteredCompilers, setFilteredCompilers] = useState<DropDownOption[]>(
-    []
+    [],
   );
   const [availableEvmVersions, setAvailableEvmVersions] = useState<
     DropDownOption[]
   >([]);
   const [verifMethod, setVerifMethod] = useState<DropDownOption>(
-    VerificationMethods[0]
+    VerificationMethods[0],
   );
   const [compilerVersion, setCompilerVersion] = useState<
     DropDownOption | undefined
   >(undefined);
   const [evmVersion, setEVMVersion] = useState<DropDownOption | undefined>(
-    undefined
+    undefined,
   );
   const [solcVersions, setSolcVersions] = useState<IBuildStructure | undefined>(
-    undefined
+    undefined,
   );
   const [errors, setErrors] = useState<Errors>({
     contractName: '',
@@ -68,12 +70,18 @@ export default function Page() {
   });
   const [libraries, setLibraries] = useState<
     { libraryName: string; libraryAddress: string }[]
-  >([
-    {
-      libraryName: '',
-      libraryAddress: '',
-    },
-  ]);
+  >([{ libraryName: '', libraryAddress: '' }]);
+
+  useEffect(() => {
+    if (address?.type === 'contract') {
+      setIsValid(true);
+      setLoadingAddress(false);
+    }
+    if (address && address.type !== 'contract') {
+      setIsValid(false);
+      setLoadingAddress(false);
+    }
+  }, [address]);
 
   useEffect(() => {
     fetchSolcVersions();
@@ -81,11 +89,7 @@ export default function Page() {
   }, []);
   useEffect(() => {
     setFiles(undefined);
-    setErrors({
-      contractName: '',
-      files: '',
-      optimizationValue: '',
-    });
+    setErrors({ contractName: '', files: '', optimizationValue: '' });
   }, [verifMethod]);
   useEffect(() => {
     if (files && files.length > 0 && contractName !== '') {
@@ -104,18 +108,18 @@ export default function Page() {
   const fetchSolcVersions = async (): Promise<IBuildStructure | undefined> => {
     try {
       const response = await fetchDataExt<IBuildStructure>(
-        `${ROUTER.VERIFY.GET_SOLC}`
+        `${ROUTER.VERIFY.GET_SOLC}`,
       );
       const data = response;
       if (response) {
         setSolcVersions(data as IBuildStructure);
       }
     } catch (error) {
-      console.log('error', error);
-      return undefined;
+      throw new Error(`error fetching solc versions: ${error}`);
     }
+    return undefined;
   };
-  const fetchEVMVersions = async (): Promise<string[] | undefined> => {
+  const fetchEVMVersions = async () => {
     try {
       const response = await fetchData<string[]>(`${ROUTER.VERIFY.GET_EVM}`);
       const data = response as unknown as string[];
@@ -123,8 +127,7 @@ export default function Page() {
       setEVMVersion(formatedData[0]);
       setAvailableEvmVersions(formatedData);
     } catch (error) {
-      console.log('error', error);
-      return undefined;
+      throw new Error(`error fetching EVM versions: ${error}`);
     }
   };
   useEffect(() => {
@@ -153,7 +156,7 @@ export default function Page() {
       const limitVersion = process.env.NEXT_PUBLIC_LTS_SOL_VERSION || '0.8.24';
       const filteredCompilers = filterReleasesByVersion(
         solcVersions?.releases,
-        limitVersion
+        limitVersion,
       );
       setFilteredCompilers(filteredCompilers);
       setCompilerVersion(filteredCompilers[0]);
@@ -161,7 +164,7 @@ export default function Page() {
   }, [solcVersions, isNightly]);
   const filterReleasesByVersion = (
     releases: { [key: string]: string },
-    versionLimit: string
+    versionLimit: string,
   ): DropDownOption[] => {
     const isVersionLessThan = (v1: string, v2: string): boolean => {
       const [major1, minor1, patch1] = v1.split('.').map(Number);
@@ -189,7 +192,7 @@ export default function Page() {
   const handleLibraryChange = (
     index: number,
     field: 'libraryName' | 'libraryAddress',
-    value: string
+    value: string,
   ) => {
     const updatedLibraries = [...libraries];
     updatedLibraries[index][field] = value;
@@ -241,68 +244,85 @@ export default function Page() {
         verifMethod,
       };
       const response = await submitRequest(builderRequestParams);
-      console.log('response', response);
       setResponseVerification(response);
       setIsLoading(false);
     } catch (error) {
-      console.log('error', error);
       setIsLoading(false);
+      throw new Error(`Error submitting verification: ${error}`);
     }
   };
 
+  if (loadingAddress) {
+    return (
+      <Card className="bg-secondary flex flex-col mt-6">
+        <div className="font-bold text-m flex items-center p-3 justify-center">
+          Loading ...
+        </div>
+      </Card>
+    );
+  }
   return (
     <div className="px-4 py-2 items-center flex flex-col">
       <div className="p-4 rounded-lg w-4/5">
-        <Card className="bg-secondary flex flex-col">
-          <GeneralDetailsSection
-            isNightly={isNightly}
-            setIsNightly={setIsNightly}
-            contractName={contractName}
-            setContractName={handleFilenameChange}
-            filteredCompilers={filteredCompilers}
-            verifMethod={verifMethod}
-            setVerifMethod={setVerifMethod}
-            compilerVersion={compilerVersion}
-            setCompilerVersion={setCompilerVersion}
-            errorContractName={errors.contractName}
-            errorFiles={errors.files}
-            files={files}
-            setFiles={setFiles}
-          />
-          {verifMethod === VerificationMethods[0] && (
-            <AdvancedDetailsSection
-              optimizationOn={optimizationOn}
-              setOptimizationOn={setOptimizationOn}
-              optimizationValue={optimizationValue}
-              setOptimizationValue={setOptimizationValue}
-              availableEvmVersions={availableEvmVersions}
-              evmVersion={evmVersion}
-              setEVMVersion={setEVMVersion}
-              errorMessage={errors.optimizationValue}
+        {!isValid ? (
+          <Card className="bg-secondary flex flex-col">
+            <div className="font-bold text-m flex items-center p-3 justify-center">
+              This Contract Address Is Not Valid
+            </div>
+          </Card>
+        ) : (
+          <Card className="bg-secondary flex flex-col">
+            <GeneralDetailsSection
+              isNightly={isNightly}
+              setIsNightly={setIsNightly}
+              contractName={contractName}
+              setContractName={handleFilenameChange}
+              filteredCompilers={filteredCompilers}
+              verifMethod={verifMethod}
+              setVerifMethod={setVerifMethod}
+              compilerVersion={compilerVersion}
+              setCompilerVersion={setCompilerVersion}
+              errorContractName={errors.contractName}
+              errorFiles={errors.files}
+              files={files}
+              setFiles={setFiles}
             />
-          )}
-          <ConstructorArgumentsSection
-            constructorArgs={constructorArgs}
-            setConstructorArgs={setConstructorArgs}
-            abiEncoded={abiEncoded}
-            setAbiEncoded={setAbiEncoded}
-          />
-          {verifMethod === VerificationMethods[0] && (
-            <ContractLibrariesSection
-              libraries={libraries}
-              handleAddLibrary={handleAddLibrary}
-              handleRemoveLibrary={handleRemoveLibrary}
-              handleLibraryChange={handleLibraryChange}
+            {verifMethod === VerificationMethods[0] && (
+              <AdvancedDetailsSection
+                optimizationOn={optimizationOn}
+                setOptimizationOn={setOptimizationOn}
+                optimizationValue={optimizationValue}
+                setOptimizationValue={setOptimizationValue}
+                availableEvmVersions={availableEvmVersions}
+                evmVersion={evmVersion}
+                setEVMVersion={setEVMVersion}
+                errorMessage={errors.optimizationValue}
+              />
+            )}
+            <ConstructorArgumentsSection
+              constructorArgs={constructorArgs}
+              setConstructorArgs={setConstructorArgs}
+              abiEncoded={abiEncoded}
+              setAbiEncoded={setAbiEncoded}
             />
-          )}
-          <div className="flex justify-end mt-4">
-            <Button
-              label={'Verify Contract'}
-              onClick={handleSubmitVerification}
-              type="brand"
-            />
-          </div>
-        </Card>
+            {verifMethod === VerificationMethods[0] && (
+              <ContractLibrariesSection
+                libraries={libraries}
+                handleAddLibrary={handleAddLibrary}
+                handleRemoveLibrary={handleRemoveLibrary}
+                handleLibraryChange={handleLibraryChange}
+              />
+            )}
+            <div className="flex justify-end mt-4">
+              <Button
+                label={'Verify Contract'}
+                onClick={handleSubmitVerification}
+                type="brand"
+              />
+            </div>
+          </Card>
+        )}
+
         {isModalOpen && (
           <VerificationModal
             isModalOpen={isModalOpen}

@@ -19,24 +19,18 @@ export type BuilderRequestParams = {
 interface RequestParams {
   address: string;
   settings: {
-    optimizer: {
-      enabled: boolean;
-      runs: number;
-    };
+    optimizer: { enabled: boolean; runs: number };
     evmVersion?: string;
   };
   version: string;
   name: string;
   imports?: { name: string; contents: string }[];
   source?: string;
-  sources?: {
-    [key: string]: {
-      content: string;
-    };
-  };
+  sources?: { [key: string]: { content: string } };
   libraries?: Record<string, string>;
   constructorArguments?: string[];
   encodedConstructorArguments?: string;
+  sourceFile?: File;
 }
 
 export const validateForm = async ({
@@ -122,6 +116,12 @@ const validateJsonFile = async (files: File[]): Promise<boolean> => {
     const jsonData = JSON.parse(text);
     if ('sources' in jsonData && 'settings' in jsonData) {
       return true;
+    } else if ('input' in jsonData) {
+      if (jsonData.input.sources && jsonData.input.settings) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
@@ -132,15 +132,18 @@ const validateJsonFile = async (files: File[]): Promise<boolean> => {
 };
 
 export const submitRequest = async (
-  params: BuilderRequestParams
+  params: BuilderRequestParams,
 ): Promise<IVerificationResponse | undefined> => {
   try {
     const requestParams = await buildRequestParams(params);
     if (requestParams) {
-      const response = await submitVerificationRequest(
-        requestParams,
-        params.verifMethod.key !== 'solidity' ? params.files : []
-      );
+      let files: File[] = [];
+      if (params.verifMethod.key !== 'solidity') {
+        files = requestParams.sourceFile
+          ? [requestParams.sourceFile]
+          : params.files;
+      }
+      const response = await submitVerificationRequest(requestParams, files);
       return response;
     }
   } catch (error) {
@@ -177,6 +180,7 @@ export const buildRequestParams = async ({
       },
       version: compilerVersion,
       name: contractName,
+      sourceFile: undefined,
     };
     if (verifMethod.key === 'solidity') {
       if (files.length > 0) {
@@ -184,7 +188,7 @@ export const buildRequestParams = async ({
           files.map(async (file) => {
             const contents = await file.text();
             return { name: file.name, contents };
-          })
+          }),
         );
         params.source = params.imports[0]?.contents || '';
       }
@@ -196,8 +200,27 @@ export const buildRequestParams = async ({
             }
             return acc;
           },
-          {} as Record<string, string>
+          {} as Record<string, string>,
         );
+      }
+    } else {
+      const text = await files[0].text();
+      const jsonData = JSON.parse(text);
+      if ('input' in jsonData) {
+        if (jsonData.input.sources && jsonData.input.settings) {
+          const extractedContent = JSON.stringify(jsonData.input, null, 2);
+          const newFileName = files[0].name;
+          const newFile = new File([extractedContent], newFileName, {
+            type: 'application/json',
+          });
+          params.sourceFile = newFile;
+        } else {
+          return undefined;
+        }
+      } else {
+        if (!jsonData.sources || !jsonData.settings) {
+          return undefined;
+        }
       }
     }
 
@@ -216,13 +239,14 @@ export const buildRequestParams = async ({
 
 export const submitVerificationRequest = async (
   requestParams: RequestParams,
-  files: File[]
+  files: File[],
 ): Promise<IVerificationResponse | undefined> => {
   try {
+    delete requestParams.sourceFile;
     const response = await postData<IVerificationResponse>(
       '/verifications/verify',
       requestParams,
-      files
+      files,
     );
     if (!response) {
       console.error('No response from verification request');
@@ -232,7 +256,7 @@ export const submitVerificationRequest = async (
   } catch (error) {
     console.error('Error submitting verification request:', error);
     throw new Error(
-      `Error submitting verification request with error ${error}`
+      `Error submitting verification request with error ${error}`,
     );
   }
 };
