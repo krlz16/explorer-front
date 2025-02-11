@@ -1,8 +1,8 @@
-import Pagination from '@/components/ui/Pagination';
 import AddressesTable from '@/components/addresses/AddressesTable';
 import { IPageProps } from '@/common/interfaces/RouterParams';
 import { AddressIcon } from '@/common/icons';
 import { fetchAddresses } from '@/services/addresses';
+import PaginationCursor from '@/components/ui/PaginationCursor';
 
 export default async function Page(props: IPageProps) {
   const params = await props.searchParams;
@@ -13,7 +13,17 @@ export default async function Page(props: IPageProps) {
         <AddressIcon className="w-6 h-6" />
         Addresses
       </h1>
-      <Pagination text="Total Addresses" data={response!.pagination!} />
+      <div className="mt-8">
+        <PaginationCursor
+          data={
+            response?.paginationData || {
+              nextCursor: response?.paginationData?.nextCursor ?? null,
+              prevCursor: response?.paginationData?.prevCursor ?? null,
+              take: response?.paginationData?.take ?? 10,
+            }
+          }
+        />
+      </div>
       <AddressesTable addresses={response?.data} />
     </div>
   );
