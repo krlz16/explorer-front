@@ -16,7 +16,7 @@ function BlockCard({ block }: props) {
         <div className="mr-2">
           <BlockIcon />
         </div>
-        <div className='flex flex-col justify-around h-full'>
+        <div className="flex flex-col justify-around h-full">
           <div className="font-bold leading-none">
             <Block number={block.number} />
           </div>
