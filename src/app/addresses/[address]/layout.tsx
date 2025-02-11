@@ -34,7 +34,7 @@ export default async function layout({ children, params }: props) {
       <div className="text-white-400 mt-6">
         Addess
         <span className="text-brand-green ml-1">
-          <ToolTip text={address?.address} trim={0} />
+          <ToolTip text={address?.address} trim={0} type="address" />
         </span>
       </div>
       <AddressDataProvider address={address}>{children}</AddressDataProvider>

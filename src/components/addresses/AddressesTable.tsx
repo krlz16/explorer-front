@@ -1,4 +1,3 @@
-import { ROUTER } from '@/common/constants';
 import { AddressIcon } from '@/common/icons';
 import { IAddresses } from '@/common/interfaces/Addresses';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
@@ -26,10 +25,7 @@ function AddressesTable({ addresses }: props) {
             <AddressIcon />
           </TableCell>
           <TableCell>
-            <ToolTip
-              text={a.address}
-              href={`${ROUTER.ADDRESSES.INDEX}/${a.address}`}
-            />
+            <ToolTip text={a.address} type="address" />
           </TableCell>
           <TableCell>{parseDecimals(a?.balance, 4)} RBTC</TableCell>
           <TableCell className="text-brand-pink">{a.type}</TableCell>

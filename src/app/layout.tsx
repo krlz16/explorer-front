@@ -16,14 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex">
-        <Sidebar />
-        <div className="w-full px-5">
-          <AppDataProvider>
+      <body className="w-full xxl:max-w-[2000px] xxl:m-auto flex">
+        <AppDataProvider>
+          <Sidebar />
+          <div className="w-full px-5">
             <Header />
             {children}
-          </AppDataProvider>
-        </div>
+          </div>
+        </AppDataProvider>
       </body>
     </html>
   );

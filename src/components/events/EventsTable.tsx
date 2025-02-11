@@ -1,13 +1,11 @@
 import { IEvents } from '@/common/interfaces/IEvents';
 import React from 'react';
 import ToolTip from '../ui/ToolTip';
-import { ROUTER } from '@/common/constants';
-import { parseDecimals } from '@/common/utils/ParseDecimals';
-import Link from 'next/link';
 import { parseDate } from '@/common/utils/Time';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import { isAddress } from '@rsksmart/rsk-utils';
 import { weiToEther } from '@/common/utils/ParseToNumber';
+import Block from '../blocks/Block';
 
 type props = {
   events: IEvents[] | undefined;
@@ -28,10 +26,7 @@ function EventsTable({ events }: props) {
             {e.event || 'N/A'}
           </TableCell>
           <TableCell>
-            <ToolTip
-              text={e.address}
-              href={`${ROUTER.ADDRESSES.INDEX}/${e.address}`}
-            />
+            <ToolTip text={e.address} type="address" />
           </TableCell>
           <TableCell>
             {e.args?.map((a, i) => (
@@ -46,9 +41,7 @@ function EventsTable({ events }: props) {
           </TableCell>
           <TableCell>{parseDate(e.timestamp).timeAgo}</TableCell>
           <TableCell>
-            <Link href={`${ROUTER.BLOCKS.INDEX}/${e.blockNumber}`}>
-              {parseDecimals(e.blockNumber)}
-            </Link>
+            <Block number={e.blockNumber} />
           </TableCell>
         </TableRow>
       ))}

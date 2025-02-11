@@ -91,7 +91,6 @@ export default async function page({ params }: props) {
           title="Status"
           value={<Status type={!itx?.error ? 'SUCCESS' : 'FAIL'} />}
         />
-
         <ListItem title="Gas" value={parseDecimals(itx?.action.gas)} />
         <ListItem
           title="Gas Used"

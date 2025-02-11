@@ -16,13 +16,7 @@ export default async function StatsContainer() {
   const response = await fetchData<IStats>(ROUTER.STATS);
   const stats = response?.data;
   return (
-    <div className="flex gap-3 mt-9 justify-between">
-      <Stat
-        title="EHs"
-        value={parseDecimals(stats?.hashrate, 0)}
-        description="Net Hashrate"
-        icon={<HashrateIcon />}
-      />
+    <div className="flex flex-col gap-3 mt-9 justify-between sm:grid sm:grid-cols-2 lg:grid-cols-4">
       <Stat
         title="RBTC"
         value={parseDecimals(stats?.circulatingSupply, 0)}
@@ -30,16 +24,22 @@ export default async function StatsContainer() {
         icon={<RbtcIcon />}
       />
       <Stat
-        title="BTC"
-        value={parseDecimals(stats?.totalSupply, 0)}
-        description="2WP Locking Cap"
-        icon={<RbtcIcon />}
+        title="GHs"
+        value={parseDecimals(stats?.hashrate, 1)}
+        description="Net Hashrate"
+        icon={<HashrateIcon />}
       />
       <Stat
         title=""
         value={parseDecimals(stats?.activeAccounts, 0)}
         description="Active Accounts"
         icon={<UsersIcon />}
+      />
+      <Stat
+        title="BTC"
+        value={parseDecimals(stats?.totalSupply, 0)}
+        description="2WP Locking Cap"
+        icon={<RbtcIcon />}
       />
     </div>
   );

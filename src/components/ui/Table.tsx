@@ -31,7 +31,7 @@ export const TableRow = ({ children }: TableProps) => {
 
 export const TableCell = ({
   children,
-  className = 'flex-1 text-center',
+  className = 'flex-1 text-center flex justify-center',
 }: TableCellProps) => {
   return <div className={`flex-1 text-center ${className}`}>{children}</div>;
 };

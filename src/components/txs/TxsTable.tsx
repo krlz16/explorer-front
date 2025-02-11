@@ -1,12 +1,11 @@
-import { ROUTER } from '@/common/constants';
 import { ITxs } from '@/common/interfaces/Txs';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
 import ToolTip from '@/components/ui/ToolTip';
-import Link from 'next/link';
 import React from 'react';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import { parseDate } from '@/common/utils/Time';
 import Status from '../ui/Status';
+import Block from '../blocks/Block';
 
 type props = {
   txs: ITxs[] | undefined;
@@ -24,34 +23,27 @@ function TxsTable({ txs }: props) {
         <TableCell>To</TableCell>
         <TableCell>Value</TableCell>
         <TableCell>GasUsed</TableCell>
-        {/* <TableCell>Type</TableCell> */}
       </TableHeader>
       {txs?.map((tx, i) => (
         <TableRow key={i}>
           <TableCell>
-            <ToolTip text={tx.hash} href={`${ROUTER.TXS.INDEX}/${tx.hash}`} />
+            <ToolTip text={tx.hash} type="hash" />
           </TableCell>
           <TableCell>
-            <Status value={Number(tx.receipt?.status)} />
+            <Status type={tx.status} />
           </TableCell>
           <TableCell>
-            <Link href={`${ROUTER.BLOCKS.INDEX}/${tx.blockNumber}`}>
-              {parseDecimals(tx.blockNumber)}
-            </Link>
+            <Block number={tx.blockNumber} />
           </TableCell>
           <TableCell>{parseDate(tx.timestamp).timeAgo}</TableCell>
           <TableCell>
-            <ToolTip
-              text={tx.from}
-              href={`${ROUTER.ADDRESSES.INDEX}/${tx.from}`}
-            />
+            <ToolTip text={tx.from} type="address" />
           </TableCell>
           <TableCell>
-            <ToolTip text={tx.to} href={`${ROUTER.ADDRESSES.INDEX}/${tx.to}`} />
+            <ToolTip text={tx.to} type="address" />
           </TableCell>
           <TableCell>{`${parseDecimals(tx.value, 6)} RBTC`}</TableCell>
           <TableCell>{parseDecimals(tx.gasUsed)}</TableCell>
-          {/* <TableCell>{tx.txType}</TableCell> */}
         </TableRow>
       ))}
     </Table>

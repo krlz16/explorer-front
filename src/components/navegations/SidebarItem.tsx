@@ -1,3 +1,4 @@
+import { useAppDataContext } from '@/context/AppContext';
 import Link from 'next/link';
 
 type props = {
@@ -9,8 +10,10 @@ type props = {
 };
 
 function SidebarItem({ label, link, icon, className, isActive }: props) {
+  const { setActiveSidebar, widthScreen } = useAppDataContext();
   return (
     <Link
+      onClick={() => setActiveSidebar(widthScreen >= 1000)}
       className={`h-13 text-sm rounded-xl px-3 py-5 flex items-center mx-3 gap-2 font-bold ${isActive ? `${className} text-black` : 'text-white-400 hover:bg-secondary hover:text-white-400'}`}
       href={link}
     >

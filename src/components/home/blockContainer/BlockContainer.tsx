@@ -6,6 +6,7 @@ import BlockCard from './BlockCard';
 import { useHomeDataContext } from '@/context/HomeContext';
 import { ChangeEvent } from 'react';
 import CardLoader from '@/components/loaders/CardLoader';
+import Card from '@/components/ui/Card';
 
 export default function BlockContainer() {
   const { blocks, autoUpdate, setAutoUpdate } = useHomeDataContext();
@@ -17,7 +18,7 @@ export default function BlockContainer() {
   if (!blocks) return <CardLoader />;
 
   return (
-    <div className="w-full">
+    <Card className="w-full bg-secondary" pd="p3">
       <div className="flex justify-between">
         <div className="text-left text-2xl font-semibold mb-2 pl-6">Blocks</div>
         <div className="flex items-center gap-2">
@@ -33,7 +34,7 @@ export default function BlockContainer() {
       {blocks
         ?.slice(0, 6)
         .map((block, i) => <BlockCard key={i} block={block} />)}
-      <div className="mt-6 w-full text-center">
+      <div className="mt-3 w-full text-center">
         <Link
           href={ROUTER.BLOCKS.INDEX}
           className="hover:underline flex justify-center items-center gap-2"
@@ -42,6 +43,6 @@ export default function BlockContainer() {
           <RightArrowIcon />
         </Link>
       </div>
-    </div>
+    </Card>
   );
 }

@@ -1,17 +1,14 @@
-import { ROUTER } from '@/common/constants';
+'use client';
 import React from 'react';
 import TxsChart from './TxsChart';
-import { IBlocks } from '@/common/interfaces/Blocks';
-import { fetchData } from '@/services/api';
+import { useHomeDataContext } from '@/context/HomeContext';
 
-export default async function TxsChartContainer() {
-  const params = {
-    take_data: 10,
-  };
-  const response = await fetchData<IBlocks[]>(ROUTER.BLOCKS.INDEX, params, 1);
+export default function TxsChartContainer() {
+  const { blocks } = useHomeDataContext();
+  if (!blocks) return '';
   return (
-    <div className="w-1/2">
-      <TxsChart blocks={response?.data} />
+    <div className="w-full md:w-1/2" key={blocks[0].number}>
+      <TxsChart blocks={blocks} />
     </div>
   );
 }

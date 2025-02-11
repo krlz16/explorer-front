@@ -10,7 +10,7 @@ function CardLoader({ value = 5 }: props) {
     array.push(i);
   }
   return (
-    <>
+    <div className="w-full">
       {array.map((i) => (
         <div
           key={i}
@@ -43,7 +43,7 @@ function CardLoader({ value = 5 }: props) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
