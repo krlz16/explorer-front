@@ -3,7 +3,7 @@ export const PUBLIC_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
 
 export const NETWORK = process.env.NETWORK;
 
-export const CHAIN_ID = NETWORK === 'mainnet' ? 30 : 31 as 30 | 31
+export const CHAIN_ID = NETWORK === 'mainnet' ? 30 : (31 as 30 | 31);
 
 export const ROUTER = {
   HOME: '/',

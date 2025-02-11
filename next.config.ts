@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   webpack: (config) => {
     // Remove warnings for pino-pretty, lokijs, and encoding libs used by wagmi
     // This can be removed if all wagmi hooks are used inside useEffect
-    config.externals.push("pino-pretty", "lokijs", "encoding");
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
 };

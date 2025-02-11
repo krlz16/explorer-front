@@ -5,7 +5,7 @@ interface OutputIconProps {
   height?: number;
 }
 
-export default function OutputIcon ({ width = 7, height = 6 }: OutputIconProps) {
+export default function OutputIcon({ width = 7, height = 6 }: OutputIconProps) {
   return (
     <svg
       width={width}
@@ -22,4 +22,4 @@ export default function OutputIcon ({ width = 7, height = 6 }: OutputIconProps) 
       />
     </svg>
   );
-};
+}

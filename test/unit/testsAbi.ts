@@ -1,1397 +1,1397 @@
 // HeroV4 contract ABI
 // normal contract - verified on testnet & staging
-// EVM: London (default for solc 0.8.7+) 
+// EVM: London (default for solc 0.8.7+)
 // Solc: 0.8.28
 // Address: 0x6026961edd5d7ca672a9b651599fa2a6843e973a
 export const HeroV4_ABI: any[] = [
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    inputs: [],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "uint256[]",
-        "name": "ids",
-        "type": "uint256[]"
+        indexed: true,
+        internalType: 'uint256[]',
+        name: 'ids',
+        type: 'uint256[]',
       },
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-            "internalType": "address[]",
-            "name": "addresses",
-            "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-            "internalType": "uint256[]",
-            "name": "uints",
-            "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-            "internalType": "string[]",
-            "name": "strings",
-            "type": "string[]"
-          }
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
         ],
-        "indexed": false,
-        "internalType": "struct HeroV4.ComplexData[]",
-        "name": "complexDataSnapshot",
-        "type": "tuple[]"
+        indexed: false,
+        internalType: 'struct HeroV4.ComplexData[]',
+        name: 'complexDataSnapshot',
+        type: 'tuple[]',
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: 'uint256',
+        name: 'timestamp',
+        type: 'uint256',
+      },
     ],
-    "name": "ComplexDataSnapshot",
-    "type": "event"
+    name: 'ComplexDataSnapshot',
+    type: 'event',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
+        indexed: true,
+        internalType: 'uint256',
+        name: 'id',
+        type: 'uint256',
       },
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-            "internalType": "address[]",
-            "name": "addresses",
-            "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-            "internalType": "uint256[]",
-            "name": "uints",
-            "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-            "internalType": "string[]",
-            "name": "strings",
-            "type": "string[]"
-          }
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
         ],
-        "indexed": false,
-        "internalType": "struct HeroV4.ComplexData",
-        "name": "complexData",
-        "type": "tuple"
+        indexed: false,
+        internalType: 'struct HeroV4.ComplexData',
+        name: 'complexData',
+        type: 'tuple',
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: 'uint256',
+        name: 'timestamp',
+        type: 'uint256',
+      },
     ],
-    "name": "ComplexDataUpdated",
-    "type": "event"
+    name: 'ComplexDataUpdated',
+    type: 'event',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "from",
-        "type": "address"
+        indexed: true,
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
     ],
-    "name": "Deposit",
-    "type": "event"
+    name: 'Deposit',
+    type: 'event',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "apprenticeAddress",
-        "type": "address"
+        indexed: true,
+        internalType: 'address',
+        name: 'apprenticeAddress',
+        type: 'address',
       },
       {
-        "indexed": false,
-        "internalType": "string",
-        "name": "category",
-        "type": "string"
-      }
+        indexed: false,
+        internalType: 'string',
+        name: 'category',
+        type: 'string',
+      },
     ],
-    "name": "NewApprentice",
-    "type": "event"
+    name: 'NewApprentice',
+    type: 'event',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
+        indexed: true,
+        internalType: 'uint256',
+        name: 'id',
+        type: 'uint256',
       },
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-            "internalType": "address[]",
-            "name": "addresses",
-            "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-            "internalType": "uint256[]",
-            "name": "uints",
-            "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-            "internalType": "string[]",
-            "name": "strings",
-            "type": "string[]"
-          }
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
         ],
-        "indexed": false,
-        "internalType": "struct HeroV4.ComplexData",
-        "name": "complexData",
-        "type": "tuple"
+        indexed: false,
+        internalType: 'struct HeroV4.ComplexData',
+        name: 'complexData',
+        type: 'tuple',
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: 'uint256',
+        name: 'timestamp',
+        type: 'uint256',
+      },
     ],
-    "name": "NewComplexData",
-    "type": "event"
+    name: 'NewComplexData',
+    type: 'event',
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
+        indexed: true,
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
     ],
-    "name": "Withdraw",
-    "type": "event"
+    name: 'Withdraw',
+    type: 'event',
   },
   {
-    "stateMutability": "payable",
-    "type": "fallback"
+    stateMutability: 'payable',
+    type: 'fallback',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address[]",
-        "name": "addresses",
-        "type": "address[]"
-      }
+        internalType: 'address[]',
+        name: 'addresses',
+        type: 'address[]',
+      },
     ],
-    "name": "acceptAddresses",
-    "outputs": [
+    name: 'acceptAddresses',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
       {
-        "internalType": "address[]",
-        "name": "",
-        "type": "address[]"
-      }
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
     ],
-    "stateMutability": "pure",
-    "type": "function"
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bytes1",
-        "name": "bytes1Value",
-        "type": "bytes1"
+        internalType: 'bytes1',
+        name: 'bytes1Value',
+        type: 'bytes1',
       },
       {
-        "internalType": "bytes2",
-        "name": "bytes2Value",
-        "type": "bytes2"
+        internalType: 'bytes2',
+        name: 'bytes2Value',
+        type: 'bytes2',
       },
       {
-        "internalType": "bytes32",
-        "name": "bytes32Value",
-        "type": "bytes32"
-      }
+        internalType: 'bytes32',
+        name: 'bytes32Value',
+        type: 'bytes32',
+      },
     ],
-    "name": "acceptBytes",
-    "outputs": [
+    name: 'acceptBytes',
+    outputs: [
       {
-        "internalType": "bytes1",
-        "name": "",
-        "type": "bytes1"
+        internalType: 'bytes1',
+        name: '',
+        type: 'bytes1',
       },
       {
-        "internalType": "bytes2",
-        "name": "",
-        "type": "bytes2"
+        internalType: 'bytes2',
+        name: '',
+        type: 'bytes2',
       },
       {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
+      },
     ],
-    "stateMutability": "pure",
-    "type": "function"
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "num1",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'num1',
+            type: 'uint256',
           },
           {
-            "internalType": "uint256",
-            "name": "num2",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'num2',
+            type: 'uint256',
           },
           {
-            "internalType": "address",
-            "name": "addr1",
-            "type": "address"
+            internalType: 'address',
+            name: 'addr1',
+            type: 'address',
           },
           {
-            "internalType": "bool",
-            "name": "throwError",
-            "type": "bool"
-          }
+            internalType: 'bool',
+            name: 'throwError',
+            type: 'bool',
+          },
         ],
-        "internalType": "struct HeroV4.Tuple",
-        "name": "tuple",
-        "type": "tuple"
-      }
+        internalType: 'struct HeroV4.Tuple',
+        name: 'tuple',
+        type: 'tuple',
+      },
     ],
-    "name": "acceptTuple",
-    "outputs": [
+    name: 'acceptTuple',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        internalType: 'address',
+        name: '',
+        type: 'address',
       },
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
     ],
-    "stateMutability": "pure",
-    "type": "function"
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint8",
-        "name": "uint8Value",
-        "type": "uint8"
+        internalType: 'uint8',
+        name: 'uint8Value',
+        type: 'uint8',
       },
       {
-        "internalType": "uint16",
-        "name": "uint16Value",
-        "type": "uint16"
+        internalType: 'uint16',
+        name: 'uint16Value',
+        type: 'uint16',
       },
       {
-        "internalType": "uint256",
-        "name": "uint256Value",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'uint256Value',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "uintValue",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: 'uintValue',
+        type: 'uint256',
+      },
     ],
-    "name": "acceptUints",
-    "outputs": [
+    name: 'acceptUints',
+    outputs: [
       {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
+        internalType: 'uint8',
+        name: '',
+        type: 'uint8',
       },
       {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
+        internalType: 'uint16',
+        name: '',
+        type: 'uint16',
       },
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "stateMutability": "pure",
-    "type": "function"
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "acceptedApprenticeTypes",
-    "outputs": [
+    inputs: [],
+    name: 'acceptedApprenticeTypes',
+    outputs: [
       {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
     ],
-    "stateMutability": "pure",
-    "type": "function"
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
       },
       {
-        "internalType": "address[]",
-        "name": "_addresses",
-        "type": "address[]"
+        internalType: 'address[]',
+        name: '_addresses',
+        type: 'address[]',
       },
       {
-        "internalType": "uint256[]",
-        "name": "_uints",
-        "type": "uint256[]"
+        internalType: 'uint256[]',
+        name: '_uints',
+        type: 'uint256[]',
       },
       {
-        "internalType": "string[]",
-        "name": "_strings",
-        "type": "string[]"
-      }
+        internalType: 'string[]',
+        name: '_strings',
+        type: 'string[]',
+      },
     ],
-    "name": "addComplexData",
-    "outputs": [
+    name: 'addComplexData',
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-            "internalType": "address[]",
-            "name": "addresses",
-            "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-            "internalType": "uint256[]",
-            "name": "uints",
-            "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-            "internalType": "string[]",
-            "name": "strings",
-            "type": "string[]"
-          }
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
         ],
-        "internalType": "struct HeroV4.ComplexData",
-        "name": "",
-        "type": "tuple"
-      }
+        internalType: 'struct HeroV4.ComplexData',
+        name: '',
+        type: 'tuple',
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
+        internalType: 'string',
+        name: '',
+        type: 'string',
       },
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "name": "apprentices",
-    "outputs": [
+    name: 'apprentices',
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "name": "complexDataIds",
-    "outputs": [
+    name: 'complexDataIds',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "createComplexDataSnapshot",
-    "outputs": [
+    inputs: [],
+    name: 'createComplexDataSnapshot',
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-            "internalType": "address[]",
-            "name": "addresses",
-            "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-            "internalType": "uint256[]",
-            "name": "uints",
-            "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-            "internalType": "string[]",
-            "name": "strings",
-            "type": "string[]"
-          }
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
         ],
-        "internalType": "struct HeroV4.ComplexData[]",
-        "name": "",
-        "type": "tuple[]"
-      }
+        internalType: 'struct HeroV4.ComplexData[]',
+        name: '',
+        type: 'tuple[]',
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "defeatVillian",
-    "outputs": [
+    inputs: [],
+    name: 'defeatVillian',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "string",
-        "name": "category",
-        "type": "string"
-      }
+        internalType: 'string',
+        name: 'category',
+        type: 'string',
+      },
     ],
-    "name": "getApprenticesByCategory",
-    "outputs": [
+    name: 'getApprenticesByCategory',
+    outputs: [
       {
-        "internalType": "address[]",
-        "name": "",
-        "type": "address[]"
-      }
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "bool",
-        "name": "category",
-        "type": "bool"
-      }
+        internalType: 'bool',
+        name: 'category',
+        type: 'bool',
+      },
     ],
-    "name": "getApprenticesByCategoryBool",
-    "outputs": [
+    name: 'getApprenticesByCategoryBool',
+    outputs: [
       {
-        "internalType": "address[]",
-        "name": "",
-        "type": "address[]"
-      }
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "getBalance",
-    "outputs": [
+    inputs: [],
+    name: 'getBalance',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
+      },
     ],
-    "name": "getComplexDataById",
-    "outputs": [
+    name: 'getComplexDataById',
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-            "internalType": "address[]",
-            "name": "addresses",
-            "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-            "internalType": "uint256[]",
-            "name": "uints",
-            "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-            "internalType": "string[]",
-            "name": "strings",
-            "type": "string[]"
-          }
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
         ],
-        "internalType": "struct HeroV4.ComplexData",
-        "name": "",
-        "type": "tuple"
-      }
+        internalType: 'struct HeroV4.ComplexData',
+        name: '',
+        type: 'tuple',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "getHeroStats",
-    "outputs": [
+    inputs: [],
+    name: 'getHeroStats',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "hero",
-    "outputs": [
+    inputs: [],
+    name: 'hero',
+    outputs: [
       {
-        "internalType": "address payable",
-        "name": "",
-        "type": "address"
-      }
+        internalType: 'address payable',
+        name: '',
+        type: 'address',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_type",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '_type',
+        type: 'uint256',
+      },
     ],
-    "name": "newApprentice",
-    "outputs": [
+    name: 'newApprentice',
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address payable",
-        "name": "_to",
-        "type": "address"
+        internalType: 'address payable',
+        name: '_to',
+        type: 'address',
       },
       {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '_amount',
+        type: 'uint256',
+      },
     ],
-    "name": "sendViaCall",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+    name: 'sendViaCall',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "totalApprentices",
-    "outputs": [
+    inputs: [],
+    name: 'totalApprentices',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
       },
       {
-        "internalType": "address[]",
-        "name": "_addresses",
-        "type": "address[]"
+        internalType: 'address[]',
+        name: '_addresses',
+        type: 'address[]',
       },
       {
-        "internalType": "uint256[]",
-        "name": "_uints",
-        "type": "uint256[]"
+        internalType: 'uint256[]',
+        name: '_uints',
+        type: 'uint256[]',
       },
       {
-        "internalType": "string[]",
-        "name": "_strings",
-        "type": "string[]"
-      }
+        internalType: 'string[]',
+        name: '_strings',
+        type: 'string[]',
+      },
     ],
-    "name": "updateComplexData",
-    "outputs": [
+    name: 'updateComplexData',
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "id",
-            "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-            "internalType": "address[]",
-            "name": "addresses",
-            "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-            "internalType": "uint256[]",
-            "name": "uints",
-            "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-            "internalType": "string[]",
-            "name": "strings",
-            "type": "string[]"
-          }
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
         ],
-        "internalType": "struct HeroV4.ComplexData",
-        "name": "",
-        "type": "tuple"
-      }
+        internalType: 'struct HeroV4.ComplexData',
+        name: '',
+        type: 'tuple',
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "villiansDefeated",
-    "outputs": [
+    inputs: [],
+    name: 'villiansDefeated',
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "inputs": [],
-    "name": "worldSaved",
-    "outputs": [
+    inputs: [],
+    name: 'worldSaved',
+    outputs: [
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-    "stateMutability": "payable",
-    "type": "receive"
-  }
-] as const
+    stateMutability: 'payable',
+    type: 'receive',
+  },
+] as const;
 
 export const HeroV4_FUNCTION_FRAGMENTS_ABI: any[] = [
   {
-      "inputs": [
-          {
-              "internalType": "address[]",
-              "name": "addresses",
-              "type": "address[]"
-          }
-      ],
-      "name": "acceptAddresses",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          },
-          {
-              "internalType": "address[]",
-              "name": "",
-              "type": "address[]"
-          }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
+    inputs: [
+      {
+        internalType: 'address[]',
+        name: 'addresses',
+        type: 'address[]',
+      },
+    ],
+    name: 'acceptAddresses',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-      "inputs": [
-          {
-              "internalType": "bytes1",
-              "name": "bytes1Value",
-              "type": "bytes1"
-          },
-          {
-              "internalType": "bytes2",
-              "name": "bytes2Value",
-              "type": "bytes2"
-          },
-          {
-              "internalType": "bytes32",
-              "name": "bytes32Value",
-              "type": "bytes32"
-          }
-      ],
-      "name": "acceptBytes",
-      "outputs": [
-          {
-              "internalType": "bytes1",
-              "name": "",
-              "type": "bytes1"
-          },
-          {
-              "internalType": "bytes2",
-              "name": "",
-              "type": "bytes2"
-          },
-          {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-          }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
+    inputs: [
+      {
+        internalType: 'bytes1',
+        name: 'bytes1Value',
+        type: 'bytes1',
+      },
+      {
+        internalType: 'bytes2',
+        name: 'bytes2Value',
+        type: 'bytes2',
+      },
+      {
+        internalType: 'bytes32',
+        name: 'bytes32Value',
+        type: 'bytes32',
+      },
+    ],
+    name: 'acceptBytes',
+    outputs: [
+      {
+        internalType: 'bytes1',
+        name: '',
+        type: 'bytes1',
+      },
+      {
+        internalType: 'bytes2',
+        name: '',
+        type: 'bytes2',
+      },
+      {
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
+      },
+    ],
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-      "inputs": [
+    inputs: [
+      {
+        components: [
           {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "num1",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "num2",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "address",
-                      "name": "addr1",
-                      "type": "address"
-                  },
-                  {
-                      "internalType": "bool",
-                      "name": "throwError",
-                      "type": "bool"
-                  }
-              ],
-              "internalType": "struct HeroV4.Tuple",
-              "name": "tuple",
-              "type": "tuple"
-          }
-      ],
-      "name": "acceptTuple",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
+            internalType: 'uint256',
+            name: 'num1',
+            type: 'uint256',
           },
           {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
+            internalType: 'uint256',
+            name: 'num2',
+            type: 'uint256',
           },
           {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
+            internalType: 'address',
+            name: 'addr1',
+            type: 'address',
           },
           {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-          }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
+            internalType: 'bool',
+            name: 'throwError',
+            type: 'bool',
+          },
+        ],
+        internalType: 'struct HeroV4.Tuple',
+        name: 'tuple',
+        type: 'tuple',
+      },
+    ],
+    name: 'acceptTuple',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'pure',
+    type: 'function',
   },
   {
-      "inputs": [
+    inputs: [
+      {
+        internalType: 'uint8',
+        name: 'uint8Value',
+        type: 'uint8',
+      },
+      {
+        internalType: 'uint16',
+        name: 'uint16Value',
+        type: 'uint16',
+      },
+      {
+        internalType: 'uint256',
+        name: 'uint256Value',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'uintValue',
+        type: 'uint256',
+      },
+    ],
+    name: 'acceptUints',
+    outputs: [
+      {
+        internalType: 'uint8',
+        name: '',
+        type: 'uint8',
+      },
+      {
+        internalType: 'uint16',
+        name: '',
+        type: 'uint16',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'pure',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'acceptedApprenticeTypes',
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
+    stateMutability: 'pure',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address[]',
+        name: '_addresses',
+        type: 'address[]',
+      },
+      {
+        internalType: 'uint256[]',
+        name: '_uints',
+        type: 'uint256[]',
+      },
+      {
+        internalType: 'string[]',
+        name: '_strings',
+        type: 'string[]',
+      },
+    ],
+    name: 'addComplexData',
+    outputs: [
+      {
+        components: [
           {
-              "internalType": "uint8",
-              "name": "uint8Value",
-              "type": "uint8"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-              "internalType": "uint16",
-              "name": "uint16Value",
-              "type": "uint16"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-              "internalType": "uint256",
-              "name": "uint256Value",
-              "type": "uint256"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-              "internalType": "uint256",
-              "name": "uintValue",
-              "type": "uint256"
-          }
-      ],
-      "name": "acceptUints",
-      "outputs": [
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
+        ],
+        internalType: 'struct HeroV4.ComplexData',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'apprentices',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'complexDataIds',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'createComplexDataSnapshot',
+    outputs: [
+      {
+        components: [
           {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-              "internalType": "uint16",
-              "name": "",
-              "type": "uint16"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
+        ],
+        internalType: 'struct HeroV4.ComplexData[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-      "inputs": [],
-      "name": "acceptedApprenticeTypes",
-      "outputs": [
-          {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
-          }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
+    inputs: [],
+    name: 'defeatVillian',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-      "inputs": [
+    inputs: [
+      {
+        internalType: 'string',
+        name: 'category',
+        type: 'string',
+      },
+    ],
+    name: 'getApprenticesByCategory',
+    outputs: [
+      {
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'bool',
+        name: 'category',
+        type: 'bool',
+      },
+    ],
+    name: 'getApprenticesByCategoryBool',
+    outputs: [
+      {
+        internalType: 'address[]',
+        name: '',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getBalance',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
+      },
+    ],
+    name: 'getComplexDataById',
+    outputs: [
+      {
+        components: [
           {
-              "internalType": "uint256",
-              "name": "_id",
-              "type": "uint256"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-              "internalType": "address[]",
-              "name": "_addresses",
-              "type": "address[]"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-              "internalType": "uint256[]",
-              "name": "_uints",
-              "type": "uint256[]"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-              "internalType": "string[]",
-              "name": "_strings",
-              "type": "string[]"
-          }
-      ],
-      "name": "addComplexData",
-      "outputs": [
-          {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "id",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "address[]",
-                      "name": "addresses",
-                      "type": "address[]"
-                  },
-                  {
-                      "internalType": "uint256[]",
-                      "name": "uints",
-                      "type": "uint256[]"
-                  },
-                  {
-                      "internalType": "string[]",
-                      "name": "strings",
-                      "type": "string[]"
-                  }
-              ],
-              "internalType": "struct HeroV4.ComplexData",
-              "name": "",
-              "type": "tuple"
-          }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
+          },
+        ],
+        internalType: 'struct HeroV4.ComplexData',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-      "inputs": [
+    inputs: [],
+    name: 'getHeroStats',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'hero',
+    outputs: [
+      {
+        internalType: 'address payable',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_type',
+        type: 'uint256',
+      },
+    ],
+    name: 'newApprentice',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address payable',
+        name: '_to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '_amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'sendViaCall',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'totalApprentices',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_id',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address[]',
+        name: '_addresses',
+        type: 'address[]',
+      },
+      {
+        internalType: 'uint256[]',
+        name: '_uints',
+        type: 'uint256[]',
+      },
+      {
+        internalType: 'string[]',
+        name: '_strings',
+        type: 'string[]',
+      },
+    ],
+    name: 'updateComplexData',
+    outputs: [
+      {
+        components: [
           {
-              "internalType": "string",
-              "name": "",
-              "type": "string"
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
           },
           {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "name": "apprentices",
-      "outputs": [
-          {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "name": "complexDataIds",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [],
-      "name": "createComplexDataSnapshot",
-      "outputs": [
-          {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "id",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "address[]",
-                      "name": "addresses",
-                      "type": "address[]"
-                  },
-                  {
-                      "internalType": "uint256[]",
-                      "name": "uints",
-                      "type": "uint256[]"
-                  },
-                  {
-                      "internalType": "string[]",
-                      "name": "strings",
-                      "type": "string[]"
-                  }
-              ],
-              "internalType": "struct HeroV4.ComplexData[]",
-              "name": "",
-              "type": "tuple[]"
-          }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-  },
-  {
-      "inputs": [],
-      "name": "defeatVillian",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-  },
-  {
-      "inputs": [
-          {
-              "internalType": "string",
-              "name": "category",
-              "type": "string"
-          }
-      ],
-      "name": "getApprenticesByCategory",
-      "outputs": [
-          {
-              "internalType": "address[]",
-              "name": "",
-              "type": "address[]"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [
-          {
-              "internalType": "bool",
-              "name": "category",
-              "type": "bool"
-          }
-      ],
-      "name": "getApprenticesByCategoryBool",
-      "outputs": [
-          {
-              "internalType": "address[]",
-              "name": "",
-              "type": "address[]"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [],
-      "name": "getBalance",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [
-          {
-              "internalType": "uint256",
-              "name": "_id",
-              "type": "uint256"
-          }
-      ],
-      "name": "getComplexDataById",
-      "outputs": [
-          {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "id",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "address[]",
-                      "name": "addresses",
-                      "type": "address[]"
-                  },
-                  {
-                      "internalType": "uint256[]",
-                      "name": "uints",
-                      "type": "uint256[]"
-                  },
-                  {
-                      "internalType": "string[]",
-                      "name": "strings",
-                      "type": "string[]"
-                  }
-              ],
-              "internalType": "struct HeroV4.ComplexData",
-              "name": "",
-              "type": "tuple"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [],
-      "name": "getHeroStats",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
+            internalType: 'address[]',
+            name: 'addresses',
+            type: 'address[]',
           },
           {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
+            internalType: 'uint256[]',
+            name: 'uints',
+            type: 'uint256[]',
           },
           {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [],
-      "name": "hero",
-      "outputs": [
-          {
-              "internalType": "address payable",
-              "name": "",
-              "type": "address"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [
-          {
-              "internalType": "uint256",
-              "name": "_type",
-              "type": "uint256"
-          }
-      ],
-      "name": "newApprentice",
-      "outputs": [
-          {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-          }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-  },
-  {
-      "inputs": [
-          {
-              "internalType": "address payable",
-              "name": "_to",
-              "type": "address"
+            internalType: 'string[]',
+            name: 'strings',
+            type: 'string[]',
           },
-          {
-              "internalType": "uint256",
-              "name": "_amount",
-              "type": "uint256"
-          }
-      ],
-      "name": "sendViaCall",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
+        ],
+        internalType: 'struct HeroV4.ComplexData',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-      "inputs": [],
-      "name": "totalApprentices",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+    inputs: [],
+    name: 'villiansDefeated',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
   },
   {
-      "inputs": [
-          {
-              "internalType": "uint256",
-              "name": "_id",
-              "type": "uint256"
-          },
-          {
-              "internalType": "address[]",
-              "name": "_addresses",
-              "type": "address[]"
-          },
-          {
-              "internalType": "uint256[]",
-              "name": "_uints",
-              "type": "uint256[]"
-          },
-          {
-              "internalType": "string[]",
-              "name": "_strings",
-              "type": "string[]"
-          }
-      ],
-      "name": "updateComplexData",
-      "outputs": [
-          {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "id",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "address[]",
-                      "name": "addresses",
-                      "type": "address[]"
-                  },
-                  {
-                      "internalType": "uint256[]",
-                      "name": "uints",
-                      "type": "uint256[]"
-                  },
-                  {
-                      "internalType": "string[]",
-                      "name": "strings",
-                      "type": "string[]"
-                  }
-              ],
-              "internalType": "struct HeroV4.ComplexData",
-              "name": "",
-              "type": "tuple"
-          }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
+    inputs: [],
+    name: 'worldSaved',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
   },
-  {
-      "inputs": [],
-      "name": "villiansDefeated",
-      "outputs": [
-          {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  },
-  {
-      "inputs": [],
-      "name": "worldSaved",
-      "outputs": [
-          {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-          }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-  }
-] as const
+] as const;

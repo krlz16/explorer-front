@@ -3,7 +3,10 @@ interface AddressTooltipProps {
   position?: 'top' | 'bottom' | 'left' | 'right';
 }
 
-export default function AddressTooltip ({ address, position = 'top' }: AddressTooltipProps) {
+export default function AddressTooltip({
+  address,
+  position = 'top',
+}: AddressTooltipProps) {
   const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   const tooltipPositionClasses = {
@@ -23,4 +26,4 @@ export default function AddressTooltip ({ address, position = 'top' }: AddressTo
       </div>
     </div>
   );
-};
+}
