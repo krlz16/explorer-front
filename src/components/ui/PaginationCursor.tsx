@@ -13,7 +13,7 @@ type BlockPaginationProps = {
   };
 };
 
-function BlocksPagination({ data }: BlockPaginationProps) {
+function PaginationCursor({ data }: BlockPaginationProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -88,4 +88,4 @@ function BlocksPagination({ data }: BlockPaginationProps) {
   );
 }
 
-export default BlocksPagination;
+export default PaginationCursor;
