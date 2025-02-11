@@ -1,4 +1,3 @@
-import Pagination from '@/components/ui/Pagination';
 import AddressesTable from '@/components/addresses/AddressesTable';
 import { IPageProps } from '@/common/interfaces/RouterParams';
 import { AddressIcon } from '@/common/icons';
