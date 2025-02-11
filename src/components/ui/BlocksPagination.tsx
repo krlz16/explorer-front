@@ -9,6 +9,7 @@ type BlockPaginationProps = {
     nextCursor: number | null;
     prevCursor: number | null;
     take: number;
+    hasMoreData?: boolean;
   };
 };
 
@@ -18,17 +19,30 @@ function BlocksPagination({ data }: BlockPaginationProps) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams?.toString());
 
-  const handlePage = (cursor: number | null, direction: string) => {
-    console.log('direction: ', direction);
-    console.log('cursor: ', cursor);
+  const handlePage = (
+    cursor: number | null,
+    direction: 'first' | 'next' | 'prev',
+  ) => {
+    if (direction === 'first') {
+      params.delete('cursor');
+      params.set('take', Math.abs(data.take).toString());
+    } else if (direction === 'prev') {
+      if (!cursor || (data.take < 0 && data.hasMoreData === false)) {
+        params.delete('cursor');
+        params.set('take', Math.abs(data.take).toString());
+      } else {
+        params.set('cursor', cursor.toString());
+        params.set('take', (-Math.abs(data.take)).toString());
+      }
+    } else if (direction === 'next') {
+      if (cursor) {
+        params.set('cursor', cursor.toString());
+        params.set('take', Math.abs(data.take).toString());
+      }
+    }
 
-    if (direction === 'next' && data.nextCursor) {
-      params.set('cursor', data.nextCursor.toString());
-    } else if (direction === 'prev' && data.prevCursor) {
-      console.log('data.prevCursor selected: ', data.prevCursor);
-      params.set('cursor', data.prevCursor.toString());
-    } else {
-      params.delete('cursor'); // Reset if no cursor is available
+    if (!cursor && direction !== 'first') {
+      params.delete('cursor');
     }
 
     router.push(`${pathname}?${params.toString()}`);
@@ -39,6 +53,14 @@ function BlocksPagination({ data }: BlockPaginationProps) {
     <div className="flex justify-between items-center mt-6">
       <div className="font-semibold">{/* {text} {data.total || 'N/A'} */}</div>
       <div className="flex items-center gap-3">
+        {/* First Button */}
+        <Button
+          label="First"
+          onClick={() => handlePage(null, 'first')}
+          type="secondary"
+        />
+
+        {/* Previous Button */}
         <Button
           onClick={() => handlePage(data.prevCursor, 'prev')}
           disabled={!data.prevCursor}
@@ -49,6 +71,8 @@ function BlocksPagination({ data }: BlockPaginationProps) {
           }
           type="secondary"
         />
+
+        {/* Next Button */}
         <Button
           onClick={() => handlePage(data.nextCursor, 'next')}
           disabled={!data.nextCursor}

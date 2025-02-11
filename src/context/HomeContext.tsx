@@ -29,7 +29,7 @@ export const HomeContext = ({ children }: { children: React.ReactNode }) => {
 
   // Blocks
   const fetchBlocks = async () => {
-    const params = { take_data: 10 };
+    const params = { take: 10 };
     const response = await fetchData<IBlocks[]>(ROUTER.BLOCKS.INDEX, params, 0);
     setBlocks(response?.data);
     saveBlocksToCache(response?.data);
