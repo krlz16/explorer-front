@@ -1,5 +1,5 @@
 import BlocksTable from '../../components/blocks/BlocksTable';
-import BlocksPagination from '@/components/ui/BlocksPagination';
+import PaginationCursor from '@/components/ui/PaginationCursor';
 import { IPageProps } from '@/common/interfaces/RouterParams';
 import { BlockIcon } from '@/common/icons';
 import { fetchBlocks } from '@/services/blocks';
@@ -16,12 +16,12 @@ export default async function page(props: IPageProps) {
       </h1>
 
       <div className="mt-8">
-        <BlocksPagination
+        <PaginationCursor
           data={
-            response?.paginationBlocks || {
-              nextCursor: response?.paginationBlocks?.nextCursor ?? null,
-              prevCursor: response?.paginationBlocks?.prevCursor ?? null,
-              take: response?.paginationBlocks?.take ?? 10,
+            response?.paginationData || {
+              nextCursor: response?.paginationData?.nextCursor ?? null,
+              prevCursor: response?.paginationData?.prevCursor ?? null,
+              take: response?.paginationData?.take ?? 50,
             }
           }
         />

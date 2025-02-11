@@ -1,11 +1,10 @@
 'use client';
 import { IBlocks } from '@/common/interfaces/Blocks';
 import ToolTip from '../ui/ToolTip';
-import Link from 'next/link';
-import { parseDate } from '@/common/utils/Time';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import Block from './Block';
 import { useState, useMemo } from 'react';
+import Date from '../ui/Date';
 
 type props = {
   blocks: IBlocks[] | undefined;
@@ -40,7 +39,9 @@ function BlocksTable({ blocks }: props) {
             <TableCell className="text-brand-green">
               <Block number={b.number} />
             </TableCell>
-            <TableCell>{parseDate(b.timestamp).timeAgo}</TableCell>
+            <TableCell>
+              <Date date={b.timestamp} mode='timer'/>
+            </TableCell>
             <TableCell>{b.transactions}</TableCell>
             <TableCell>
               <ToolTip text={b.hash} type="block" />
