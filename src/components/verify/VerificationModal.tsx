@@ -1,6 +1,7 @@
 import { IVerificationResponse } from '@/common/interfaces/IVerificationResponse';
 import Modal from '../ui/Modal';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 type Props = {
   address: string;
@@ -18,13 +19,28 @@ export default function VerificationModal({
   isLoading,
 }: Props) {
   const router = useRouter();
+  const [tryThis, setTryThis] = useState<Record<string, string>[]>([]);
+  const [error, setError] = useState<string | undefined>(undefined);
   const onContinue = () => {
     router.push(`/addresses/${address}?tab=contract`);
     setIsModalOpen(false);
   };
+  useEffect(() => {
+    if (responseVerification?.data.dataResponse.tryThis) {
+      setTryThis(responseVerification?.data.dataResponse.tryThis);
+    }
+    if (responseVerification?.data.dataResponse.errors) {
+      setError(
+        responseVerification?.data.dataResponse.errors[0].formattedMessage,
+      );
+    }
+  }, [
+    responseVerification?.data.dataResponse.tryThis,
+    responseVerification?.data.dataResponse.errors,
+  ]);
   return (
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-      <div className="h-[220px] w-[320px] flex flex-col justify-center items-center text-white">
+      <div className=" w-[320px] flex flex-col justify-center items-center text-white">
         <h2 id="modal-title" className="text-2xl font-semibold mb-4">
           Verifying Contract
         </h2>
@@ -72,6 +88,17 @@ export default function VerificationModal({
                 <span className="text-gray-400 text-sm">Incorrect params</span>
               </div>
             </div>
+            {(tryThis && Object.keys(tryThis).length > 0) ||
+              (error && (
+                <div className="mt-4 p-3 bg-gray-800 rounded-lg text-white w-full max-w-[320px]">
+                  <span className="text-md font-semibold">
+                    {error ? 'Error received:' : 'Try changing this:'}
+                  </span>
+                  <pre className="mt-2 text-sm bg-gray-900 p-2 rounded-md whitespace-pre-wrap break-words overflow-x-auto text-gray-300 max-w-full">
+                    {error ?? JSON.stringify(tryThis, null, 2)}
+                  </pre>
+                </div>
+              ))}
             <button
               className="mt-4 px-6 py-2 bg-pink-500 text-black font-bold rounded-lg hover:bg-pink-600 transition"
               onClick={() => setIsModalOpen(false)}

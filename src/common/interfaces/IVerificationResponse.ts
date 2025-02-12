@@ -52,4 +52,20 @@ type DataResponse = {
     ipfs: string;
     solc: string;
   }[];
+  tryThis?: Record<string, string>[];
+  errors?: ErrorInResponse[];
+};
+
+type ErrorInResponse = {
+  component: string;
+  errorCode: string;
+  formattedMessage: string;
+  message: string;
+  severity: string;
+  sourceLocation: {
+    end: number;
+    file: string;
+    start: number;
+  };
+  type: string;
 };
