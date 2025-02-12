@@ -82,11 +82,12 @@ export default function Page() {
     try {
       if (!address) return;
       const data = await fetchContractVerification(address.address);
-      if (address?.type === 'contract' && !data?.data.match) {
+      if (address?.type === 'contract' && !data?.data?.match) {
         setIsValid(true);
         setLoadingAddress(false);
+        return;
       }
-      if (data?.data.match) {
+      if (data?.data?.match) {
         setErrorMsg('This Contract Is Already Verified');
       }
       if (address.type !== 'contract') {
@@ -338,8 +339,9 @@ export default function Page() {
           </Card>
         )}
 
-        {isModalOpen && (
+        {isModalOpen && address && (
           <VerificationModal
+            address={address?.address}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
             responseVerification={responseVerification}

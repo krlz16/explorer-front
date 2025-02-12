@@ -1,7 +1,9 @@
 import { IVerificationResponse } from '@/common/interfaces/IVerificationResponse';
 import Modal from '../ui/Modal';
+import { useRouter } from 'next/navigation';
 
 type Props = {
+  address: string;
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
   responseVerification: IVerificationResponse | undefined;
@@ -9,11 +11,17 @@ type Props = {
 };
 
 export default function VerificationModal({
+  address,
   isModalOpen,
   setIsModalOpen,
   responseVerification,
   isLoading,
 }: Props) {
+  const router = useRouter();
+  const onContinue = () => {
+    router.push(`/addresses/${address}?tab=contract`);
+    setIsModalOpen(false);
+  };
   return (
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
       <div className="h-[220px] w-[320px] flex flex-col justify-center items-center text-white">
@@ -86,7 +94,7 @@ export default function VerificationModal({
             </div>
             <button
               className="mt-4 px-6 py-2 bg-pink-500 text-black font-bold rounded-lg hover:bg-pink-600 transition"
-              onClick={() => setIsModalOpen(false)}
+              onClick={onContinue}
             >
               Continue
             </button>
