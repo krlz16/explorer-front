@@ -22,6 +22,7 @@ import {
 import { useAddressDataContext } from '@/context/AddressContext';
 import { IVerificationResponse } from '@/common/interfaces/IVerificationResponse';
 import VerificationModal from '@/components/verify/VerificationModal';
+import { fetchContractVerification } from '@/services/addresses';
 
 export type Errors = {
   contractName: string;
@@ -38,6 +39,7 @@ export default function Page() {
   const [abiEncoded, setAbiEncoded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string>('');
   const [contractName, setContractName] = useState<string>('');
   const [optimizationValue, setOptimizationValue] = useState<string>('');
   const [constructorArgs, setConstructorArgs] = useState<string>('');
@@ -73,16 +75,29 @@ export default function Page() {
   >([{ libraryName: '', libraryAddress: '' }]);
 
   useEffect(() => {
-    if (address?.type === 'contract') {
-      setIsValid(true);
-      setLoadingAddress(false);
-    }
-    if (address && address.type !== 'contract') {
+    validateAddress();
+  }, [address, address?.isVerified]);
+
+  const validateAddress = async () => {
+    try {
+      if (!address) return;
+      const data = await fetchContractVerification(address.address);
+      if (address?.type === 'contract' && !data?.data.match) {
+        setIsValid(true);
+        setLoadingAddress(false);
+      }
+      if (data?.data.match) {
+        setErrorMsg('This Contract Is Already Verified');
+      }
+      if (address.type !== 'contract') {
+        setErrorMsg('This Contract Address Is Not Valid');
+      }
       setIsValid(false);
       setLoadingAddress(false);
+    } catch (error) {
+      setErrorMsg('Error fetching information, please try again');
     }
-  }, [address]);
-
+  };
   useEffect(() => {
     fetchSolcVersions();
     fetchEVMVersions();
@@ -267,7 +282,7 @@ export default function Page() {
         {!isValid ? (
           <Card className="bg-secondary flex flex-col">
             <div className="font-bold text-m flex items-center p-3 justify-center">
-              This Contract Address Is Not Valid
+              {errorMsg}
             </div>
           </Card>
         ) : (
