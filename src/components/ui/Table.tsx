@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { ReactNode } from 'react';
 
 type TableProps = {
@@ -6,16 +6,16 @@ type TableProps = {
 };
 
 interface TableCellProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
 export const Table = ({ children }: TableProps) => {
   return (
     <div className="w-full overflow-x-scroll md:overflow-visible mt-6">
-      <div className='w-[900px] md:w-full'>{children}</div>
+      <div className="w-[900px] md:w-full">{children}</div>
     </div>
-  )
+  );
 };
 
 export const TableHeader = ({ children }: TableProps) => {

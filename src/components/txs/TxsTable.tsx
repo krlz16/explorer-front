@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { ITxs } from '@/common/interfaces/Txs';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
 import ToolTip from '@/components/ui/ToolTip';
@@ -7,7 +7,6 @@ import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import Status from '../ui/Status';
 import Block from '../blocks/Block';
 import Date from '../ui/Date';
-import { IPagination } from '@/common/interfaces/IResponse';
 
 type props = {
   txs: ITxs[] | undefined;
@@ -15,7 +14,9 @@ type props = {
 };
 
 function TxsTable({ txs, showBlock = true }: props) {
-  const [highlightedAddress, setHighlightedAddress] = useState<string | null>(null);
+  const [highlightedAddress, setHighlightedAddress] = useState<string | null>(
+    null,
+  );
 
   const addressCount = useMemo(() => {
     const count: Record<string, number> = {};
@@ -35,8 +36,8 @@ function TxsTable({ txs, showBlock = true }: props) {
         <TableCell>Ago</TableCell>
         <TableCell>From</TableCell>
         <TableCell>To</TableCell>
-        <TableCell>Value</TableCell>
-        <TableCell>GasUsed</TableCell>
+        <TableCell>Amount</TableCell>
+        <TableCell>Fee</TableCell>
       </TableHeader>
       {txs?.map((tx, i) => {
         const isFromRepeated = addressCount[tx.from] > 1;
@@ -59,7 +60,9 @@ function TxsTable({ txs, showBlock = true }: props) {
               <Date date={tx.timestamp} mode="timer" />
             </TableCell>
             <TableCell
-              onMouseEnter={() => isFromRepeated && setHighlightedAddress(tx.from)}
+              onMouseEnter={() =>
+                isFromRepeated && setHighlightedAddress(tx.from)
+              }
               onMouseLeave={() => setHighlightedAddress(null)}
             >
               <ToolTip
@@ -78,7 +81,7 @@ function TxsTable({ txs, showBlock = true }: props) {
                 group={highlightedAddress === tx.to && isToRepeated}
               />
             </TableCell>
-            <TableCell className='break-all'>{`${parseDecimals(tx.value, 6)} RBTC`}</TableCell>
+            <TableCell className="break-all">{`${parseDecimals(tx.value, 6)} RBTC`}</TableCell>
             <TableCell>{parseDecimals(tx.gasUsed)}</TableCell>
           </TableRow>
         );

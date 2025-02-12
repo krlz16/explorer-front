@@ -31,9 +31,15 @@ function ListItem({
         )}
         {title}
       </div>
-      <div className={`w-full sm:w-9/12 text-white-100 break-words ${className}`}>
+      <div
+        className={`w-full sm:w-9/12 text-white-100 break-words ${className}`}
+      >
         {type === 'tooltip' ? (
-          <ToolTip className='!px-0' text={(value as string) || text} trim={trim} />
+          <ToolTip
+            className="!px-0"
+            text={(value as string) || text}
+            trim={trim}
+          />
         ) : (
           value
         )}

@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { IBlocks } from '@/common/interfaces/Blocks';
 import { ITxs, IInternalTxs } from '@/common/interfaces/Txs';
-import { INavigation, IPagination } from '@/common/interfaces/IResponse';
+import { INavigation } from '@/common/interfaces/IResponse';
 import { useTab } from '@/hooks/useTab';
 import { BLOCKS_BTN_TABS } from '@/components/blocks/tabs/BlocksTabs';
 import { fetchTxsByBlock } from '@/services/transactions';
@@ -15,7 +15,7 @@ interface DataContextType {
   itxsData: IInternalTxs[] | undefined;
   loading: boolean;
   changeTab: (newTab: string) => void;
-  currentTab: string
+  currentTab: string;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -58,6 +58,7 @@ export const BlocksDataProvider = ({
     getTxsByBlock();
     getInternalTxsByBlock();
   }, [
+    block,
     currentTab,
     itxsData?.length,
     setItxsData,

@@ -43,12 +43,8 @@ function InternalTxsTable({ itxs }: props) {
           <TableCell>
             <ToolTip text={itx.action?.to} type="address" />
           </TableCell>
-          <TableCell>
-            { parseDecimals(itx.action.value, 4) }
-          </TableCell>
-          <TableCell>
-            { itx.action.gas }
-          </TableCell>
+          <TableCell>{parseDecimals(itx.action.value, 4)}</TableCell>
+          <TableCell>{itx.action.gas}</TableCell>
         </TableRow>
       ))}
     </Table>

@@ -14,7 +14,6 @@ type BlockPaginationProps = {
 };
 
 function PaginationCursor({ data }: BlockPaginationProps) {
-  console.log('data: ', data)
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

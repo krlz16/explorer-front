@@ -7,6 +7,7 @@ import {
   differenceInMinutes,
   differenceInSeconds,
 } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 
 interface Response {
   timeAgo: string;
@@ -16,10 +17,13 @@ interface Response {
 export const parseDate = (timestamp: number | string | undefined): Response => {
   if (!timestamp) return { timeAgo: '', formattedDate: '' };
 
-  const date = new Date(Number(timestamp) * 1000);
+  const date = new Date(
+    Number(timestamp) < 1e10 ? Number(timestamp) * 1000 : Number(timestamp),
+  );
   const now = new Date();
 
-  const formattedDate = format(date, "MMM dd yyyy HH:mm:ss 'UTC'");
+  const utcDate = toZonedTime(date, 'UTC');
+  const formattedDate = format(utcDate, "MMM dd yyyy HH:mm:ss 'UTC'");
 
   const differenceInYearsValue = differenceInYears(now, date);
   const differenceInMonthsValue = differenceInMonths(now, date);

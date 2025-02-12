@@ -1,7 +1,8 @@
 'use client';
 import { ROUTER } from '@/common/constants';
-import { CopyIcon } from '@/common/icons';
+import { CheckCopiedIcon, CopyIcon } from '@/common/icons';
 import { getRouteStyles } from '@/common/utils/RouteColors';
+import { useAppDataContext } from '@/context/AppContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
@@ -27,9 +28,13 @@ const ToolTip: React.FC<Props> = ({
 }) => {
   const pathname = usePathname();
   const [copied, setCopied] = useState(false);
+  const { widthScreen } = useAppDataContext();
 
   if (!text) return null;
   if (text.length < 24) trim = 0;
+  if (widthScreen <= 1100 && text.length >= 60 && trim === 0) trim = 24;
+  if (widthScreen <= 900 && text.length >= 24 && trim > 6) trim = 16;
+  if (widthScreen <= 500 && text.length >= 24 && trim === 0) trim = 10;
 
   const trim1 = text.substring(0, trim);
   const trim2 = text.substring(text.length - trim);
@@ -38,7 +43,7 @@ const ToolTip: React.FC<Props> = ({
     event.stopPropagation();
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 1000);
     });
   };
 
@@ -98,8 +103,12 @@ const ToolTip: React.FC<Props> = ({
 
         {showCopy && (
           <div className="relative ml-1 group flex items-start">
-            <button onClick={handleCopy}>
-              <CopyIcon className="fill-white-400 active:fill-white w-4 h-4" />
+            <button onClick={handleCopy} className="w-5 h-5">
+              {copied ? (
+                <CheckCopiedIcon />
+              ) : (
+                <CopyIcon className="fill-white-400 active:fill-white w-4 h-4" />
+              )}
             </button>
 
             {/* Tooltip copy */}

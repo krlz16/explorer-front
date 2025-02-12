@@ -31,7 +31,12 @@ function BlockDetail() {
           title="Transactions:"
           value={
             <>
-              <span className='text-brand-green'>{block?.transactions} {(block?.transactions || 0 > 1) ? 'transactions ' : 'transaction '}</span>
+              <span className="text-brand-green">
+                {block?.transactions}{' '}
+                {block?.transactions || 0 > 1
+                  ? 'transactions '
+                  : 'transaction '}
+              </span>
               <span>in this block</span>
             </>
           }

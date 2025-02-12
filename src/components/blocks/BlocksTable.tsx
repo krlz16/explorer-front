@@ -40,7 +40,7 @@ function BlocksTable({ blocks }: props) {
               <Block number={b.number} />
             </TableCell>
             <TableCell>
-              <Date date={b.timestamp} mode='timer'/>
+              <Date date={b.timestamp} mode="timer" />
             </TableCell>
             <TableCell>{b.transactions}</TableCell>
             <TableCell>

@@ -8,7 +8,8 @@ import Button from '@/components/ui/Button';
 import { useBlocksDataContext } from '@/context/BlocksContext';
 
 export default function BlockPage() {
-  const { txsData, itxsData, loading, changeTab, currentTab } = useBlocksDataContext();
+  const { txsData, itxsData, loading, changeTab, currentTab } =
+    useBlocksDataContext();
 
   return (
     <div className="mt-6">
@@ -27,7 +28,9 @@ export default function BlockPage() {
       <div className="mt-6">
         {loading && <TableLoader />}
         {currentTab === 'overview' && <BlockDetail />}
-        {currentTab === 'txs' && !loading && <TxsTable txs={txsData} showBlock={false} />}
+        {currentTab === 'txs' && !loading && (
+          <TxsTable txs={txsData} showBlock={false} />
+        )}
         {currentTab === 'itxs' && !loading && (
           <InternalTxsTable itxs={itxsData} />
         )}
