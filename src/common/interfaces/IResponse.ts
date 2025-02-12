@@ -4,7 +4,7 @@ export interface IPagination {
   totalPages: number;
 }
 
-interface IBlocksPagination {
+interface IPaginationData {
   nextCursor: number | null;
   prevCursor: number | null;
   take: number;
@@ -18,6 +18,6 @@ export interface INavigation {
 export type DataResponse<T> = {
   data: T;
   pagination?: IPagination;
-  paginationBlocks?: IBlocksPagination;
+  paginationData?: IPaginationData;
   navigation?: INavigation;
 } | null;
