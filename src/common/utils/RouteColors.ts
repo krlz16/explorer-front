@@ -25,6 +25,10 @@ const routeStyles = {
     background: 'bg-brand-cyan',
     text: 'text-brand-cyan',
   },
+  [ROUTER.EVENTS.INDEX]: {
+    background: 'bg-brand-purple',
+    text: 'text-brand-purple',
+  },
 };
 
 // Valores predeterminados

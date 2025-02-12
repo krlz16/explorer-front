@@ -5,6 +5,9 @@ import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import Status from '../ui/Status';
 import Badge from '../ui/Badge';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
+import Link from 'next/link';
+import { InternalLinkIcon } from '@/common/icons';
+import { ROUTER } from '@/common/constants';
 
 type props = {
   itxs: IInternalTxs[] | undefined;
@@ -14,8 +17,8 @@ function InternalTxsTable({ itxs }: props) {
   return (
     <Table>
       <TableHeader>
+        <TableCell className="w-10 flex-none"></TableCell>
         <TableCell>Type</TableCell>
-        <TableCell>ID</TableCell>
         <TableCell>Status</TableCell>
         <TableCell>From</TableCell>
         <TableCell>To</TableCell>
@@ -24,15 +27,17 @@ function InternalTxsTable({ itxs }: props) {
       </TableHeader>
       {itxs?.map((itx, i) => (
         <TableRow key={i}>
+          <TableCell className="w-10 flex-none">
+            <Link href={`${ROUTER.ITXS.INDEX}/${itx.internalTxId}`}>
+              <InternalLinkIcon />
+            </Link>
+          </TableCell>
           <TableCell>
             <Badge
               className="capitalize"
               text={itx.action?.callType}
               type="info"
             />
-          </TableCell>
-          <TableCell>
-            <ToolTip text={itx.internalTxId} type="itx" />
           </TableCell>
           <TableCell>
             <Status type={itx.error === null ? 'SUCCESS' : 'FAIL'} />

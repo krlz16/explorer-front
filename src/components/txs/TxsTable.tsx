@@ -33,7 +33,7 @@ function TxsTable({ txs, showBlock = true }: props) {
         <TableCell>Hash</TableCell>
         <TableCell>Status</TableCell>
         {showBlock && <TableCell>Block</TableCell>}
-        <TableCell>Ago</TableCell>
+        <TableCell>Age</TableCell>
         <TableCell>From</TableCell>
         <TableCell>To</TableCell>
         <TableCell>Amount</TableCell>
@@ -52,7 +52,7 @@ function TxsTable({ txs, showBlock = true }: props) {
               <Status type={tx.status} />
             </TableCell>
             {showBlock && (
-              <TableCell>
+              <TableCell className="text-brand-purple">
                 <Block number={tx.blockNumber} />
               </TableCell>
             )}

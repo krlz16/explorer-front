@@ -62,6 +62,9 @@ export default {
         xl: '1500px',
         xxl: '2000px',
       },
+      fontSize: {
+        title: '38px',
+      },
     },
   },
   plugins: [],

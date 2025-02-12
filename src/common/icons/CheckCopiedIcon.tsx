@@ -14,7 +14,7 @@ function CheckCopiedIcon() {
         stroke="#B8B8B8"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

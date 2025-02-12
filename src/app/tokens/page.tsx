@@ -8,7 +8,7 @@ export default async function page(props: IPageProps) {
   const response = await fetchTokens(params);
   return (
     <div className="w-full">
-      <Pagination text="Total tokens" data={response!.pagination!} />
+      <Pagination data={response!.pagination!} />
       <TokensTable tokens={response?.data} />
     </div>
   );

@@ -14,7 +14,7 @@ function Log({
 }) {
   return (
     <div className={`${className}`}>
-      <div className="w-8 h-8 rounded-full bg-brand-purple flex items-center justify-center text-sm">
+      <div className="w-8 h-8 rounded-full border border-brand-purple text-brand-purple flex items-center justify-center text-sm">
         {i}
       </div>
       <div className="flex-1">
