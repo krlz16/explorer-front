@@ -54,11 +54,16 @@ const FormUploadFile = ({
       const validFiles = filterFilesByFormat(filesArray);
 
       const newFiles = allowMultiple
-        ? validFiles
+        ? validFiles.filter(
+            (file) =>
+              !uploadedFiles.some(
+                (existingFile) => existingFile.name === file.name,
+              ),
+          )
         : [validFiles[0]].filter(Boolean);
 
       setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-      e.dataTransfer.clearData();
+      (e.target as HTMLInputElement).value = '';
     }
   };
 
@@ -72,10 +77,16 @@ const FormUploadFile = ({
       const validFiles = filterFilesByFormat(filesArray);
 
       const newFiles = allowMultiple
-        ? validFiles
+        ? validFiles.filter(
+            (file) =>
+              !uploadedFiles.some(
+                (existingFile) => existingFile.name === file.name,
+              ),
+          )
         : [validFiles[0]].filter(Boolean);
 
       setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      (e.target as HTMLInputElement).value = '';
     }
   };
 
@@ -83,12 +94,18 @@ const FormUploadFile = ({
     if (acceptedFormats.length === 0) return files;
 
     return files.filter((file) =>
-      acceptedFormats.some((format) => file.name.toLowerCase().endsWith(format))
+      acceptedFormats.some((format) =>
+        file.name.toLowerCase().endsWith(format),
+      ),
     );
   };
 
   const removeFile = (index: number) => {
     setUploadedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
   };
 
   return (
