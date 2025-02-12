@@ -89,7 +89,7 @@ export default async function page({ params }: props) {
           value={<Badge text={itx!.type!} type="info" />}
         />
         <ListItem title="Input" value={<Code code={itx?.action.input} />} />
-        <ListItem title="Value" value={`${itx?.action.value} RBTC`} />
+        <ListItem title="Value" value={`${parseDecimals(itx?.action.value, 6)} RBTC`} />
         <ListItem
           title="Status"
           value={<Status type={!itx?.error ? 'SUCCESS' : 'FAIL'} />}
