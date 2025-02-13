@@ -30,4 +30,5 @@ export { default as ExternalLinkIcon } from './ExternalLinkIcon';
 export { default as CheckCopiedIcon } from './CheckCopiedIcon';
 export { default as ArrowLargeIcon } from './ArrowLargeIcon';
 export { default as InternalLinkIcon } from './InternalLinkIcon';
+export { default as BitcoinIcon } from './BitcoinIcon';
 export { default as Logo } from './Logo';
