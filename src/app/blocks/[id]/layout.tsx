@@ -27,7 +27,7 @@ export default async function layout({ children, params }: props) {
         All Blocks
       </Link>
       <h1 className="flex gap-3 items-center text-3xl font-medium">
-        <BlockIcon className="w-6 h-6" /> Block{' '}
+        Block{' '}
         <span className="text-white-400">#{block?.number}</span>
       </h1>
       <div className="text-white-400 mt-6">
