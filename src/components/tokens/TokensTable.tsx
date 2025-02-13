@@ -2,7 +2,9 @@ import { ITokens } from '@/common/interfaces/Tokens';
 import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
-import { parseDecimals } from '@/common/utils/ParseDecimals';
+import Link from 'next/link';
+import { ROUTER } from '@/common/constants';
+import Block from '../blocks/Block';
 
 type props = {
   tokens: ITokens[] | undefined;
@@ -20,13 +22,19 @@ function TokensTable({ tokens }: props) {
       </TableHeader>
       {tokens?.map((tk, i) => (
         <TableRow key={i}>
-          <TableCell>{tk.name}</TableCell>
-          <TableCell>{tk.symbol}</TableCell>
+          <TableCell className="text-brand-cyan">
+            <Link href={`${ROUTER.ADDRESSES.INDEX}/${tk.address}`}>
+              {tk.name || `(Not Provided)`}
+            </Link>
+          </TableCell>
+          <TableCell>{tk.symbol || `(Not Provided)`}</TableCell>
           <TableCell>
             <ToolTip text={tk.address} type="address" />
           </TableCell>
           <TableCell>{`${tk.balance} RBTC`}</TableCell>
-          <TableCell>{parseDecimals(tk.blockNumber)}</TableCell>
+          <TableCell>
+            <Block number={tk.blockNumber} />
+          </TableCell>
         </TableRow>
       ))}
     </Table>

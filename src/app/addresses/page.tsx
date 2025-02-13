@@ -3,16 +3,14 @@ import { IPageProps } from '@/common/interfaces/RouterParams';
 import { AddressIcon } from '@/common/icons';
 import { fetchAddresses } from '@/services/addresses';
 import PaginationCursor from '@/components/ui/PaginationCursor';
+import PageTitle from '@/components/ui/PageTitle';
 
 export default async function Page(props: IPageProps) {
   const params = await props.searchParams;
   const response = await fetchAddresses(params);
   return (
     <div className="w-full">
-      <h1 className="font-bold text-3xl flex gap-3 items-center mt-10">
-        <AddressIcon className="w-6 h-6" />
-        Addresses
-      </h1>
+      <PageTitle title='Addresses' />
       <div className="mt-8">
         <PaginationCursor
           data={

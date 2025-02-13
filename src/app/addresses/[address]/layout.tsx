@@ -5,6 +5,7 @@ import { fetchAddress } from '@/services/addresses';
 import Link from 'next/link';
 import ToolTip from '@/components/ui/ToolTip';
 import { AddressDataProvider } from '@/context/AddressContext';
+import PageTitle from '@/components/ui/PageTitle';
 
 type props = {
   params: Promise<{
@@ -22,16 +23,15 @@ export default async function layout({ children, params }: props) {
     <Card pd="p0" className="mb-14 mt-6">
       <Link
         href={ROUTER.BLOCKS.INDEX}
-        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-orange`}
+        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-pink`}
       >
-        <ReturIcon className="fill-brand-orange" />
-        All Blocks
+        <ReturIcon className="stroke-brand-pink" />
+        All Addresses
       </Link>
-      <h1 className="flex gap-3 items-center text-3xl font-medium">
-        {address?.type === 'contract' ? 'Contrat ' : 'Address '}
-        Details
-      </h1>
-      <div className="text-white-400 mt-6">
+      <PageTitle
+        title={`${address?.type === 'contract' ? 'Contract ' : 'Address '} Details`}
+      />
+      <div className="text-white-400 mt-6 text-lg">
         Addess
         <span className="text-brand-green ml-1">
           <ToolTip text={address?.address} trim={0} type="address" />

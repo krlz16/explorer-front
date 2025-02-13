@@ -1,4 +1,5 @@
 'use client';
+import Block from '@/components/blocks/Block';
 import ListContent from '@/components/generals/ListContent';
 import ListItem from '@/components/generals/ListItem';
 import Badge from '@/components/ui/Badge';
@@ -26,7 +27,10 @@ function AddressDetail() {
         value={<Badge text={address?.type} type="info" />}
       />
       <ListItem title="Balance" value={`${address?.balance} RBTC`} />
-      <ListItem title="Updated at block:" value={address?.blockNumber} />
+      <ListItem
+        title="Updated at block:"
+        value={<Block number={address?.blockNumber} />}
+      />
       <ListItem
         title="Internal Tx:"
         value={address?.createdByTx?.internalTxId}
