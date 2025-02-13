@@ -1,3 +1,4 @@
+'use client';
 import { IInternalTxs } from '@/common/interfaces/Txs';
 import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
@@ -8,12 +9,16 @@ import { parseDecimals } from '@/common/utils/ParseDecimals';
 import Link from 'next/link';
 import { InternalLinkIcon } from '@/common/icons';
 import { ROUTER } from '@/common/constants';
+import { usePathname } from 'next/navigation';
+import { getRouteStyles } from '@/common/utils/RouteColors';
 
 type props = {
   itxs: IInternalTxs[] | undefined;
 };
 
 function InternalTxsTable({ itxs }: props) {
+  const pathname = usePathname();
+  const iconColor = getRouteStyles(pathname, ['stroke']);
   return (
     <Table>
       <TableHeader>
@@ -29,7 +34,7 @@ function InternalTxsTable({ itxs }: props) {
         <TableRow key={i}>
           <TableCell className="w-10 flex-none">
             <Link href={`${ROUTER.ITXS.INDEX}/${itx.internalTxId}`}>
-              <InternalLinkIcon />
+              <InternalLinkIcon className={iconColor} />
             </Link>
           </TableCell>
           <TableCell>

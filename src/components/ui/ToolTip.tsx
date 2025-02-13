@@ -76,7 +76,7 @@ const ToolTip: React.FC<Props> = ({
     );
   };
 
-  const { text: textColor } = getRouteStyles(pathname);
+  const textColor = getRouteStyles(pathname, ['text']);
 
   return (
     <div
