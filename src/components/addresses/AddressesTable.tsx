@@ -10,7 +10,7 @@ type props = {
   addresses: IAddresses[] | undefined
 }
 
-function AddressesTable({ addresses }: props) {
+function AddressesTable({ addresses }: props) {  
   return (
     <Table>
       <TableHeader>

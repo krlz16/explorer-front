@@ -69,6 +69,13 @@ function Sidebar() {
             link={ROUTER.TOKENS.INDEX}
             icon={<TokenIcon className={isActive(ROUTER.TOKENS.INDEX) ? '!fill-black' : 'fill-white-400'}  />}
           />
+          <SidebarItem
+            label="EAS"
+            isActive={isActive(ROUTER.EAS.INDEX)}
+            className="bg-brand-cyan"
+            link={ROUTER.EAS.INDEX}
+            icon={<TokenIcon className={isActive(ROUTER.EAS.INDEX) ? '!fill-black' : 'fill-white-400'}  />}
+          />
         </aside>
       </div>
     </div>

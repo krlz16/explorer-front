@@ -1,5 +1,6 @@
 export const API_URL = process.env.API_URL;
 export const PUBLIC_DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
+export const EAS_API_URL = process.env.EAS_API_URL;
 
 export const ROUTER = {
   HOME: '/',
@@ -39,5 +40,8 @@ export const ROUTER = {
   },
   BALANCES: {
     ADDRESS: '/balances/address'
-  }
+  },
+  EAS: {
+    INDEX: '/eas',    
+  },
 }

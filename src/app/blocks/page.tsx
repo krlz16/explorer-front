@@ -42,11 +42,7 @@ export default async function page(props: IPageProps) {
             <BlockIcon className='w-7 h-7' fill='fill-white' />
           </div>
         </div>
-      </div>
-      <Pagination
-        text='Total Blocks: '
-        data={response!.pagination!}
-      />
+      </div>      
       <BlocksTable
         blocks={response?.data}
       />
