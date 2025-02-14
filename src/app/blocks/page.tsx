@@ -1,7 +1,6 @@
 import BlocksTable from '../../components/blocks/BlocksTable';
 import PaginationCursor from '@/components/ui/PaginationCursor';
 import { IPageProps } from '@/common/interfaces/RouterParams';
-import { BlockIcon, TxIcon } from '@/common/icons';
 import { fetchBlocks } from '@/services/blocks';
 
 export default async function page(props: IPageProps) {
@@ -11,7 +10,6 @@ export default async function page(props: IPageProps) {
   return (
     <div className="w-full">
       <h1 className="font-bold text-3xl flex gap-3 items-center mt-10">
-        <BlockIcon className="w-6 h-6" />
         Blocks
       </h1>
 
@@ -26,7 +24,6 @@ export default async function page(props: IPageProps) {
           }
         />
       </div>
-
       <BlocksTable blocks={response?.data} />
     </div>
   );
