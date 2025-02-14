@@ -42,6 +42,7 @@ export const ROUTER = {
     ADDRESS: '/balances/address'
   },
   EAS: {
-    INDEX: '/eas',    
+    ATTESTATIONS: '/eas/attestations',
+    SCHEMAS: '/eas/schemas',
   },
 }

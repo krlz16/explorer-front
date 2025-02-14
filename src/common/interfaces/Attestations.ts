@@ -34,3 +34,15 @@ export interface ITotalSchemas {
     }
   }
 }
+
+export interface ISchemas {
+  schemata: {
+    id: string
+    index: number
+    schema: string
+    resolver: string
+    _count: {
+      attestations: number
+    }
+  }[]
+}

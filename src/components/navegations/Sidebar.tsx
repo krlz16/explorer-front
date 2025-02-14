@@ -71,10 +71,10 @@ function Sidebar() {
           />
           <SidebarItem
             label="EAS"
-            isActive={isActive(ROUTER.EAS.INDEX)}
+            isActive={isActive(ROUTER.EAS.ATTESTATIONS)}
             className="bg-brand-cyan"
-            link={ROUTER.EAS.INDEX}
-            icon={<TokenIcon className={isActive(ROUTER.EAS.INDEX) ? '!fill-black' : 'fill-white-400'}  />}
+            link={ROUTER.EAS.ATTESTATIONS}
+            icon={<TokenIcon className={isActive(ROUTER.EAS.ATTESTATIONS) ? '!fill-black' : 'fill-white-400'}  />}
           />
         </aside>
       </div>

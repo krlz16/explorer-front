@@ -1,17 +1,30 @@
-
 import { IPageProps } from '@/common/interfaces/RouterParams';
-import { fetchAttestations, fetchTotalAttestations, fetchTotalOffchainAttestations, fetchTotalSchemas } from '@/services/eas';
-import AttestationsTable from '@/components/eas/EasTable';
+import { fetchSchemas, fetchTotalAttestations, fetchTotalOffchainAttestations, fetchTotalSchemas } from '@/services/eas';
 import { BlockIcon, TxIcon } from '@/common/icons';
+import Link from 'next/link';
+import { ROUTER } from '@/common/constants';
+import SchemasTable from '@/components/eas/SchemasTable';
 
 export default async function page(props: IPageProps) {
-  const params = await props.searchParams;
-  const response = await fetchAttestations(params);
+  const params = await props.searchParams;  
+  const response = await fetchSchemas(params);
   const totalAttestation = await fetchTotalAttestations(params);
   const totalOffchainAttestations = await fetchTotalOffchainAttestations();
   const totalSchemas = await fetchTotalSchemas();
-  return (
-    <div className='w-full'>      
+
+  return (        
+    <div className='w-full'>
+      <div className='mt-8 flex justify-between gap-6'/>    
+      <div className="flex gap-2">       
+        <Link href={ROUTER.EAS.ATTESTATIONS} 
+        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-white`}>        
+          Attestations
+        </Link>
+        <Link href={ROUTER.EAS.SCHEMAS} 
+        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-white`}>        
+          Schemas
+        </Link>
+      </div>
       <div className='mt-8 flex justify-between gap-6'>
         <div className='h-20 w-full p-4 rounded-xl bg-secondary flex justify-between items-center'>
           <div>
@@ -42,7 +55,7 @@ export default async function page(props: IPageProps) {
           </div>
         </div>
       </div>      
-      <AttestationsTable attestations={response?.data} />
+      <SchemasTable schemas={response?.data} />
     </div>    
   )
 }

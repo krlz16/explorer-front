@@ -44,8 +44,6 @@ export async function fetchGraphQL<T>(query: string, variables?: object): Promis
       body: JSON.stringify({ query, variables }),
     });
 
-    console.log('body', JSON.stringify({ query, variables }));
-
     if (!response.ok) {
       console.log('response: ', response);
       throw new Error('Fetch error');

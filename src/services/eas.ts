@@ -1,10 +1,10 @@
 import { fetchGraphQL } from "./api";
-import { IAttestations, ITotalAttestations, ITotalSchemas } from "@/common/interfaces/Attestations";
+import { IAttestations, ISchemas, ITotalAttestations, ITotalSchemas } from "@/common/interfaces/Attestations";
 
 export async function fetchAttestations(params: object) {
     const query = 
         `query Attestations {
-            attestations(take: 25, orderBy: { time: desc}) {
+            attestations(orderBy: { time: desc}) {
                 id
                 attester
                 recipient
@@ -77,4 +77,22 @@ export async function fetchTotalSchemas() {
     
   const response = await fetchGraphQL<ITotalSchemas>(query);
   return response;
+}
+
+export async function fetchSchemas(params: object) {
+    const query = 
+        `query Schemata {
+            schemata {
+                id
+                index
+                schema
+                resolver    
+                _count {
+                    attestations
+                }
+            }
+        }`;
+        
+    const response = await fetchGraphQL<ISchemas>(query, params);
+    return response;
 }
