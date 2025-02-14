@@ -23,11 +23,11 @@ function ContractCode() {
     if (contract?.sources) {
       setFileSelected(contract?.sources[0]);
       const source = contract?.sources.find((s) =>
-        s.file.includes(contract.request.name),
+        s?.file?.includes(contract.request.name),
       );
       setSourceCode(source);
       const sources = contract?.sources.filter(
-        (s) => !s.file.includes(contract.request.name),
+        (s) => !s.file?.includes(contract.request.name),
       );
       setSources(sources);
     }
