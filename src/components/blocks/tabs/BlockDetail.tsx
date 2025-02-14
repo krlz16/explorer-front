@@ -103,7 +103,7 @@ function BlockDetail() {
             trim={0}
           />
           <ListItem
-            title="Paren Hash:"
+            title="Parent Hash:"
             type="tooltip"
             value={block?.parentHash}
             trim={0}
