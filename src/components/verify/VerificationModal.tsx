@@ -74,7 +74,6 @@ export default function VerificationModal({
             <div className="animate-spin h-12 w-12 border-4 border-gray-300 border-t-pink-500 rounded-full"></div>
           </div>
         )}
-
         {!isLoading && !responseVerification?.success && (
           <div className="flex flex-col items-center">
             <div className="flex flex-row items-center space-x-3">
