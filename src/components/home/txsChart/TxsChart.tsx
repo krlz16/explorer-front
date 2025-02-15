@@ -142,11 +142,12 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
           },
           onClick: (e) => {
             if (!chartInstance.current) return;
-            const dataX = chartInstance.current.scales.x.getValueForPixel(e.x!);
-
-            if (!blocks || !dataX) return '';
-            const block = blocks[dataX];
-            window.open(`${ROUTER.BLOCKS.INDEX}/${block.number}`, '_blank');
+            const tooltip = chartInstance.current.tooltip;
+            if (tooltip && tooltip.dataPoints && tooltip.dataPoints.length) {
+              const blockIndex = tooltip.dataPoints[0].dataIndex;
+              const block = blocks[blockIndex];
+              window.open(`${ROUTER.BLOCKS.INDEX}/${block.number}`, '_blank');
+            }
           },
           onHover: (event, chartElement) => {
             if (!event?.native) return;
