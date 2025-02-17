@@ -30,7 +30,7 @@ const SearchResults = ({
   loading,
 }: ISearchResultsProps) => {
   const { address, block, tokens, tx, searchType, rnsAddress, isResult } =
-    searchResults;
+  searchResults;
   let href = '';
   let label = '';
 
@@ -65,7 +65,7 @@ const SearchResults = ({
       {searchType && searchType !== 'Tokens' && (
         <a href={href} onClick={() => setInput('')}>
           <div className="text-white-400">{searchType}</div>
-          <div className="hover:underline text-brand-orange flex items-center gap-4 mt-5">
+          <div className="hover:underline text-white-100 flex items-center gap-4 mt-5">
             <div>
               <RenderIcon type={searchType} />
             </div>
@@ -73,7 +73,7 @@ const SearchResults = ({
               {searchType === 'Block' ? (
                 <>
                   <div>{parseDecimals(block?.number)}</div>
-                  <div>{`${block?.hash.substring(0, block.hash.length - 22)}...`}</div>
+                  <div className='text-white-400'>{`${block?.hash.substring(0, block.hash.length - 22)}...`}</div>
                 </>
               ) : (
                 label
@@ -87,8 +87,10 @@ const SearchResults = ({
           {tokens?.length ? (
             <>
               <div className="text-white-400 mb-5">{searchType}</div>
-              {tokens?.map((tk, i) => (
-                <a
+              {tokens?.map((tk, i) => {
+                const name = tk.symbol + tk.name;
+                return (
+                  <a
                   key={i}
                   href={`${ROUTER.ADDRESSES.INDEX}/${tk?.address}`}
                   onClick={() => setInput('')}
@@ -97,12 +99,18 @@ const SearchResults = ({
                   <div>
                     <RenderIcon type={searchType} />
                   </div>
-                  <div className="flex gap-2">
-                    <div>({tk.symbol})</div>
-                    <div>{tk.name}</div>
+                  <div className="md:flex gap-2 w-full flex-wrap">
+                    <div className='md:w-[20%] flex gap-1'>
+                      <span className='text-white-400'>({tk.symbol})</span>
+                      { name.length < 20 ? tk.name : `${tk.name.substring(0, 10)}...` }
+                    </div>
+                    <div className='md:w-[60%] text-white-400'>
+                      {tk.address}
+                    </div>
                   </div>
                 </a>
-              ))}
+                )
+              })}
             </>
           ) : (
             <>No results found.</>

@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { useSearch } from '@/hooks/useSearch';
 import SearchResults from './SearchResults';
+import { SearchIcon } from '@/common/icons';
 
 function SearchInput() {
   const pathname = usePathname();
@@ -13,19 +14,22 @@ function SearchInput() {
 
   const handleInput = (e: FormEvent<HTMLInputElement>) => {
     setLoading(true);
-    setInput(e.currentTarget.value.trim());
+    setInput(e.currentTarget.value);
   };
 
   return (
     <div className={`${pathname === '/' ? 'w-full' : 'w-[600px]'} relative`}>
-      <input
-        className="w-full h-11 rounded-lg bg-secondary text-white px-3 py-2 relative z-30"
-        type="text"
-        value={input}
-        placeholder="Search by Token, Block, Symbol, Rns"
-        onFocus={() => setFocus(true)}
-        onInput={handleInput}
-      />
+      <div className={`${focus ? 'border border-white-100' : 'border border-transparent'} flex gap-2 items-center px-3 relative z-30 rounded-xl bg-secondary h-11`}>
+        <SearchIcon />
+        <input
+          className="w-full bg-secondary text-white outline-none"
+          type="text"
+          value={input}
+          placeholder="Search by address, block, tx, token name, symbol, rns"
+          onFocus={() => setFocus(true)}
+          onInput={handleInput}
+        />
+      </div>
       {focus && input && (
         <div className="w-full bg-secondary min-h-10 z-30 relative mt-2 rounded-lg p-4 border border-gray-500">
           <SearchResults
