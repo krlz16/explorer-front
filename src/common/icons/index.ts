@@ -28,4 +28,7 @@ export { default as MenuIcon } from './MenuIcon';
 export { default as CloseIcon } from './CloseIcon';
 export { default as ExternalLinkIcon } from './ExternalLinkIcon';
 export { default as CheckCopiedIcon } from './CheckCopiedIcon';
+export { default as XIcon } from './XIcon';
+export { default as GithubIcon } from './GithubIcon';
+export { default as DiscordIcon } from './DiscordIcon';
 export { default as Logo } from './Logo';
