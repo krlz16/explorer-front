@@ -12,7 +12,7 @@ interface TableCellProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Table = ({ children }: TableProps) => {
   return (
-    <div className="w-full overflow-x-scroll md:overflow-visible mt-6">
+    <div className="w-full overflow-x-scroll md:overflow-visible mt-6 text-sm">
       <div className="w-[900px] md:w-full">{children}</div>
     </div>
   );
@@ -36,12 +36,13 @@ export const TableRow = ({ children }: TableProps) => {
 
 export const TableCell = ({
   children,
-  className = 'flex-1 text-center flex justify-center',
+  className,
   ...props
 }: TableCellProps) => {
   return (
     <div
       className={`flex-1 text-center flex justify-center ${className}`}
+      style={{ minWidth: "120px" }}
       {...props}
     >
       {children}
