@@ -1,20 +1,20 @@
 import { DiscordIcon, GithubIcon, XIcon } from '@/common/icons';
 import Link from 'next/link';
-import React from 'react';
 
 function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="w-full md:flex justify-between items-center p-6 bg-primary relative z-40 border-t border-t-line text-sm">
-      <div>
+    <footer className="w-full grid md:flex justify-between items-center p-6 bg-primary relative z-40 border-t border-t-line text-sm">
+      <div className='order-2 mt-3 md:order-1'>
         <div className="flex gap-2 items-center">
           <span>Built by</span>
           <span className="text-lg font-bold">RootstockLabs</span>
         </div>
         <div className="text-xs text-gray-400">
-          Copyright &copy; 2025 RoostockLabs. All rights reserved.
+          Copyright &copy; {year} RoostockLabs. All rights reserved.
         </div>
       </div>
-      <div className="flex gap-4 flex-wrap mt-3">
+      <div className="flex gap-4 flex-wrap mt-3 order-1 md:order-2">
         <Link
           className="hover:underline"
           href="https://rootstock.io/"
@@ -44,7 +44,7 @@ function Footer() {
           Documentation
         </Link>
       </div>
-      <div className="flex gap-4 mt-6">
+      <div className="flex gap-4 mt-6 order-3">
         <Link href="https://twitter.com/rootstock_io" target="_blank">
           <XIcon />
         </Link>
