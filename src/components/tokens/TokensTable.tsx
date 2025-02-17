@@ -1,3 +1,4 @@
+'use client'
 import { ITokens } from '@/common/interfaces/Tokens';
 import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
@@ -5,12 +6,18 @@ import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import Link from 'next/link';
 import { ROUTER } from '@/common/constants';
 import Block from '../blocks/Block';
+import { getRouteStyles } from '@/common/utils/RouteColors';
+import { usePathname } from 'next/navigation';
+import { parseDecimals } from '@/common/utils/ParseDecimals';
 
 type props = {
   tokens: ITokens[] | undefined;
 };
 
 function TokensTable({ tokens }: props) {
+  const pathname = usePathname()
+  const textColor = getRouteStyles(pathname, ['text']);
+  console.log('textColor: ', textColor)
   return (
     <Table>
       <TableHeader>
@@ -22,7 +29,7 @@ function TokensTable({ tokens }: props) {
       </TableHeader>
       {tokens?.map((tk, i) => (
         <TableRow key={i}>
-          <TableCell className="text-brand-cyan">
+          <TableCell className={textColor}>
             <Link href={`${ROUTER.ADDRESSES.INDEX}/${tk.address}`}>
               {tk.name || `(Not Provided)`}
             </Link>
@@ -31,7 +38,7 @@ function TokensTable({ tokens }: props) {
           <TableCell>
             <ToolTip text={tk.address} type="address" />
           </TableCell>
-          <TableCell>{`${tk.balance} RBTC`}</TableCell>
+          <TableCell>{parseDecimals(tk.balance, 4)}</TableCell>
           <TableCell>
             <Block number={tk.blockNumber} />
           </TableCell>

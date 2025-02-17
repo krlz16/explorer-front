@@ -4,7 +4,10 @@ export interface IEvents {
   eventId: string;
   abi: EventAbi;
   address: string;
-  args: string[] | undefined;
+  args: {
+    name: string;
+    value: string
+  }[]
   topic0: string;
   topic1: string | null;
   topic2: string | null;

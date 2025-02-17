@@ -13,3 +13,10 @@ export async function fetchTokenByNameOrSymbol(value: string) {
   );
   return response;
 }
+
+export async function fetchTokenAddress(address: string) {
+  const response = await fetchData<ITokens[]>(
+    `${ROUTER.TOKENS.ADDRESS}/${address}`,
+  );
+  return response;
+}

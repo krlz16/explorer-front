@@ -14,7 +14,7 @@ function BalancesTable({ balances }: props) {
   return (
     <Table>
       <TableHeader>
-        <TableCell>Amount</TableCell>
+        <TableCell>Balance</TableCell>
         <TableCell>Timestamp</TableCell>
         <TableCell>Block</TableCell>
       </TableHeader>

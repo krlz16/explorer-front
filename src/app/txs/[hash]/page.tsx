@@ -28,7 +28,7 @@ export default function Page() {
       setLoading(false);
     };
     const getTransferEventByTxhash = async () => {
-      if (currentTab !== 'ttransfer' || tokensData?.length) return;
+      if (currentTab !== 'token_transfer' || tokensData?.length) return;
       setLoading(true);
       const data = await fetchTransferEventByTxhash(tx!.hash!);
       setTokensData(data?.data);
@@ -68,7 +68,7 @@ export default function Page() {
         {currentTab === 'logs' && !loading && (
           <LogsContainer logs={tx?.receipt.logs} />
         )}
-        {currentTab === 'ttransfer' && !loading && (
+        {currentTab === 'token_transfer' && !loading && (
           <>
             {tokensData?.length ? (
               <TokenTransfersTable tokens={tokensData} />

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import ToolTip from '@/components/ui/ToolTip';
 import { AddressDataProvider } from '@/context/AddressContext';
 import PageTitle from '@/components/ui/PageTitle';
+import Badge from '@/components/ui/Badge';
 
 type props = {
   params: Promise<{
@@ -29,7 +30,15 @@ export default async function layout({ children, params }: props) {
         All Addresses
       </Link>
       <PageTitle
-        title={`${address?.type === 'contract' ? 'Contract ' : 'Address '} Details`}
+        title={
+        <>
+          {address?.type === 'contract' ? 'Contract ' : 'Address '} Details
+          {
+            address?.isVerified && (
+              <Badge text='Verified' type='success' className='text-sm' />
+            )
+          }
+        </>}
       />
       <div className="text-white-400 mt-6 text-lg">
         Addess

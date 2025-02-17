@@ -1,4 +1,5 @@
 'use client';
+import { parseDecimals } from '@/common/utils/ParseDecimals';
 import Block from '@/components/blocks/Block';
 import ListContent from '@/components/generals/ListContent';
 import ListItem from '@/components/generals/ListItem';
@@ -19,7 +20,7 @@ function AddressDetail() {
             title="Timestamp"
             value={<Date date={address?.createdByTx?.timestamp} />}
           />
-          <ListItem title="Total Supply" value={address?.totalSupply} />
+          <ListItem title="Total Supply" value={parseDecimals(address?.totalSupply, 4)} />
         </>
       )}
       <ListItem
@@ -30,10 +31,6 @@ function AddressDetail() {
       <ListItem
         title="Updated at block:"
         value={<Block number={address?.blockNumber} />}
-      />
-      <ListItem
-        title="Internal Tx:"
-        value={address?.createdByTx?.internalTxId}
       />
     </ListContent>
   );
