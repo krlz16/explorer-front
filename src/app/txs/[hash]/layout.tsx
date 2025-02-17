@@ -25,7 +25,7 @@ export default async function layout({ children, params }: props) {
         className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-purple`}
       >
         <ReturIcon className="stroke-brand-purple" />
-        All Transactions
+        All transactions
       </Link>
       <PageTitle title="Transaction Details" />
       <TxsDataContextProvider tx={tx}>{children}</TxsDataContextProvider>

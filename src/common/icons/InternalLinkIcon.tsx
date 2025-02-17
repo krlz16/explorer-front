@@ -1,7 +1,10 @@
 import React from 'react';
 
-function InternalLinkIcon({ className = 'stroke-white-100' }: { className?: string }) {
-  
+function InternalLinkIcon({
+  className = 'stroke-white-100',
+}: {
+  className?: string;
+}) {
   return (
     <svg
       className={className}
