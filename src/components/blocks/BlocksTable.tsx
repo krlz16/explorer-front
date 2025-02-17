@@ -27,7 +27,6 @@ function BlocksTable({ blocks }: props) {
         <TableCell>Block</TableCell>
         <TableCell>Timestamp</TableCell>
         <TableCell>Txs</TableCell>
-        <TableCell>Hash</TableCell>
         <TableCell>Miner</TableCell>
         <TableCell>Size</TableCell>
       </TableHeader>

@@ -97,15 +97,15 @@ function BlockDetail() {
           />
           <hr className="border-gray-700 border-[1px] my-2" />
           <ListItem
-            title="Parent Hash:"
+            title="Transaction Hash:"
             type="tooltip"
-            value={block?.parentHash}
+            value={block?.hash}
             trim={0}
           />
           <ListItem
-            title="Sha3uncles:"
+            title="Parent Hash:"
             type="tooltip"
-            value={block?.sha3Uncles}
+            value={block?.parentHash}
             trim={0}
           />
         </ListContent>
