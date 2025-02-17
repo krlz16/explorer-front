@@ -85,7 +85,7 @@ function TxsTable({ txs, showBlock = true }: props) {
                 group={highlightedAddress === tx.to && isToRepeated}
               />
             </TableCell>
-            <TableCell className="break-all">{`${parseDecimals(tx.value, 6)} RBTC`}</TableCell>
+            <TableCell>{parseDecimals(tx.value, 6)}</TableCell>
             <TableCell>{parseDecimals(tx.gasUsed)}</TableCell>
           </TableRow>
         );

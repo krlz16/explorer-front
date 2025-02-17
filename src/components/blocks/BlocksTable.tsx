@@ -27,7 +27,6 @@ function BlocksTable({ blocks }: props) {
         <TableCell>Block</TableCell>
         <TableCell>Timestamp</TableCell>
         <TableCell>Txs</TableCell>
-        <TableCell>Hash</TableCell>
         <TableCell>Miner</TableCell>
         <TableCell>Size</TableCell>
       </TableHeader>
@@ -43,9 +42,6 @@ function BlocksTable({ blocks }: props) {
               <Date date={b.timestamp} mode="timer" />
             </TableCell>
             <TableCell>{b.transactions}</TableCell>
-            <TableCell>
-              <ToolTip text={b.hash} type="block" />
-            </TableCell>
             <TableCell
               onMouseEnter={() =>
                 isMinerRepeated && setHighlightedMiner(b.miner)

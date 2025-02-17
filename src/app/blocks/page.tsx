@@ -11,7 +11,7 @@ export default async function page(props: IPageProps) {
 
   return (
     <div className="w-full">
-      <PageTitle title="Blocks" icon={<BlockIcon className="w-6 h-6" />} />
+      <PageTitle title="Blocks" />
       <div className="mt-8">
         <PaginationCursor
           data={
