@@ -12,7 +12,6 @@ import ToolTip from '@/components/ui/ToolTip';
 
 function TxDetail() {
   const { tx } = useTxsDataContext();
-  console.log('tx: ', tx);
 
   return (
     <ListContent>
