@@ -1,4 +1,4 @@
-import { ITokens, ITokensByAddress } from '@/common/interfaces/Tokens';
+import { ITokensByAddress } from '@/common/interfaces/Tokens';
 import { fetchData } from './api';
 import { ROUTER } from '@/common/constants';
 

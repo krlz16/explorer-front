@@ -2,7 +2,6 @@ import { ITokensByAddress } from '@/common/interfaces/Tokens';
 import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
 import { Table, TableCell, TableHeader, TableRow } from '@/components/ui/Table';
-import { parseDecimals } from '@/common/utils/ParseDecimals';
 
 type props = {
   accountsByAddress: ITokensByAddress[] | undefined;

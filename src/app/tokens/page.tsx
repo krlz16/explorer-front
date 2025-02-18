@@ -1,4 +1,3 @@
-import Pagination from '@/components/ui/Pagination';
 import { IPageProps } from '@/common/interfaces/RouterParams';
 import TokensTable from '@/components/tokens/TokensTable';
 import { fetchTokens } from '@/services/tokens';
