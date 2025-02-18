@@ -31,4 +31,6 @@ export { default as CheckCopiedIcon } from './CheckCopiedIcon';
 export { default as XIcon } from './XIcon';
 export { default as GithubIcon } from './GithubIcon';
 export { default as DiscordIcon } from './DiscordIcon';
+export { default as ArrowLargeIcon } from './ArrowLargeIcon';
+export { default as InternalLinkIcon } from './InternalLinkIcon';
 export { default as Logo } from './Logo';
