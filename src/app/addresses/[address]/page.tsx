@@ -22,6 +22,7 @@ import { IEvents } from '@/common/interfaces/IEvents';
 import { fetchBalancesByAddress } from '@/services/balances';
 import { IBalances } from '@/common/interfaces/Balances';
 import { fetchTokensByAddress } from '@/services/tokens';
+import { fetchAccountsByAddress } from '@/services/accounts';
 import { ITokensByAddress } from '@/common/interfaces/Tokens';
 
 type ITabType =
@@ -30,6 +31,7 @@ type ITabType =
   | 'itxs'
   | 'tokens'
   | 'events'
+  | 'accounts'
   | 'token_transfer'
   | 'balances';
 
@@ -44,6 +46,9 @@ export default function Page() {
   >();
   const [eventsByAddress, setEventsByAddress] = useState<
     IEvents[] | undefined
+  >();
+  const [accountsByAddress, setAccountsByAddress] = useState<
+    ITokensByAddress[] | undefined
   >();
   const [transferByAddress, setTransferByAddress] = useState<
     IEvents[] | undefined
@@ -81,6 +86,9 @@ export default function Page() {
         } else if (tab === 'events') {
           data = await fetchEventsByAddress(address);
           setEventsByAddress(data?.data);
+        } else if (tab === 'accounts') {
+          data = await fetchAccountsByAddress(address);
+          setAccountsByAddress(data?.data);
         } else if (tab === 'token_transfer') {
           data = await fetchTransferEventsByAddress(address);
           setTransferByAddress(data?.data);
@@ -130,6 +138,7 @@ export default function Page() {
           txs={txsByAddress}
           tokensByAddress={tokensByAddress}
           events={eventsByAddress}
+          accountsByAddress={accountsByAddress}
           tokens={transferByAddress}
           balances={balancesByAddress}
         />
