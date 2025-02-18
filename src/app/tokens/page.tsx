@@ -1,4 +1,3 @@
-import Pagination from '@/components/ui/Pagination';
 import { IPageProps } from '@/common/interfaces/RouterParams';
 import TokensTable from '@/components/tokens/TokensTable';
 import { fetchTokens } from '@/services/tokens';
@@ -10,7 +9,7 @@ export default async function page(props: IPageProps) {
   const response = await fetchTokens(params);
   return (
     <div className="w-full">
-      <PageTitle title='Tokens' />
+      <PageTitle title="Tokens" />
       <div className="mt-8">
         <PaginationCursor
           data={

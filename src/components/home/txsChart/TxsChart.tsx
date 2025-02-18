@@ -140,7 +140,7 @@ const LineChart = ({ blocks }: { blocks: IBlocks[] | undefined }) => {
               },
             },
           },
-          onClick: (e) => {
+          onClick: () => {
             if (!chartInstance.current) return;
             const tooltip = chartInstance.current.tooltip;
             if (tooltip && tooltip.dataPoints && tooltip.dataPoints.length) {
