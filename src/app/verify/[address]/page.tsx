@@ -107,6 +107,7 @@ export default function Page() {
     setFiles(undefined);
     setErrors({ contractName: '', files: '', optimizationValue: '' });
   }, [verifMethod]);
+
   useEffect(() => {
     if (files && files.length > 0 && contractName !== '') {
       const isValid = isFilenameValid(contractName, files);
@@ -118,6 +119,9 @@ export default function Page() {
       } else {
         setErrors((prev) => ({ ...prev, contractName: '' }));
       }
+    }
+    if (files && files.length <= 0) {
+      setErrors((prev) => ({ ...prev, contractName: '', files: '' }));
     }
   }, [files]);
 
