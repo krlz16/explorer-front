@@ -5,7 +5,7 @@ function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="w-full grid md:flex justify-between items-center p-6 bg-primary relative z-40 border-t border-t-line text-sm">
-      <div className='order-2 mt-3 md:order-1'>
+      <div className="order-2 mt-3 md:order-1">
         <div className="flex gap-2 items-center">
           <span>Built by</span>
           <span className="text-lg font-bold">RootstockLabs</span>
