@@ -54,6 +54,7 @@ const SearchResults = ({
       break;
     case 'Tokens':
       href = `${ROUTER.TXS.INDEX}/${searchResults}`;
+      label = tokens && tokens.length > 1 ? 'Tokens' : 'Token'
       break;
     case 'Rns':
       href = `${ROUTER.ADDRESSES.INDEX}/${rnsAddress}`;
@@ -89,7 +90,7 @@ const SearchResults = ({
         <>
           {tokens?.length ? (
             <>
-              <div className="text-white-400 mb-5">{searchType}</div>
+              <div className="text-white-400 mb-5">{label}</div>
               {tokens?.map((tk, i) => {
                 return (
                   <a
