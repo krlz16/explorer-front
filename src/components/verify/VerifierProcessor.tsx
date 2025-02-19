@@ -190,6 +190,14 @@ export const buildRequestParams = async ({
             return { name: file.name, contents };
           }),
         );
+        const contractFileIndex = params.imports.findIndex(
+          (importedFile) => importedFile.name === `${contractName}.sol`,
+        );
+
+        if (contractFileIndex !== -1) {
+          const [contractFile] = params.imports.splice(contractFileIndex, 1);
+          params.imports.unshift(contractFile);
+        }
         params.source = params.imports[0]?.contents || '';
       }
       if (libraries.length > 0) {
