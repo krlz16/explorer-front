@@ -30,6 +30,7 @@ export default {
 
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        secondary: 'var(--bg-secondary)',
       },
       backgroundColor: {
         primary: 'var(--bg-primary)',
@@ -61,6 +62,9 @@ export default {
         lg: '1200px',
         xl: '1500px',
         xxl: '2000px',
+      },
+      fontSize: {
+        title: '38px',
       },
     },
   },
