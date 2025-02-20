@@ -349,6 +349,7 @@ export default function Page() {
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
             responseVerification={responseVerification}
+            setResponseVerification={setResponseVerification}
             isLoading={isLoading}
           />
         )}
