@@ -10,5 +10,5 @@ export const getRnsAddress = async (address: string) => {
     resolver = new Resolver.forRskTestnet();
   else resolver = new Resolver.forRskMainnet();
 
-  return resolver.addr(domain);
+  return resolver.addr(address);
 };
