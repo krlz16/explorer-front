@@ -32,7 +32,7 @@ export default function BlockPage() {
           <TxsTable txs={txsData} showBlock={false} />
         )}
         {currentTab === 'itxs' && !loading && (
-          <InternalTxsTable itxs={itxsData} />
+          <InternalTxsTable itxs={itxsData} showBlock={false} />
         )}
       </div>
     </div>

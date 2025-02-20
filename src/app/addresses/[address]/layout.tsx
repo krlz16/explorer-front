@@ -1,8 +1,5 @@
-import { ROUTER } from '@/common/constants';
-import { ReturIcon } from '@/common/icons';
 import Card from '@/components/ui/Card';
 import { fetchAddress } from '@/services/addresses';
-import Link from 'next/link';
 import ToolTip from '@/components/ui/ToolTip';
 import { AddressDataProvider } from '@/context/AddressContext';
 import PageTitle from '@/components/ui/PageTitle';
@@ -21,7 +18,7 @@ export default async function layout({ children, params }: props) {
   const address = response?.data;
 
   return (
-    <Card pd="p0" className="mb-14 mt-6">
+    <Card pd="p0" className="mb-14 mt-7">
       <PageTitle
         title={
           <>

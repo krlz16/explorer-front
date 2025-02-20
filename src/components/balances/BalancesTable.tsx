@@ -14,7 +14,7 @@ function BalancesTable({ balances }: props) {
     <Table>
       <TableHeader>
         <TableCell>Balance</TableCell>
-        <TableCell>Timestamp</TableCell>
+        <TableCell>Date & Time</TableCell>
         <TableCell>Block</TableCell>
       </TableHeader>
       {balances?.map((b, i) => (

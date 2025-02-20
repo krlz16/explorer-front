@@ -11,20 +11,23 @@ import { InternalLinkIcon } from '@/common/icons';
 import { ROUTER } from '@/common/constants';
 import { usePathname } from 'next/navigation';
 import { getRouteStyles } from '@/common/utils/RouteColors';
+import Block from '../blocks/Block';
 
 type props = {
   itxs: IInternalTxs[] | undefined;
+  showBlock?: boolean;
 };
 
-function InternalTxsTable({ itxs }: props) {
+function InternalTxsTable({ itxs, showBlock = true }: props) {
   const pathname = usePathname();
-  const iconColor = getRouteStyles(pathname, ['stroke']);
+  const color = getRouteStyles(pathname, ['stroke', 'text']);
   return (
     <Table>
       <TableHeader>
         <TableCell className="w-10 flex-none"></TableCell>
         <TableCell>Type</TableCell>
         <TableCell>Status</TableCell>
+        {showBlock && <TableCell>Block</TableCell>}
         <TableCell>From</TableCell>
         <TableCell>To</TableCell>
         <TableCell>Amount</TableCell>
@@ -34,7 +37,7 @@ function InternalTxsTable({ itxs }: props) {
         <TableRow key={i}>
           <TableCell className="w-10 flex-none">
             <Link href={`${ROUTER.ITXS.INDEX}/${itx.internalTxId}`}>
-              <InternalLinkIcon className={iconColor} />
+              <InternalLinkIcon className={`${color}`} />
             </Link>
           </TableCell>
           <TableCell>
@@ -47,6 +50,11 @@ function InternalTxsTable({ itxs }: props) {
           <TableCell>
             <Status type={itx.error === null ? 'SUCCESS' : 'FAIL'} />
           </TableCell>
+          {showBlock && (
+            <TableCell className={`${color}`}>
+              <Block number={itx.blockNumber} />
+            </TableCell>
+          )}
           <TableCell className="text-brand-orange">
             <ToolTip text={itx.action?.from} type="address" />
           </TableCell>

@@ -17,7 +17,7 @@ function EventsTable({ events }: props) {
         <TableCell className="!text-left">Event</TableCell>
         <TableCell>Address</TableCell>
         <TableCell>Arguments</TableCell>
-        <TableCell>Timestamp</TableCell>
+        <TableCell>Age</TableCell>
         <TableCell>Block</TableCell>
       </TableHeader>
       {events?.map((e, i) => (

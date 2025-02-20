@@ -15,7 +15,6 @@ type props = {
 };
 
 function TokensTable({ tokens }: props) {
-  console.log('tokens: ', tokens)
   const pathname = usePathname();
   const textColor = getRouteStyles(pathname, ['text']);
   return (
@@ -29,8 +28,11 @@ function TokensTable({ tokens }: props) {
       </TableHeader>
       {tokens?.map((tk, i) => (
         <TableRow key={i}>
-          <TableCell className={textColor}>
-            <Link href={`${ROUTER.ADDRESSES.INDEX}/${ pathname === ROUTER.ADDRESSES.INDEX ? tk.address : tk.contract}`}>
+          <TableCell>
+            <Link
+              href={`${ROUTER.ADDRESSES.INDEX}/${pathname === ROUTER.ADDRESSES.INDEX ? tk.address : tk.contract}`}
+              className={`${textColor}`}
+            >
               {tk.name || `(Not Provided)`}
             </Link>
           </TableCell>
@@ -39,7 +41,7 @@ function TokensTable({ tokens }: props) {
             <ToolTip text={tk.address} type="address" />
           </TableCell>
           <TableCell>{parseDecimals(tk.balance, 4)}</TableCell>
-          <TableCell>
+          <TableCell className={`${textColor}`}>
             <Block number={tk.blockNumber} />
           </TableCell>
         </TableRow>

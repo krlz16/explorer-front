@@ -63,7 +63,7 @@ export default function Page() {
         {loading && <TableLoader />}
         {currentTab === 'overview' && !loading && <TxDetail />}
         {currentTab === 'itxs' && !loading && (
-          <InternalTxsTable itxs={itxsData} />
+          <InternalTxsTable itxs={itxsData} showBlock={false} />
         )}
         {currentTab === 'logs' && !loading && (
           <LogsContainer logs={tx?.receipt.logs} />
