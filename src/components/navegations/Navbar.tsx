@@ -13,7 +13,7 @@ function Navbar() {
       {pathname !== '/' && <SearchInput />}
       <div className="ml-auto">
         <Button
-          className="flex-row-reverse"
+          className="flex-row-reverse h-8 md:h-10 after:h-8 md:after:h-10 text-xs md:text-sm"
           label="TESTNET"
           type="outline"
           icon={<ExternalLinkIcon />}

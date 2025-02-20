@@ -29,6 +29,7 @@ export { default as CloseIcon } from './CloseIcon';
 export { default as ExternalLinkIcon } from './ExternalLinkIcon';
 export { default as CheckCopiedIcon } from './CheckCopiedIcon';
 export { default as BitcoinIcon } from './BitcoinIcon';
+export { default as SearchIcon } from './SearchIcon';
 export { default as XIcon } from './XIcon';
 export { default as GithubIcon } from './GithubIcon';
 export { default as DiscordIcon } from './DiscordIcon';

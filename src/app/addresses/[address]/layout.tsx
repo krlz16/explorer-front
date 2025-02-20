@@ -22,13 +22,6 @@ export default async function layout({ children, params }: props) {
 
   return (
     <Card pd="p0" className="mb-14 mt-6">
-      <Link
-        href={ROUTER.BLOCKS.INDEX}
-        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-pink`}
-      >
-        <ReturIcon className="stroke-brand-pink" />
-        All Addresses
-      </Link>
       <PageTitle
         title={
           <>
