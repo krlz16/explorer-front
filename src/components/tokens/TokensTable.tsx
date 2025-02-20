@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { ITokens } from '@/common/interfaces/Tokens';
 import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
@@ -15,9 +15,9 @@ type props = {
 };
 
 function TokensTable({ tokens }: props) {
-  const pathname = usePathname()
+  console.log('tokens: ', tokens)
+  const pathname = usePathname();
   const textColor = getRouteStyles(pathname, ['text']);
-  console.log('textColor: ', textColor)
   return (
     <Table>
       <TableHeader>
@@ -30,7 +30,7 @@ function TokensTable({ tokens }: props) {
       {tokens?.map((tk, i) => (
         <TableRow key={i}>
           <TableCell className={textColor}>
-            <Link href={`${ROUTER.ADDRESSES.INDEX}/${tk.address}`}>
+            <Link href={`${ROUTER.ADDRESSES.INDEX}/${ pathname === ROUTER.ADDRESSES.INDEX ? tk.address : tk.contract}`}>
               {tk.name || `(Not Provided)`}
             </Link>
           </TableCell>

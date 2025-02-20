@@ -1,9 +1,8 @@
 import React from 'react';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import { IBalances } from '@/common/interfaces/Balances';
-import Date from '../ui/Date';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
-import { AddressIcon, BitcoinIcon } from '@/common/icons';
+import { BitcoinIcon } from '@/common/icons';
 import Block from '../blocks/Block';
 import { parseDate } from '@/common/utils/Time';
 
@@ -20,12 +19,12 @@ function BalancesTable({ balances }: props) {
       </TableHeader>
       {balances?.map((b, i) => (
         <TableRow key={i}>
-          <TableCell className='gap-2'>
+          <TableCell className="gap-2">
             <BitcoinIcon />
             {`${parseDecimals(b.balance, 4)} RBTC`}
           </TableCell>
           <TableCell className="flex justify-center">
-            <div className='flex flex-col'>
+            <div className="flex flex-col">
               {(() => {
                 const { timeAgo, formattedDate } = parseDate(b.timestamp);
                 return (
@@ -37,7 +36,9 @@ function BalancesTable({ balances }: props) {
               })()}
             </div>
           </TableCell>
-          <TableCell className='text-brand-pink'><Block number={b.blockNumber} /></TableCell>
+          <TableCell className="text-brand-pink">
+            <Block number={b.blockNumber} />
+          </TableCell>
         </TableRow>
       ))}
     </Table>

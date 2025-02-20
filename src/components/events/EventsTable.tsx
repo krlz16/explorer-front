@@ -28,16 +28,16 @@ function EventsTable({ events }: props) {
           <TableCell>
             <ToolTip text={e.address} type="address" />
           </TableCell>
-          <TableCell className='flex-col'>
+          <TableCell className="flex-col">
             {e.args?.map((a, i) => (
               <div key={i} className="flex flex-col justify-center">
                 {isAddress(a.value) ? (
-                  <div className='flex'>
+                  <div className="flex">
                     <span>{a.name}:</span>
-                    <ToolTip text={a.value} type='address'/>
+                    <ToolTip text={a.value} type="address" />
                   </div>
                 ) : (
-                  <div className='flex gap-1'>
+                  <div className="flex gap-1">
                     <span className="flex">{a.name}:</span>
                     <span className="flex">{weiToEther(a.value)}</span>
                   </div>

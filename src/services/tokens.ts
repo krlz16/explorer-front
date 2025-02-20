@@ -7,6 +7,13 @@ export async function fetchTokens(params: object) {
   return response;
 }
 
+export async function fetchTokensByAddress(address: string) {
+  const response = await fetchData<ITokens[]>(
+    `${ROUTER.TOKENS.INDEX}/${address}`,
+  );
+  return response;
+}
+
 export async function fetchTokenByNameOrSymbol(value: string) {
   const response = await fetchData<ITokens[]>(
     `${ROUTER.TOKENS.SEARCH}/${value}`,

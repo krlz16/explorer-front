@@ -24,12 +24,15 @@ import { IBalances } from '@/common/interfaces/Balances';
 import { fetchTokenAddress } from '@/services/tokens';
 import { ITokens } from '@/common/interfaces/Tokens';
 import { CheckIcon } from '@/common/icons';
+import { fetchAccountsByAddress } from '@/services/accounts';
 
 type ITabType =
   | 'contract'
   | 'txs'
   | 'itxs'
+  | 'tokens'
   | 'events'
+  | 'accounts'
   | 'token_transfer'
   | 'tokens'
   | 'balances';
@@ -43,13 +46,16 @@ export default function Page() {
   const [eventsByAddress, setEventsByAddress] = useState<
     IEvents[] | undefined
   >();
+  const [accountsByAddress, setAccountsByAddress] = useState<
+    ITokens[] | undefined
+  >();
   const [transferByAddress, setTransferByAddress] = useState<
     IEvents[] | undefined
   >();
   const [balancesByAddress, setBalancesByAddress] = useState<
     IBalances[] | undefined
   >();
-  const [tokenByAddress, setTokenByAddress] = useState<
+  const [tokensByAddress, setTokensByAddress] = useState<
     ITokens[] | undefined
   >();
   const { changeTab, currentTab } = useTab({
@@ -79,12 +85,15 @@ export default function Page() {
         } else if (tab === 'events') {
           data = await fetchEventsByAddress(address);
           setEventsByAddress(data?.data);
+        } else if (tab === 'accounts') {
+          data = await fetchAccountsByAddress(address);
+          setAccountsByAddress(data?.data);
         } else if (tab === 'token_transfer') {
           data = await fetchTransferEventsByAddress(address);
           setTransferByAddress(data?.data);
         } else if (tab === 'tokens') {
           data = await fetchTokenAddress(address);
-          setTokenByAddress(data?.data);
+          setTokensByAddress(data?.data);
         } else if (tab === 'balances') {
           data = await fetchBalancesByAddress(address);
           setBalancesByAddress(data?.data);
@@ -115,12 +124,14 @@ export default function Page() {
             <Button
               key={i}
               label={
-                (i === btn.label.length - 1 && address?.isVerified) ?
-                <div className='flex items-center gap-1'>
-                  {btn.label}
-                  <CheckIcon />
-                </div>
-                : btn.label
+                i === btn.label.length - 1 && address?.isVerified ? (
+                  <div className="flex items-center gap-1">
+                    {btn.label}
+                    <CheckIcon />
+                  </div>
+                ) : (
+                  btn.label
+                )
               }
               onClick={() => changeTab(btn.tab)}
               className={
@@ -131,15 +142,16 @@ export default function Page() {
         })}
       </div>
 
-      {(!loading && currentTab !== 'contract') && (
+      {!loading && currentTab !== 'contract' && (
         <AddressesTxsTabsContent
           currentTab={currentTab}
           itxs={itxsByAddress}
           txs={txsByAddress}
+          tokensByAddress={tokensByAddress}
           events={eventsByAddress}
+          accountsByAddress={accountsByAddress}
           tokens={transferByAddress}
           balances={balancesByAddress}
-          tokensByAddress={tokenByAddress}
         />
       )}
       {loading && <TableLoader />}

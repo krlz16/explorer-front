@@ -3,7 +3,9 @@ import { fetchData } from './api';
 import { ROUTER } from '@/common/constants';
 
 export async function fetchTransferEventByTxhash(hash: string) {
-  const response = await fetchData<IEvents[]>(`${ROUTER.EVENTS.TOKEN_TRANSFER}/${hash}`);
+  const response = await fetchData<IEvents[]>(
+    `${ROUTER.EVENTS.TOKEN_TRANSFER}/${hash}`,
+  );
   return response;
 }
 

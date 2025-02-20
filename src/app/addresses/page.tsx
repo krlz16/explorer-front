@@ -1,6 +1,5 @@
 import AddressesTable from '@/components/addresses/AddressesTable';
 import { IPageProps } from '@/common/interfaces/RouterParams';
-import { AddressIcon } from '@/common/icons';
 import { fetchAddresses } from '@/services/addresses';
 import PaginationCursor from '@/components/ui/PaginationCursor';
 import PageTitle from '@/components/ui/PageTitle';
@@ -10,7 +9,7 @@ export default async function Page(props: IPageProps) {
   const response = await fetchAddresses(params);
   return (
     <div className="w-full">
-      <PageTitle title='Addresses' />
+      <PageTitle title="Addresses" />
       <div className="mt-8">
         <PaginationCursor
           data={

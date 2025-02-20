@@ -1,4 +1,3 @@
-import { AddressIcon } from '@/common/icons';
 import { IAddresses } from '@/common/interfaces/Addresses';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
 import ToolTip from '@/components/ui/ToolTip';

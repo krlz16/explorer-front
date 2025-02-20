@@ -1,7 +1,6 @@
 import BlocksTable from '../../components/blocks/BlocksTable';
 import PaginationCursor from '@/components/ui/PaginationCursor';
 import { IPageProps } from '@/common/interfaces/RouterParams';
-import { BlockIcon } from '@/common/icons';
 import { fetchBlocks } from '@/services/blocks';
 import PageTitle from '@/components/ui/PageTitle';
 

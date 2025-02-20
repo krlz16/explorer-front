@@ -31,14 +31,13 @@ export default async function layout({ children, params }: props) {
       </Link>
       <PageTitle
         title={
-        <>
-          {address?.type === 'contract' ? 'Contract ' : 'Address '} Details
-          {
-            address?.isVerified && (
-              <Badge text='Verified' type='success' className='text-sm' />
-            )
-          }
-        </>}
+          <>
+            {address?.type === 'contract' ? 'Contract ' : 'Address '} Details
+            {address?.isVerified && (
+              <Badge text="Verified" type="success" className="text-sm" />
+            )}
+          </>
+        }
       />
       <div className="text-white-400 mt-6 text-lg">
         Addess

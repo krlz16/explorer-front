@@ -20,7 +20,10 @@ function AddressDetail() {
             title="Timestamp"
             value={<Date date={address?.createdByTx?.timestamp} />}
           />
-          <ListItem title="Total Supply" value={parseDecimals(address?.totalSupply, 4)} />
+          <ListItem
+            title="Total Supply"
+            value={parseDecimals(address?.totalSupply, 4)}
+          />
         </>
       )}
       <ListItem

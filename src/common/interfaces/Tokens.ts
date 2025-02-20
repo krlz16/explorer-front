@@ -5,5 +5,6 @@ export interface ITokens {
   balance: string;
   name: string;
   symbol: string;
+  contract: string;
   contract_interface: string[];
 }

@@ -12,6 +12,9 @@ export const ROUTER = {
     BLOCK: '/txs/block',
     ADDRESS: '/txs/address',
   },
+  ACCOUNTS: {
+    INDEX: '/accounts',
+  },
   ADDRESSES: {
     INDEX: '/addresses',
     TOKENS: '/tokens',

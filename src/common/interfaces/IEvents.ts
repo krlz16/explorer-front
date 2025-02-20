@@ -6,8 +6,8 @@ export interface IEvents {
   address: string;
   args: {
     name: string;
-    value: string
-  }[]
+    value: string;
+  }[];
   topic0: string;
   topic1: string | null;
   topic2: string | null;
