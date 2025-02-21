@@ -16,9 +16,15 @@ type BlockPaginationProps = {
     take: number;
     hasMoreData?: boolean;
   };
+  pureData?: any;
+  dataIndicator?: string;
 };
 
-function PaginationCursor({ data }: BlockPaginationProps) {
+function PaginationCursor({
+  data,
+  pureData,
+  dataIndicator,
+}: BlockPaginationProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -73,6 +79,48 @@ function PaginationCursor({ data }: BlockPaginationProps) {
   const handleDownload = (format: 'JSON' | 'CSV') => {
     console.log(`Downloading in ${format} format...`);
     setIsDropdownOpen(false);
+    if (!pureData) return;
+    if (format === 'JSON') {
+      const jsonString = JSON.stringify(pureData, null, 2);
+      const blob = new Blob([jsonString], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const fileName = `${dataIndicator}-${new Date().toISOString()}`;
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${fileName}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } else if (format === 'CSV') {
+      const dataArray = Array.isArray(pureData)
+        ? pureData
+        : Object.entries(pureData).map(([key, value]) => ({
+            key,
+            ...(typeof value === 'object' ? value : { value }),
+          }));
+      const headers = Object.keys(dataArray[0]).join(',') + '\n';
+      const rows = dataArray
+        .map((row) =>
+          Object.values(row)
+            .map((val) => `"${String(val).replace(/"/g, '""')}"`)
+            .join(','),
+        )
+        .join('\n');
+
+      const csvString = headers + rows;
+      const blob = new Blob([csvString], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const fileName = `${dataIndicator}-${new Date().toISOString()}`;
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${fileName}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (
