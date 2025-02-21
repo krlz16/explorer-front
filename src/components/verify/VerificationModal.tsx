@@ -97,7 +97,7 @@ export default function VerificationModal({
                 <span className="text-gray-400 text-sm">Incorrect params</span>
               </div>
             </div>
-            {tryThis && (
+            {(error || tryThis.length > 0) && (
               <div className="mt-4 p-3 bg-gray-800 rounded-lg text-white w-full max-w-[320px]">
                 <span className="text-md font-semibold">
                   {error ? 'Error received:' : 'Try changing this:'}
