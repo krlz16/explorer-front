@@ -7,6 +7,8 @@ import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import Status from '../ui/Status';
 import Block from '../blocks/Block';
 import Date from '../ui/Date';
+import { getRouteStyles } from '@/common/utils/RouteColors';
+import { usePathname } from 'next/navigation';
 
 type props = {
   txs: ITxs[] | undefined;
@@ -14,6 +16,8 @@ type props = {
 };
 
 function TxsTable({ txs, showBlock = true }: props) {
+  const pathname = usePathname();
+  const styleColor = getRouteStyles(pathname, ['text']);
   const [highlightedAddress, setHighlightedAddress] = useState<string | null>(
     null,
   );
@@ -52,7 +56,7 @@ function TxsTable({ txs, showBlock = true }: props) {
               <Status type={tx.status} />
             </TableCell>
             {showBlock && (
-              <TableCell className="text-brand-purple">
+              <TableCell className={styleColor}>
                 <Block number={tx.blockNumber} />
               </TableCell>
             )}

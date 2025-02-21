@@ -17,7 +17,7 @@ function EventsTable({ events }: props) {
         <TableCell className="!text-left">Event</TableCell>
         <TableCell>Address</TableCell>
         <TableCell>Arguments</TableCell>
-        <TableCell>Timestamp</TableCell>
+        <TableCell>Age</TableCell>
         <TableCell>Block</TableCell>
       </TableHeader>
       {events?.map((e, i) => (
@@ -28,13 +28,19 @@ function EventsTable({ events }: props) {
           <TableCell>
             <ToolTip text={e.address} type="address" />
           </TableCell>
-          <TableCell>
+          <TableCell className="flex-col">
             {e.args?.map((a, i) => (
-              <div key={i} className="flex justify-center">
-                {isAddress(a) ? (
-                  <ToolTip text={a} />
+              <div key={i} className="flex flex-col justify-center">
+                {isAddress(a.value) ? (
+                  <div className="flex">
+                    <span>{a.name}:</span>
+                    <ToolTip text={a.value} type="address" />
+                  </div>
                 ) : (
-                  <span className="flex">value: {weiToEther(a)}</span>
+                  <div className="flex gap-1">
+                    <span className="flex">{a.name}:</span>
+                    <span className="flex">{weiToEther(a.value)}</span>
+                  </div>
                 )}
               </div>
             ))}

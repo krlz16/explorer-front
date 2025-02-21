@@ -28,7 +28,7 @@ export const TableHeader = ({ children }: TableProps) => {
 
 export const TableRow = ({ children }: TableProps) => {
   return (
-    <div className="flex h-14 hover:bg-secondary text-white-400 items-center border-t border-t-gray-700">
+    <div className="flex min-h-14 py-2 hover:bg-secondary text-white-400 items-center border-t border-t-gray-700">
       {children}
     </div>
   );

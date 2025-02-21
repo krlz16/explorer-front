@@ -1,10 +1,10 @@
-import { ITokensByAddress } from '@/common/interfaces/Tokens';
 import ToolTip from '@/components/ui/ToolTip';
 import React from 'react';
 import { Table, TableCell, TableHeader, TableRow } from '@/components/ui/Table';
+import { ITokens } from '@/common/interfaces/Tokens';
 
 type props = {
-  accountsByAddress: ITokensByAddress[] | undefined;
+  accountsByAddress: ITokens[] | undefined;
 };
 
 function AccountsByAddressTable({ accountsByAddress }: props) {

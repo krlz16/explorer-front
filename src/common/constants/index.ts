@@ -27,6 +27,7 @@ export const ROUTER = {
   TOKENS: {
     INDEX: '/tokens',
     SEARCH: '/tokens/search',
+    ADDRESS: '/tokens/address',
   },
   ITXS: {
     INDEX: '/itxs',

@@ -54,7 +54,7 @@ const SearchResults = ({
       break;
     case 'Tokens':
       href = `${ROUTER.TXS.INDEX}/${searchResults}`;
-      label = tokens && tokens.length > 1 ? 'Tokens' : 'Token'
+      label = tokens && tokens.length > 1 ? 'Tokens' : 'Token';
       break;
     case 'Rns':
       href = `${ROUTER.ADDRESSES.INDEX}/${rnsAddress}`;

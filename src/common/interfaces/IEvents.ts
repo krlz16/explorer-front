@@ -4,7 +4,10 @@ export interface IEvents {
   eventId: string;
   abi: EventAbi;
   address: string;
-  args: string[] | undefined;
+  args: {
+    name: string;
+    value: string;
+  }[];
   topic0: string;
   topic1: string | null;
   topic2: string | null;
@@ -21,7 +24,7 @@ export interface IEvents {
   txStatus: string;
   address_in_event: AddressInEvent[];
   totalSupply: number;
-  contrant_detail: {
+  contract_detail: {
     name: string;
     symbol: string;
   };

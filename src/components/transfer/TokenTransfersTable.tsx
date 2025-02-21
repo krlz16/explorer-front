@@ -6,12 +6,16 @@ import { parseDecimals } from '@/common/utils/ParseDecimals';
 import { InternalLinkIcon } from '@/common/icons';
 import Link from 'next/link';
 import { ROUTER } from '@/common/constants';
+import { getRouteStyles } from '@/common/utils/RouteColors';
+import { usePathname } from 'next/navigation';
 
 type props = {
   tokens: IEvents[] | undefined;
 };
 
 function TokenTransfersTable({ tokens }: props) {
+  const pathname = usePathname();
+  const iconColor = getRouteStyles(pathname, ['stroke']);
   return (
     <Table>
       <TableHeader>
@@ -26,10 +30,10 @@ function TokenTransfersTable({ tokens }: props) {
         <TableRow key={i}>
           <TableCell className="w-10 flex-none">
             <Link href={`${ROUTER.EVENTS.INDEX}/${tk.eventId}`}>
-              <InternalLinkIcon />
+              <InternalLinkIcon className={iconColor} />
             </Link>
           </TableCell>
-          <TableCell>{tk?.contrant_detail?.name}</TableCell>
+          <TableCell>{tk?.contract_detail?.name}</TableCell>
           <TableCell className="flex flex-1 flex-col">
             {tk?.contract_interface?.map((ci, i) => <div key={i}>{ci}</div>)}
           </TableCell>

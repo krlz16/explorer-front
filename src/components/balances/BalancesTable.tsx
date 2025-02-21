@@ -1,9 +1,10 @@
 import React from 'react';
 import { Table, TableCell, TableHeader, TableRow } from '../ui/Table';
 import { IBalances } from '@/common/interfaces/Balances';
-import Date from '../ui/Date';
 import { parseDecimals } from '@/common/utils/ParseDecimals';
-import { AddressIcon } from '@/common/icons';
+import { BitcoinIcon } from '@/common/icons';
+import Block from '../blocks/Block';
+import { parseDate } from '@/common/utils/Time';
 
 type props = {
   balances: IBalances[] | undefined;
@@ -12,21 +13,32 @@ function BalancesTable({ balances }: props) {
   return (
     <Table>
       <TableHeader>
-        <TableCell className="w-12 flex-initial" />
-        <TableCell>Amount</TableCell>
-        <TableCell>Timestamp</TableCell>
+        <TableCell>Balance</TableCell>
+        <TableCell>Date & Time</TableCell>
         <TableCell>Block</TableCell>
       </TableHeader>
       {balances?.map((b, i) => (
         <TableRow key={i}>
-          <TableCell className="w-12 flex justify-center flex-initial">
-            <AddressIcon />
+          <TableCell className="gap-2">
+            <BitcoinIcon />
+            {`${parseDecimals(b.balance, 4)} RBTC`}
           </TableCell>
-          <TableCell>{`${b.balance} RBTC`}</TableCell>
           <TableCell className="flex justify-center">
-            <Date date={b.timestamp} />
+            <div className="flex flex-col">
+              {(() => {
+                const { timeAgo, formattedDate } = parseDate(b.timestamp);
+                return (
+                  <>
+                    <span>{timeAgo}</span>
+                    <span>{formattedDate}</span>
+                  </>
+                );
+              })()}
+            </div>
           </TableCell>
-          <TableCell>{parseDecimals(b.blockNumber)}</TableCell>
+          <TableCell className="text-brand-pink">
+            <Block number={b.blockNumber} />
+          </TableCell>
         </TableRow>
       ))}
     </Table>

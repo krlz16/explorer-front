@@ -5,14 +5,7 @@ export interface ITokens {
   balance: string;
   name: string;
   symbol: string;
-}
-
-export interface ITokensByAddress {
-  address: string;
+  decimals: number;
   contract: string;
-  blockNumber: number;
-  blockHash: string;
-  balance: string;
-  name: string;
-  symbol: string;
+  contract_interface: string[];
 }

@@ -28,16 +28,18 @@ function Code({ code, height }: Props) {
 
   return (
     <div
-      className={`bg-gray-600 min-h-fit rounded-xl overflow-y-auto break-all text-sm text-white-400 ${
-        height ? height : 'max-h-36'
-      }`}
+      className={`bg-gray-600 rounded-xl text-sm text-white-400 overflow-y-auto relative`}
     >
       {code?.includes('pragma') || code?.includes('function') || isJson() ? (
-        <pre className="language-solidity">
-          <code>{code}</code>
+        <pre
+          className={`language-solidity overflow-x-auto rounded-xl p-2 !bg-gray-600 !h-56`}
+        >
+          <code className="whitespace-pre-wrap break-words absolute bg-gray-600">
+            {code}
+          </code>
         </pre>
       ) : (
-        <div className="p-2">{code}</div>
+        <div className="p-2 min-h-9 break-all">{code}</div>
       )}
     </div>
   );
