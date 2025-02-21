@@ -1,19 +1,26 @@
-import Pagination from '@/components/ui/Pagination';
 import TxsTable from '@/components/txs/TxsTable';
 import { IPageProps } from '@/common/interfaces/RouterParams';
-import { TxIcon } from '@/common/icons';
 import { fetchTxs } from '@/services/transactions';
+import PageTitle from '@/components/ui/PageTitle';
+import PaginationCursor from '@/components/ui/PaginationCursor';
 
 export default async function page(props: IPageProps) {
   const params = await props.searchParams;
   const response = await fetchTxs(params);
   return (
     <div className="w-full">
-      <h1 className="font-bold text-3xl flex gap-3 items-center mt-10">
-        <TxIcon className="w-6 h-6" />
-        Transactions
-      </h1>
-      <Pagination text="Total Transactions: " data={response!.pagination!} />
+      <PageTitle title="Transactions" />
+      <div className="mt-8">
+        <PaginationCursor
+          data={
+            response?.paginationData || {
+              nextCursor: response?.paginationData?.nextCursor ?? null,
+              prevCursor: response?.paginationData?.prevCursor ?? null,
+              take: response?.paginationData?.take ?? 50,
+            }
+          }
+        />
+      </div>
       <TxsTable txs={response?.data} />
     </div>
   );

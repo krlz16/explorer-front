@@ -22,12 +22,17 @@ import { IEvents } from '@/common/interfaces/IEvents';
 import { fetchBalancesByAddress } from '@/services/balances';
 import { IBalances } from '@/common/interfaces/Balances';
 import { bridge } from '@/common/constants/bridge';
+import { fetchTokensByAddress } from '@/services/tokens';
+import { fetchAccountsByAddress } from '@/services/accounts';
+import { ITokensByAddress } from '@/common/interfaces/Tokens';
 
 type ITabType =
   | 'contract'
   | 'txs'
   | 'itxs'
+  | 'tokens'
   | 'events'
+  | 'accounts'
   | 'token_transfer'
   | 'balances';
 
@@ -38,8 +43,14 @@ export default function Page() {
   const [itxsByAddress, setITxsByAddress] = useState<
     IInternalTxs[] | undefined
   >();
+  const [tokensByAddress, setTokensByAddress] = useState<
+    ITokensByAddress[] | undefined
+  >();
   const [eventsByAddress, setEventsByAddress] = useState<
     IEvents[] | undefined
+  >();
+  const [accountsByAddress, setAccountsByAddress] = useState<
+    ITokensByAddress[] | undefined
   >();
   const [transferByAddress, setTransferByAddress] = useState<
     IEvents[] | undefined
@@ -75,9 +86,15 @@ export default function Page() {
         } else if (tab === 'itxs') {
           data = await fetchInternalTxsByAddress(address);
           setITxsByAddress(data?.data);
+        } else if (tab === 'tokens') {
+          data = await fetchTokensByAddress(address);
+          setTokensByAddress(data?.data);
         } else if (tab === 'events') {
           data = await fetchEventsByAddress(address);
           setEventsByAddress(data?.data);
+        } else if (tab === 'accounts') {
+          data = await fetchAccountsByAddress(address);
+          setAccountsByAddress(data?.data);
         } else if (tab === 'token_transfer') {
           data = await fetchTransferEventsByAddress(address);
           setTransferByAddress(data?.data);
@@ -125,7 +142,9 @@ export default function Page() {
           currentTab={currentTab}
           itxs={itxsByAddress}
           txs={txsByAddress}
+          tokensByAddress={tokensByAddress}
           events={eventsByAddress}
+          accountsByAddress={accountsByAddress}
           tokens={transferByAddress}
           balances={balancesByAddress}
         />
