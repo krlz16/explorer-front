@@ -33,7 +33,7 @@ function TokenTransfersTable({ tokens }: props) {
               <InternalLinkIcon className={iconColor} />
             </Link>
           </TableCell>
-          <TableCell>{tk?.contrant_detail?.name}</TableCell>
+          <TableCell>{tk?.contract_detail?.name}</TableCell>
           <TableCell className="flex flex-1 flex-col">
             {tk?.contract_interface?.map((ci, i) => <div key={i}>{ci}</div>)}
           </TableCell>
