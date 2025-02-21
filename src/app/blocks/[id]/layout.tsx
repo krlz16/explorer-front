@@ -1,5 +1,5 @@
 import { ROUTER } from '@/common/constants';
-import { BlockIcon, ReturIcon } from '@/common/icons';
+import { ReturIcon } from '@/common/icons';
 import Card from '@/components/ui/Card';
 import ToolTip from '@/components/ui/ToolTip';
 import { BlocksDataProvider } from '@/context/BlocksContext';
@@ -21,14 +21,13 @@ export default async function layout({ children, params }: props) {
     <Card pd="p0" className="mb-14 mt-6">
       <Link
         href={ROUTER.BLOCKS.INDEX}
-        className={`flex items-center gap-2 cursor-pointer mb-6 text-sm text-brand-orange`}
+        className={`flex items-center gap-1 cursor-pointer mb-6 text-sm text-brand-green`}
       >
-        <ReturIcon className="fill-brand-orange" />
+        <ReturIcon className="stroke-brand-green" />
         All Blocks
       </Link>
       <h1 className="flex gap-3 items-center text-3xl font-medium">
-        <BlockIcon className="w-6 h-6" /> Block{' '}
-        <span className="text-white-400">#{block?.number}</span>
+        Block <span className="text-white-400">#{block?.number}</span>
       </h1>
       <div className="text-white-400 mt-6">
         Mined by
