@@ -22,6 +22,8 @@ export default async function Page(props: IPageProps) {
               take: response?.paginationData?.take ?? 10,
             }
           }
+          pureData={response?.data}
+          dataIndicator="addresses"
         />
       </div>
       <AddressesTable addresses={response?.data} />
